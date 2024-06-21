@@ -6,7 +6,7 @@
 
 COQMAKEFILE ?= Makefile.coq
 
-MY_HTML_ROOT = doc/OrienRepr
+MY_HTML_ROOT = doc/VQCS
 MY_HTML_ROOT_WITH_VERSION = $(MY_HTML_ROOT)/v1.0
 
 HTML_EXTRA_DIR = html-extra

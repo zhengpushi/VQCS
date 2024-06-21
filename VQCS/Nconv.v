@@ -3,7 +3,7 @@
   This file is part of VQCS. It is distributed under the MIT
   "expat license". You should have recieved a LICENSE file with it.
 
-  purpose   : Conversion between units.
+  purpose   : Conversion between normalized units
   author    : ZhengPu Shi
   date      : 2022.04
 *)
@@ -14,122 +14,108 @@ Import SI_Accepted.
 
 Open Scope Unit_scope.
 
+(* we prefer DO NOT expand it *)
+#[global] Opaque n2u.
+
 
 (* ######################################################################### *)
-(** * Conversion between [Unit] *)
+(** * Conversion between normalized units *)
 
 (* ======================================================================= *)
-(** ** Two units are convertible *)
+(** ** Two normalized units are convertible *)
 
-(** Two units are convertible only when they have same dimensions *)
-Definition ucvtble (u1 u2 : Unit) : Prop := ndims (u2n u1) = ndims (u2n u2).
+(** Two Nunits are convertible only when they have same dimensions *)
+Definition ncvtble (n1 n2 : Nunit) : Prop := ndims n1 = ndims n2.
 
-(** ucvtble is equivalence relation *)
-Lemma ucvtble_refl : forall u, ucvtble u u.
+(** ncvtble is equivalence relation *)
+Lemma ncvtble_refl : forall n, ncvtble n n.
 Proof. intros. hnf. auto. Qed.
 
-Lemma ucvtble_sym : forall u1 u2, ucvtble u1 u2 -> ucvtble u2 u1.
+Lemma ncvtble_sym : forall n1 n2, ncvtble n1 n2 -> ncvtble n2 n1.
 Proof. intros. hnf. auto. Qed.
 
-Lemma ucvtble_trans : forall u1 u2 u3, ucvtble u1 u2 -> ucvtble u2 u3 -> ucvtble u1 u3.
+Lemma ncvtble_trans : forall n1 n2 n3, ncvtble n1 n2 -> ncvtble n2 n3 -> ncvtble n1 n3.
 Proof. intros. hnf. rewrite H. auto. Qed.
 
-#[export] Instance ucvtble_equiv : Equivalence ucvtble.
+#[export] Instance ncvtble_equiv : Equivalence ncvtble.
 Proof.
   constructor; hnf; intros; auto.
-  apply ucvtble_refl. apply ucvtble_sym; auto. apply ucvtble_trans with y; auto.
+  apply ncvtble_refl. apply ncvtble_sym; auto. apply ncvtble_trans with y; auto.
 Qed.
 
 (* (** Similar units imply a coefficient relation. *) *)
-(* Lemma ucvtble_imply_coef : forall u1 u2 : Unit, *)
-(*     ucvtble u1 u2 -> ucoef u2 <> 0 -> { k | u1 == (k : R) * u2}. *)
+(* Lemma ncvtble_imply_coef : forall n1 n2 : Unit, *)
+(*     ncvtble n1 n2 -> ncoef n2 <> 0 -> { k | n1 == (k : R) * n2}. *)
 (* Proof. *)
-(*   intros. unfold ucvtble, ueq in *; simpl in *. *)
-(*   exists ((ucoef u1) / (ucoef u2))%R. *)
+(*   intros. unfold ncvtble, ueq in *; simpl in *. *)
+(*   exists ((ucoef n1) / (ucoef n2))%R. *)
 (*   rewrite u2n_Umult; simpl. apply neq_iff; simpl. split. *)
 (*   - field; auto. *)
 (*   - rewrite H. auto. *)
 (* Qed. *)
 
-(** Two units are similar only when they have same dimensions (bool version) *)
-Definition ucvtbleb (u1 u2 : Unit) : bool := deqb (ndims (u2n u1)) (ndims (u2n u2)).
+(** Two normalized units are similar only when they have same dimensions (bool version) *)
+Definition ncvtbleb (n1 n2 : Nunit) : bool := deqb (ndims n1) (ndims n2).
 
-Lemma ucvtbleb_true_iff : forall u1 u2, ucvtbleb u1 u2 = true <-> ucvtble u1 u2.
-Proof. intros. unfold ucvtbleb, ucvtble. rewrite deqb_true_iff. simpl. easy. Qed.
+Lemma ncvtbleb_true_iff : forall n1 n2, ncvtbleb n1 n2 = true <-> ncvtble n1 n2.
+Proof. intros. unfold ncvtbleb, ncvtble. rewrite deqb_true_iff. simpl. easy. Qed.
   
-Lemma ucvtbleb_false_iff : forall u1 u2, ucvtbleb u1 u2 = false <-> ~(ucvtble u1 u2).
-Proof. intros. rewrite <- ucvtbleb_true_iff. split; solve_bool. Qed.
+Lemma ncvtbleb_false_iff : forall n1 n2, ncvtbleb n1 n2 = false <-> ~(ncvtble n1 n2).
+Proof. intros. rewrite <- ncvtbleb_true_iff. split; solve_bool. Qed.
   
-Lemma ucvtbleb_reflect : forall u1 u2, reflect (ucvtble u1 u2) (ucvtbleb u1 u2).
+Lemma ncvtbleb_reflect : forall n1 n2, reflect (ncvtble n1 n2) (ncvtbleb n1 n2).
 Proof.
-  intros. destruct (ucvtbleb u1 u2) eqn:E1; constructor.
-  apply ucvtbleb_true_iff; auto. apply ucvtbleb_false_iff; auto.
+  intros. destruct (ncvtbleb n1 n2) eqn:E1; constructor.
+  apply ncvtbleb_true_iff; auto. apply ncvtbleb_false_iff; auto.
 Qed.
 
-#[export] Hint Resolve ucvtbleb_reflect : bdestruct.
+#[export] Hint Resolve ncvtbleb_reflect : bdestruct.
 
-(** Get ratio factor from [Unit] `src` to [Unit] `ref` *)
-Definition uconvRate (src ref : Unit) : option R :=
-  if ucvtbleb src ref
-  then Some (ncoef (u2n src) / ncoef (u2n ref))%R
+(** Get ratio factor from [Nunit] `src` to [Nunit] `ref` *)
+Definition nconvRate (src ref : Nunit) : option R :=
+  if ncvtbleb src ref
+  then Some (ncoef src / ncoef ref)%R
   else None.
 
-(** Convert a [Unit] `src` to [Unit] `ref` *)
-Definition uconv (src ref : Unit) : option (R * Unit) :=
-  if ucvtbleb src ref
-  then Some ((ncoef (u2n src) / ncoef (u2n ref))%R, ref)
+(** Convert a [Nunit] `src` to [Nunit] `ref` *)
+Definition nconv (src ref : Nunit) : option (R * Nunit) :=
+  if ncvtbleb src ref
+  then Some ((ncoef src / ncoef ref)%R, ref)
   else None.
 
 Section test.
-  Goal uconvRate 'hrs 'min = Some 60.
+  Goal nconvRate (u2n 'hrs) (u2n 'min) = Some 60.
   Proof. cbv. f_equal. lra. Qed.
 
-  Goal uconv 'hrs 's = Some (3600, Ubu 's).
+  Goal nconv (u2n 'hrs) (u2n 's) = Some (3600, (u2n 's)).
   Proof. cbv. f_equal. f_equal. lra. Qed.
 End test.
 
 
-(** ** Convert a unit with given reference unit. *)
-
-(**
-<<
-  For example:
-    src = 2*hours, ref = 30*minutes, return (4, 30*minutes).
-  Conversion step
-  1. check that src and ref is convertible
-  2. calc coefficient
-    src == (coef_src, dims)
-    ref == (coef_ref, dims)
-    coef = coef_src / coef_ref
-  3. return result
-    dst = (coef, ref)
->>
- *)
-
-(* (** [uconv] got [None], iff, [ucvtble] not holds  *) *)
+(* (** [uconv] got [None], iff, [ncvtble] not holds  *) *)
 (* Lemma uconv_None_iff : forall (src ref : Unit), *)
-(*     uconv src ref = None <-> ~ucvtble src ref. *)
-(* Proof. intros. unfold uconv. bdestruct (ucvtbleb src ref); try easy. Qed. *)
+(*     uconv src ref = None <-> ~ncvtble src ref. *)
+(* Proof. intros. unfold uconv. bdestruct (ncvtbleb src ref); try easy. Qed. *)
 
-(* (** If [uconv src ref] got [Some (k, u)], then [ucvtble src ref] holds *) *)
-(* Lemma uconv_imply_ucvtble_src_ref : forall (src ref : Unit) k u, *)
-(*     uconv src ref = Some (k,u) -> ucvtble src ref. *)
-(* Proof. intros. unfold uconv in H. bdestruct (ucvtbleb src ref); try easy. Qed. *)
+(* (** If [uconv src ref] got [Some (k, u)], then [ncvtble src ref] holds *) *)
+(* Lemma uconv_imply_ncvtble_src_ref : forall (src ref : Unit) k u, *)
+(*     uconv src ref = Some (k,u) -> ncvtble src ref. *)
+(* Proof. intros. unfold uconv in H. bdestruct (ncvtbleb src ref); try easy. Qed. *)
 
-(* (** If [uconv src ref] got [Some (k,u)], then [ucvtble src u] holds *) *)
-(* Lemma uconv_imply_ucvtble_src_u : forall (src ref : Unit) k u, *)
-(*     uconv src ref = Some (k,u) -> ucvtble src u. *)
+(* (** If [uconv src ref] got [Some (k,u)], then [ncvtble src u] holds *) *)
+(* Lemma uconv_imply_ncvtble_src_u : forall (src ref : Unit) k u, *)
+(*     uconv src ref = Some (k,u) -> ncvtble src u. *)
 (* Proof. *)
-(*   intros. unfold uconv in H. bdestruct (ucvtbleb src ref); try easy. *)
-(*   inversion H. apply ucvtble_trans with ref; auto. congruence. *)
+(*   intros. unfold uconv in H. bdestruct (ncvtbleb src ref); try easy. *)
+(*   inversion H. apply ncvtble_trans with ref; auto. congruence. *)
 (* Qed. *)
 
-(* (** If [uconv src ref] got [Some (k,u)], then [ucvtble ref u] holds *) *)
-(* Lemma uconv_imply_ucvtble_ref_u : forall (src ref : Unit) k u, *)
-(*     uconv src ref = Some (k,u) -> ucvtble ref u. *)
+(* (** If [uconv src ref] got [Some (k,u)], then [ncvtble ref u] holds *) *)
+(* Lemma uconv_imply_ncvtble_ref_u : forall (src ref : Unit) k u, *)
+(*     uconv src ref = Some (k,u) -> ncvtble ref u. *)
 (* Proof. *)
-(*   intros. unfold uconv in H. bdestruct (ucvtbleb src ref); try easy. *)
-(*   inversion H. apply ucvtble_refl. *)
+(*   intros. unfold uconv in H. bdestruct (ncvtbleb src ref); try easy. *)
+(*   inversion H. apply ncvtble_refl. *)
 (* Qed. *)
 
 (* (** If [uconv src ref] got [Some (k,u)], then `src = k * u` *) *)
@@ -138,28 +124,28 @@ End test.
 (*     ucoef ref <> 0 -> src == k * u. *)
 (* Proof. *)
 (*   intros. *)
-(*   pose proof (uconv_imply_ucvtble_src_ref src ref _ _ H). *)
-(*   unfold uconv in *; simpl in *. apply ucvtbleb_true_iff in H1. rewrite H1 in H. *)
+(*   pose proof (uconv_imply_ncvtble_src_ref src ref _ _ H). *)
+(*   unfold uconv in *; simpl in *. apply ncvtbleb_true_iff in H1. rewrite H1 in H. *)
 (*   inversion H. hnf. subst. rewrite u2n_Umult. simpl. apply neq_iff; simpl. split. *)
 (*   - field; auto. *)
-(*   - apply ucvtbleb_true_iff in H1. hnf in H1; simpl in H1. rewrite H1. auto. *)
+(*   - apply ncvtbleb_true_iff in H1. hnf in H1; simpl in H1. rewrite H1. auto. *)
 (* Qed. *)
 
 
-(** ** Unify two [Unit]s *)
+(* (** ** Unify two [Unit]s *) *)
 
-(**
-<<
-  For example:
-    src = 2*hours, ref = 30*minutes, return (7200, 1800, secons)
-  Steps:
-  1. normalize
-     u1 == (c1, d1), u2 == (c2, d2)
-  2. check if `u1` and `u2` are convertible, that is `d1 =? d2`.
-     If not return None, otherwise retrun (c1,c2,d).
-     Here, d == (1, d1) = (1, d2)
->>
- *)
+(* (** *)
+(* << *)
+(*   For example: *)
+(*     src = 2*hours, ref = 30*minutes, return (7200, 1800, secons) *)
+(*   Steps: *)
+(*   1. normalize *)
+(*      u1 == (c1, d1), u2 == (c2, d2) *)
+(*   2. check if `u1` and `u2` are convertible, that is `d1 =? d2`. *)
+(*      If not return None, otherwise retrun (c1,c2,d). *)
+(*      Here, d == (1, d1) = (1, d2) *)
+(* >> *)
+(*  *) *)
 
 (* Definition uunify (u1 u2 : Unit) : option (R * R * Unit) := *)
 (*   let (c1,d1) := u2n u1 in *)
@@ -183,11 +169,11 @@ End test.
 (*     uunify u u = Some (c,c, n2u(1,d)). *)
 (* Proof. intros. unfold uunify. lazy [u2n]. rewrite deqb_refl. auto. Qed. *)
   
-(* (** [uunify] got [None], iff, [ucvtble] not holds  *) *)
+(* (** [uunify] got [None], iff, [ncvtble] not holds  *) *)
 (* Lemma uunify_None_iff : forall (u1 u2 : Unit), *)
-(*     uunify u1 u2 = None <-> ~ucvtble u1 u2. *)
+(*     uunify u1 u2 = None <-> ~ncvtble u1 u2. *)
 (* Proof. *)
-(*   intros. unfold uunify, ucvtble. *)
+(*   intros. unfold uunify, ncvtble. *)
 (*   destruct (u2n u1) as [c1 d1], (u2n u2) as [c2 d2]; simpl. *)
 (*   bdestruct (deqb d1 d2); subst; try easy. *)
 (* Qed. *)
@@ -202,33 +188,33 @@ End test.
 (*   inversion H. apply n2u_coef1_unormed. *)
 (* Qed. *)
 
-(* (** If [uunify u1 u2] got [Some (k1,k2,u)], then [ucvtble u1 u2] holds *) *)
-(* Lemma uunify_imply_ucvtble_u1_u2 : forall (u1 u2 : Unit) k1 k2 u, *)
-(*     uunify u1 u2 = Some (k1,k2,u) -> ucvtble u1 u2. *)
+(* (** If [uunify u1 u2] got [Some (k1,k2,u)], then [ncvtble u1 u2] holds *) *)
+(* Lemma uunify_imply_ncvtble_u1_u2 : forall (u1 u2 : Unit) k1 k2 u, *)
+(*     uunify u1 u2 = Some (k1,k2,u) -> ncvtble u1 u2. *)
 (* Proof. *)
-(*   intros. unfold uunify, ucvtble in *. *)
+(*   intros. unfold uunify, ncvtble in *. *)
 (*   destruct (u2n u1) as [c1 d1], (u2n u2) as [c2 d2]; simpl in *. *)
 (*   bdestruct (deqb d1 d2); subst; try easy. *)
 (* Qed. *)
 
-(* (** If [uunify u1 u2] got [Some (k1,k2,u)], then [ucvtble u1 u] holds *) *)
-(* Lemma uunify_imply_ucvtble_u1_u : forall (u1 u2 : Unit) k1 k2 u, *)
-(*     uunify u1 u2 = Some (k1,k2,u) -> ucvtble u1 u. *)
+(* (** If [uunify u1 u2] got [Some (k1,k2,u)], then [ncvtble u1 u] holds *) *)
+(* Lemma uunify_imply_ncvtble_u1_u : forall (u1 u2 : Unit) k1 k2 u, *)
+(*     uunify u1 u2 = Some (k1,k2,u) -> ncvtble u1 u. *)
 (* Proof. *)
-(*   intros. unfold uunify, ucvtble in *. *)
+(*   intros. unfold uunify, ncvtble in *. *)
 (*   destruct (u2n u1) as [c1 d1], (u2n u2) as [c2 d2]. *)
 (*   lazy [ndims]. bdestruct (deqb d1 d2); subst; try easy. inv H. simpl. *)
 (*   rewrite udims_n2u; auto. *)
 (* Qed. *)
 
-(* (* If [uunify u1 u2] got [Some (k1,k2,u)], then [ucvtble u2 u] holds *) *)
-(* Lemma uunify_imply_ucvtble_u2_u : forall (u1 u2 : Unit) k1 k2 u, *)
-(*     uunify u1 u2 = Some (k1,k2,u) -> ucvtble u2 u. *)
+(* (* If [uunify u1 u2] got [Some (k1,k2,u)], then [ncvtble u2 u] holds *) *)
+(* Lemma uunify_imply_ncvtble_u2_u : forall (u1 u2 : Unit) k1 k2 u, *)
+(*     uunify u1 u2 = Some (k1,k2,u) -> ncvtble u2 u. *)
 (* Proof. *)
 (*   intros. *)
-(*   apply ucvtble_trans with u1. *)
-(*   apply symmetry. eapply uunify_imply_ucvtble_u1_u2; apply H. *)
-(*   eapply uunify_imply_ucvtble_u1_u; apply H. *)
+(*   apply ncvtble_trans with u1. *)
+(*   apply symmetry. eapply uunify_imply_ncvtble_u1_u2; apply H. *)
+(*   eapply uunify_imply_ncvtble_u1_u; apply H. *)
 (* Qed. *)
 
 (* (* If [uunify u1 u2] got [Some (k1,k2,u)], then `u1 = k1 * u` *) *)
@@ -256,7 +242,7 @@ End test.
 (* (* [uunify] is commutative when got [None] *) *)
 (* Lemma uunify_comm_None : forall u1 u2, uunify u1 u2 = None -> uunify u2 u1 = None. *)
 (* Proof. *)
-(*   intros. rewrite uunify_None_iff in *. intro. apply ucvtble_sym in H0. easy. *)
+(*   intros. rewrite uunify_None_iff in *. intro. apply ncvtble_sym in H0. easy. *)
 (* Qed. *)
 
 (* (* [uunify] is commutative when got [Some] *) *)

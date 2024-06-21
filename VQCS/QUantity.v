@@ -8,15 +8,12 @@
   (1). arithmetic means add,sub,mul,div of numbers, prefer calculate directly.
   (2). algebra use numbers and variables sametime, and mainly use laws to 
     deal with the problem, prefer transform, not calculate.
-  (3). algebra include power, algorithm and complex numbers too.
-  
+  (3). algebra include power, logarithm and complex numbers too.
+
   2. u1 +/- u2, only if dims(u1) == dims(u2)
 
 *)
 
-(* From MyStdLibExt Require Export RExt. *)
-
-Require Export RExt.
 Require Export Unit Nunit SI Uconv.
 
 
@@ -26,7 +23,7 @@ Require Export Unit Nunit SI Uconv.
 Open Scope R.
 
 (** we mainly use semantics. *)
-Open Scope NU_scope.
+(* Open Scope NU_scope. *)
 
 Declare Scope QU_scope.
 Delimit Scope QU_scope with QU.

@@ -1,7 +1,7 @@
 -R ./VQCS "VQCS"
 
 -arg -w -arg -notation-overridden
-# -arg -w -arg -hiding-delimiting-key
+-arg -w -arg -hiding-delimiting-key
 # -arg -w -arg -deprecated-hint-without-locality
 # -arg -w -arg -redundant-canonical-projection
 # -arg -w -arg -ambiguous-paths
@@ -9,8 +9,13 @@
 # -arg -w -arg -future-coercion-class-field
 # -arg -w -arg -extraction-logical-axiom
 
+VQCS/Utils.v
 VQCS/Unit.v
 VQCS/Nunit.v
 VQCS/SI.v
-
+VQCS/Nconv.v
+VQCS/Uconv.v
+VQCS/Quantity.v
+VQCS/Qalgebra.v
+VQCS/QalgebraR.v
 

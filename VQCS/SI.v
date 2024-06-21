@@ -13,7 +13,7 @@
        pow: R -> nat -> R           `lra` is ok (need `simpl` first)
        powerRZ: R -> Z -> R         `lra` is ok (need `simpl` first)
        Rpower: R -> R -> R          `lra` dont' support
-     * `x ^ n` is the notation of `pow:R->nat->R`, and is the notation of
+     * `x ^ n` is the notation of `pow:R->nat->R`, and is also the notation of
        `Upow:Unit->Z->Unit`
      * About "10^3" and "1e3", or "/(10^3)" and "1e-3"
        * When talking about Q and R type,
@@ -22,9 +22,9 @@
          Contrast to `1e-3`, it is both supported by "ring/field/lra"
        * When talking about Unit type, "/(10^3)" is "Uinv (Upow (Unone 10) 3)",
          "1e-3" is "Unone (1e-3)". So "1e-3" is simpler.
-       * So, "1e3" is better than "10^3", and "1e-3" is better than "/(10^3), 0.001".
-         Thus, we use scientific notations whenever possible, especially if values 
-         contain decimals.
+       * So, "1e3" is better than "10^3", and "1e-3" is better than "/(10^3)"
+         and "0.001". Thus, we use scientific notations whenever possible, e
+         specially if values contain decimals.
 .
   2. Coding style for `R` type:
      `6.626_070_15e-34` is a better style, because:
@@ -39,13 +39,14 @@ Declare Scope SI_scope.
 Delimit Scope SI_scope with SI.
 Open Scope SI.
 
+(* ======================================================================= *)
 (** ** Tactics *)
 
 (** proof unit equality *)
-Ltac pfueq :=
+Ltac ueq :=
   compute; f_equal; field.
 
-
+(* ======================================================================= *)
 (** ** Decimal multiples and sub-multiples of SI *)
 Module SI_Prefix.
 
@@ -59,16 +60,26 @@ Module SI_Prefix.
   Definition exa (u : Unit) : Unit := 1e18 * u.
   Definition zetta (u : Unit) : Unit := 1e21 * u.
   Definition yotta (u : Unit) : Unit := 1e24 * u.
-  Notation "'_da' x" := (deca x) (at level 5, right associativity, format "'_da' x") : SI_scope.
-  Notation "'_h' x" := (hecto x) (at level 5, right associativity, format "'_h' x") : SI_scope.
-  Notation "'_k' x" := (kilo x)  (at level 5, right associativity, format "'_k' x") : SI_scope.
-  Notation "'_M' x" := (mega x)  (at level 5, right associativity, format "'_M' x") : SI_scope.
-  Notation "'_G' x" := (giga x)  (at level 5, right associativity, format "'_G' x") : SI_scope.
-  Notation "'_T' x" := (tera x)  (at level 5, right associativity, format "'_T' x") : SI_scope.
-  Notation "'_P' x" := (peta x)  (at level 5, right associativity, format "'_P' x") : SI_scope.
-  Notation "'_E' x" := (exa x)   (at level 5, right associativity, format "'_E' x") : SI_scope.
-  Notation "'_Z' x" := (zetta x) (at level 5, right associativity, format "'_Z' x") : SI_scope.
-  Notation "'_Y' x" := (yotta x) (at level 5, right associativity, format "'_Y' x") : SI_scope.
+  Notation "'_da' x" :=
+    (deca x) (at level 5, right associativity, format "'_da' x") : SI_scope.
+  Notation "'_h' x" :=
+    (hecto x) (at level 5, right associativity, format "'_h' x") : SI_scope.
+  Notation "'_k' x" :=
+    (kilo x)  (at level 5, right associativity, format "'_k' x") : SI_scope.
+  Notation "'_M' x" :=
+    (mega x)  (at level 5, right associativity, format "'_M' x") : SI_scope.
+  Notation "'_G' x" :=
+    (giga x)  (at level 5, right associativity, format "'_G' x") : SI_scope.
+  Notation "'_T' x" :=
+    (tera x)  (at level 5, right associativity, format "'_T' x") : SI_scope.
+  Notation "'_P' x" :=
+    (peta x)  (at level 5, right associativity, format "'_P' x") : SI_scope.
+  Notation "'_E' x" :=
+    (exa x)   (at level 5, right associativity, format "'_E' x") : SI_scope.
+  Notation "'_Z' x" :=
+    (zetta x) (at level 5, right associativity, format "'_Z' x") : SI_scope.
+  Notation "'_Y' x" :=
+    (yotta x) (at level 5, right associativity, format "'_Y' x") : SI_scope.
   
   Definition deci (u : Unit) : Unit := 1e-1 * u.
   Definition centi (u : Unit) : Unit := 1e-2 * u.
@@ -80,17 +91,27 @@ Module SI_Prefix.
   Definition atto (u : Unit) : Unit := 1e-18 * u.
   Definition zepto (u : Unit) : Unit := 1e-21 * u.
   Definition yocto (u : Unit) : Unit := 1e-24 * u.
-  Notation "'_d' x" := (deci x)  (at level 5, right associativity, format "'_d' x") : SI_scope.
-  Notation "'_c' x" := (centi x) (at level 5, right associativity, format "'_c' x") : SI_scope.
-  Notation "'_m' x" := (milli x) (at level 5, right associativity, format "'_m' x") : SI_scope.
-  Notation "'_μ' x" := (micro x) (at level 5, right associativity, format "'_μ' x") : SI_scope.
-  Notation "'_n' x" := (nano x)  (at level 5, right associativity, format "'_n' x") : SI_scope.
-  Notation "'_p' x" := (pico x)  (at level 5, right associativity, format "'_p' x") : SI_scope.
-  Notation "'_f' x" := (femto x) (at level 5, right associativity, format "'_f' x") : SI_scope.
-  Notation "'_a' x" := (atto x)  (at level 5, right associativity, format "'_a' x") : SI_scope.
-  Notation "'_z' x" := (zepto x) (at level 5, right associativity, format "'_z' x") : SI_scope.
-  Notation "'_y' x" := (yocto x) (at level 5, right associativity, format "'_y' x") : SI_scope.
-  
+  Notation "'_d' x" :=
+    (deci x)  (at level 5, right associativity, format "'_d' x") : SI_scope.
+  Notation "'_c' x" :=
+    (centi x) (at level 5, right associativity, format "'_c' x") : SI_scope.
+  Notation "'_m' x" :=
+    (milli x) (at level 5, right associativity, format "'_m' x") : SI_scope.
+  Notation "'_μ' x" :=
+    (micro x) (at level 5, right associativity, format "'_μ' x") : SI_scope.
+  Notation "'_n' x" :=
+    (nano x)  (at level 5, right associativity, format "'_n' x") : SI_scope.
+  Notation "'_p' x" :=
+    (pico x)  (at level 5, right associativity, format "'_p' x") : SI_scope.
+  Notation "'_f' x" :=
+    (femto x) (at level 5, right associativity, format "'_f' x") : SI_scope.
+  Notation "'_a' x" :=
+    (atto x)  (at level 5, right associativity, format "'_a' x") : SI_scope.
+  Notation "'_z' x" :=
+    (zepto x) (at level 5, right associativity, format "'_z' x") : SI_scope.
+  Notation "'_y' x" :=
+    (yocto x) (at level 5, right associativity, format "'_y' x") : SI_scope.
+
 End SI_Prefix.
 
 
@@ -137,14 +158,14 @@ Module SI_Derived.
   Notation "'rad" := (radian) (at level 5) : SI_scope.
     
   Lemma radian_spec : 'rad == 1.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* solid angle, 立体角（球面度），1 sr = 1 m^2/m^2 = 1 *)
   Definition steradian := 'm² / 'm².
   Notation "'sr" := (steradian) (at level 5) : SI_scope.
 
   Lemma steradian_spec : 'sr == 1.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* frequency, 频率（赫兹），1 Hz = 1/s *)
   Definition herz := / 's.
@@ -164,21 +185,21 @@ Module SI_Derived.
   Notation "'Pa" := (pascal) (at level 5) : SI_scope.
   
   Lemma pascal_spec : 'Pa == 'N / 'm².
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* energy,work,amout of heart,能[量]/功/热量(焦耳), 1J=1N*m = 1kg*m^2/s^2 *)
   Definition joule := 'kg * 'm² * (/'s²).
   Notation "'J" := (joule) (at level 5) : SI_scope.
   
   Lemma joule_spec : 'J == 'N * 'm.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* power,radiant flux, 功率,辐射[能]通量(瓦特), 1W=1J/s=1kg*m^2/s^3 *)
   Definition watt := 'kg * 'm² * (/'s³).
   Notation "'W" := (watt) (at level 5) : SI_scope.
   
   Lemma power_spec : 'W == 'J * (/'s).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* electric charge,电荷[量](库仑), 1C=1A*s *)
   Definition coulomb := 'A * 's.
@@ -189,49 +210,49 @@ Module SI_Derived.
   Notation "'V" := (volt) (at level 5) : SI_scope.
   
   Lemma volt_spec : 'V == 'W / 'A.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* capacitance,电容(法拉), 1F=1C/V=1/kg/m^2 *s^4*A^2 *)
   Definition farad := (/'kg) * (/'m²) * 's⁴ * 'A².
   Notation "'F" := (farad) (at level 5) : SI_scope.
   
   Lemma farad_spec : 'F == 'C / 'V.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* electric resistance,电阻(欧姆), 1Ω=1V/A=1kg*m^2/s^3/A^2 *)
   Definition ohm := 'kg * 'm² * (/'s³) * (/'A²).
   Notation "'Ω" := (ohm) (at level 5) : SI_scope.
   
   Lemma ohm_spec : 'Ω == 'V / 'A.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* electric conductance,电导(西门子),1S=1A/V=1/kg*m^2*s^3*A^2 *)
   Definition siemens := (/'kg) * (/'m²) * 's³ * 'A².
   Notation "'S" := (siemens) (at level 5) : SI_scope.
   
   Lemma siemens_spec : 'S == 'A / 'V.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* magnetic flux,磁通[量](韦伯),1Wb=1V*s=1kg*m^2/s^2/A *)
   Definition weber := 'kg * 'm² * (/'s²) * (/'A).
   Notation "'Wb" := (weber) (at level 5) : SI_scope.
   
   Lemma weber_spec : 'Wb == 'V * 's.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* magnetic flux density,磁通密度/磁感应强度(特斯拉),1T=1Wb/m^2=1kg/s^2/A *)
   Definition tesla := 'kg * (/'s²) * (/'A).
   Notation "'T" := (tesla) (at level 5) : SI_scope.
   
   Lemma tesla_spec : 'T == 'Wb / 'm².
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* inductance,电感(亨利), 1H=1Wb/A=1kg*m^2/s^2/A^2 *)
   Definition henry := 'kg * 'm² * (/'s²) * (/'A²).
   Notation "'H" := (henry) (at level 5) : SI_scope.
   
   Lemma henry_spec : 'H == 'Wb / 'A.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* Celsius temperature, 摄氏温度(摄氏度),1℃=1K *)
   (* This is a special case, which described in another module below. *)
@@ -245,7 +266,7 @@ Module SI_Derived.
   Notation "'lx" := (lux) (at level 5) : SI_scope.
   
   Lemma lux_spec : 'lx == 'lm / 'm².
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* activity referred to a radionuclide，放射性活度（贝克勒尔），1Bq=/s *)
   Definition becquerel := /'s.
@@ -256,14 +277,14 @@ Module SI_Derived.
   Notation "'Gy" := (gray) (at level 5) : SI_scope.
   
   Lemma gray_spec : 'Gy == 'J / 'kg.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* dose equivalent，受辐射等效生物当量（西弗），Sv=m^2/s^2=J/kg *)
   Definition sievert := 'm² / 's².
   Notation "'Sv" := (sievert) (at level 5) : SI_scope.
   
   Lemma sievert_spec : 'Sv == 'J / 'kg.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (* catalytic activity, 催化活性(开特），kat=mol/s *)
   Definition katal := 'mol / 's.
@@ -308,36 +329,32 @@ Module Temperature_TemperatureDifference.
   Definition kel2fahR (x : R) : R := (x - 273.15) * 1.8 + 32.
   Definition fah2kelR (x : R) : R := (x - 32) / 1.8 + 273.15.
 
-  #[export] Hint Unfold
-    cel2kelR kel2celR cel2fahR fah2celR kel2fahR fah2kelR
-    : unit.
-
   (* Solve equation of `temperature unit` *)
   Local Ltac solve_tempUnit := intros; autounfold with unit; field; lra.
 
   (* [kel2celR] o [cel2kelR] = id *)
   Lemma kel2celR_cel2kelR_id : forall x, kel2celR (cel2kelR x) = x.
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
   (* [cel2kelR] o [kel2celR] = id *)
   Lemma cel2kelR_kel2celR_id : forall x, cel2kelR (kel2celR x) = x.
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
   
   Lemma fah2celR_cel2fahR_id : forall x, fah2celR (cel2fahR x) = x.
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
   Lemma cel2fahR_fah2celR_id : forall x, cel2fahR (fah2celR x) = x.
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
   
   Lemma fah2kelR_kel2fahR_id : forall x, fah2kelR (kel2fahR x) = x.
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
   Lemma kel2fahR_fah2kelR_id : forall x, kel2fahR (fah2kelR x) = x.
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
 
   (* [kel2fahR] is consistent with [kel2celR] and [cel2fahR] *)
   Lemma kel2fahR_spec : forall x, kel2fahR x = cel2fahR (kel2celR x).
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
   (* [fah2kelR] is consistent with [fah2celR] and [cel2kelR] *)
   Lemma fah2kelR_spec : forall x, fah2kelR x = cel2kelR (fah2celR x).
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
 
   
   (** *** Definition of temperature difference unit on `R` type *)
@@ -345,19 +362,15 @@ Module Temperature_TemperatureDifference.
   Definition deltaCel (x : R) : R := x.
   Definition deltaFah (x : R) : R := (x / 1.8).
 
-  #[export] Hint Unfold
-   deltaKel deltaCel deltaFah
-    : unit.
-
   (* [deltaKel] is consistent with [K] *)
   Lemma deltaKel_spec : forall x y, x + (deltaKel y) = x + y.
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
   (* [deltaCel] is consistent with [cel2kelR] *)
   Lemma deltaCel_spec : forall x y, cel2kelR x + (deltaCel y) = cel2kelR (x + y).
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
   (* [deltaFah] is consistent with [fah2kelR] *)
   Lemma deltaFah_spec : forall x y, fah2kelR x + (deltaFah y) = fah2kelR (x + y).
-  Proof. solve_tempUnit. Qed.
+  Proof. intros; cbv; lra. Qed.
 
   
   (** *** Definition of temperature unit on `Unit` type *)
@@ -367,45 +380,44 @@ Module Temperature_TemperatureDifference.
   Notation "x '℃" := (temperatureCel x) (at level 5) : SI_scope.
   
   (* [temperatureCel] is consistent with [cel2kelR] *)
-  Lemma temperatureCel_spec : forall x, Ucoef (temperatureCel x) = cel2kelR x.
-  Proof. intros. simpl. autounfold with unit. ring. Qed.
+  Lemma temperatureCel_spec : forall x, ucoef (temperatureCel x) = cel2kelR x.
+  Proof. intros; cbv; lra. Qed.
 
   (* Absolute temperature (Fahrenheit) *)
   Definition temperatureFah (x : R) : Unit := (fah2kelR x) * 'K.
   Notation "'℉" := (temperatureFah) (at level 5) : SI_scope.
   
   (* [temperatureFah] is consistent with [fah2kelR] *)
-  Lemma temperatureFah_spec : forall x, Ucoef (temperatureFah x) = fah2kelR x.
-  Proof. intros. simpl. autounfold with unit. ring. Qed.
+  Lemma temperatureFah_spec : forall x, ucoef (temperatureFah x) = fah2kelR x.
+  Proof. intros; cbv; lra. Qed.
 
   (* Temperature difference (Kelvin) *)
   Definition temperatureDiffKel (x : R) : Unit := (deltaKel x) * 'K.
   Notation "x 'ΔK" := (temperatureDiffKel x) (at level 5) : SI_scope.
   
   (* [temperatureDiffKel] is consistent with [deltaKel] *)
-  Lemma temperatureDiffKel_spec : forall x, Ucoef (temperatureDiffKel x) = deltaKel x.
-  Proof. intros. simpl. autounfold with unit. ring. Qed.
+  Lemma temperatureDiffKel_spec : forall x, ucoef (temperatureDiffKel x) = deltaKel x.
+  Proof. intros; cbv; lra. Qed.
 
   (* Temperature difference (Celsius) *)
   Definition temperatureDiffCel (x : R) : Unit := (deltaCel x) * 'K.
   Notation "x 'Δ℃" := (temperatureDiffCel x) (at level 5) : SI_scope.
   
   (* [temperatureDiffCel] is consistent with [deltaCel] *)
-  Lemma temperatureDiffCel_spec : forall x, Ucoef (temperatureDiffCel x) = deltaCel x.
-  Proof. intros. simpl. autounfold with unit. ring. Qed.
+  Lemma temperatureDiffCel_spec : forall x, ucoef (temperatureDiffCel x) = deltaCel x.
+  Proof. intros; cbv; lra. Qed.
   
   (* Temperature difference (Fahrenheit) *)
   Definition temperatureDiffFah (x : R) : Unit := (deltaFah x) * 'K.
   Notation "x 'Δ℉" := (temperatureDiffFah x) (at level 5) : SI_scope.
   
   (* [temperatureDiffFah] is consistent with [deltaFah] *)
-  Lemma temperatureDiffFah_spec : forall x, Ucoef (temperatureDiffFah x) = deltaFah x.
-  Proof. intros. simpl. autounfold with unit. ring. Qed.
-
+  Lemma temperatureDiffFah_spec : forall x, ucoef (temperatureDiffFah x) = deltaFah x.
+  Proof. intros; cbv; lra. Qed.
 
   Section test.
-    Let ex1 : 30 '℃ == 303.15 * 'K.
-    Proof. pfueq. Qed.
+    Local Lemma ex1 : 30 '℃ == 303.15 * 'K.
+    Proof. ueq. Qed.
 
     (* 20 ℃ + 5 Δ℃ = 25 ℃ *)
     (* Let ex2 : 20 '℃ + 5 'Δ℃ == 25 '℃. *)
@@ -422,7 +434,7 @@ Module SI_Accepted.
   Notation "'ms" := (millisecond) (at level 5) : SI_scope.
   
   Lemma second_millisecond : 's == 1e3 * 'ms.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
 
   Definition killometre := 1e3 * 'm.
   Notation "'km" := (killometre) (at level 5) : SI_scope.
@@ -443,16 +455,16 @@ Module SI_Accepted.
   Notation "'hrs" := (hour) (at level 5) : SI_scope.
 
   Lemma hour2second : 'hrs == 3600 * 's.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   Definition day := 24 * 'hrs.
   Notation "'d" := (day) (at level 5) : SI_scope.
   
   Lemma day2second : 'd == 86400 * 's.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   Lemma day2minute : 'd == 1440 * 'min.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (** astronomical Unit, 天文单位 *)
   Definition astronomicalUnit := 149_597_870_700 * 'm.
@@ -533,8 +545,8 @@ Module SI_Constants_spec.
   Export SI_Constants.
 
   (** Tactic for proof unit approximate reletion. *)
-  Ltac pfuapprox :=
-    unfold Unit_approx; simpl; split; auto;
+  Ltac uapprox :=
+    unfold unit_approx; simpl; split; auto;
     (* solve Rapprox with constant value *)
     unfold Rapprox;
     match goal with
@@ -543,70 +555,70 @@ Module SI_Constants_spec.
   
   (** Properties about second *)
   Lemma Hz_def : 1 * 'Hz == 'ΔV / 9_192_631_770.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   Lemma s_def : 1 * 's == 9_192_631_770 / 'ΔV.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (** Properties about metre *)
   Lemma m_def1 : 1 * 'm == ('c / 299_792_458) * 's.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
 
   Lemma m_def2 : 1 * 'm == (9_192_631_770 / 299_792_458) * ('c / 'ΔV).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
-  Lemma m_def3 : Unit_approx (1 * 'm) (30.663319 * ('c/'ΔV)) 1e-9.
-  Proof. pfuapprox. Qed.
+  Lemma m_def3 : unit_approx (1 * 'm) (30.663319 * ('c/'ΔV)) 1e-9.
+  Proof. uapprox. Qed.
   
   (** Properties about kilogram *)
   Lemma kg_def1 : 1 * 'kg == 
     ('h / (6.62607015e-34)) * ((/'m²)*'s).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   Lemma kg_def2 : 1 * 'kg == 
     ((299792458)² / (6.62607015e-34 * 9192631770)) *
     (('h * 'ΔV) / ('c²)).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
-  Lemma kg_def3 : Unit_approx (1 * 'kg)
+  Lemma kg_def3 : unit_approx (1 * 'kg)
     ((1.4755214e40) * (('h * 'ΔV) / ('c²))) 1e-9.
-  Proof. pfuapprox. Qed.
+  Proof. uapprox. Qed.
   
   (** Properties about ampere *)
   Lemma A_def1 : 1 * 'A == ('e / 1.602176634e-19) * (/'s).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   Lemma A_def2 : 1 * 'A == (/(9192631770 * 1.602176634e-19)) * ('ΔV * 'e).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
-  Lemma A_def3 : Unit_approx (1 * 'A) (6.7896868e8 * ('ΔV * 'e)) 1e-8.
-  Proof. pfuapprox. Qed.
+  Lemma A_def3 : unit_approx (1 * 'A) (6.7896868e8 * ('ΔV * 'e)) 1e-8.
+  Proof. uapprox. Qed.
   
   (** Properties about kelvin *)
   Lemma kelvin_def1 : 1 * 'K == (1.380649e-23 /'k) * ('kg * 'm² * (/'s²)).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   Lemma kelvin_def2 : 1 * 'K == (1.380649e-23 / (6.62607015e-34 * 9192631770))
                                 * ('ΔV * 'h * (/'k)).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
-  Lemma kelvin_def3 : Unit_approx (1*'K) (2.2666653 * ('ΔV * 'h * (/'k))) 1e-7.
-  Proof. pfuapprox. Qed.
+  Lemma kelvin_def3 : unit_approx (1*'K) (2.2666653 * ('ΔV * 'h * (/'k))) 1e-7.
+  Proof. uapprox. Qed.
   
   (** Properties about mole *)
   Lemma mol_def : 1 * 'mol == 6.02214076e23 / 'NA.
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   (** Properties about candela *)
   Lemma cd_def1 : 1 * 'cd == ('Kcd/683) * ('kg * 'm² * (/'s³) * (/'sr)).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
   Lemma cd_def2 : 1 * 'cd == 
     (/(6.62607015e-34 * 9192631770² * 683)) * ('ΔV² * 'h * 'Kcd).
-  Proof. pfueq. Qed.
+  Proof. ueq. Qed.
   
-  Lemma cd_def3 : Unit_approx (1 * 'cd) (2.6148305e10 * ('ΔV² * 'h * 'Kcd)) 1e-8.
-  Proof. pfuapprox. Qed.
+  Lemma cd_def3 : unit_approx (1 * 'cd) (2.6148305e10 * ('ΔV² * 'h * 'Kcd)) 1e-8.
+  Proof. uapprox. Qed.
 
 End SI_Constants_spec.
 
@@ -618,7 +630,8 @@ Section test.
   Import SI_Prefix.
   Import SI_Constants.
 
-  (* https://en.wikipedia.org/wiki/Gas_constant
+  Section ex1.
+    (* https://en.wikipedia.org/wiki/Gas_constant
      在热力学公式 pV = nRT 中，R称为理想气体常数，它有多种单位。见下表
      SI units
    ✓8.31446261815324       J ⋅ K−1 ⋅ mol−1
@@ -647,48 +660,52 @@ Section test.
      bar    巴             压强       现在定义 = 100 kPa = 'h 'kPa
      erh    --             能量       现在定义 = 1e-7 J = 1e-7 * 'J
      atm    一个标准大气压  压强
-   *)
+     *)
 
-  Let killoPa := _k 'Pa.
-  Let Ru1 : Unit := 'J / 'K / 'mol.
-  Let Ru2 : Unit := 'm³ * 'Pa / 'K / 'mol.
-  Let Ru3 : Unit := 'kg * 'm² / 's² / 'K / 'mol.
-  Let Ru4 : Unit := 1000 * 'L * 'Pa / 'K / 'mol. (* added 1000 *)
-  Let Ru5 : Unit := 'L * _k 'Pa / 'K / 'mol. (* added 1000 *)
+    Let killoPa := _k 'Pa.
+    Let Ru1 : Unit := 'J / 'K / 'mol.
+    Let Ru2 : Unit := 'm³ * 'Pa / 'K / 'mol.
+    Let Ru3 : Unit := 'kg * 'm² / 's² / 'K / 'mol.
+    Let Ru4 : Unit := 1000 * 'L * 'Pa / 'K / 'mol. (* added 1000 *)
+    Let Ru5 : Unit := 'L * _k 'Pa / 'K / 'mol. (* added 1000 *)
 
-  Goal Ru1 == Ru2. pfueq. Qed.
-  Goal Ru1 == Ru3. pfueq. Qed.
-  Goal Ru1 == Ru4. pfueq. Qed.
-  Goal Ru1 == Ru5. pfueq. Qed.
+    Goal Ru1 == Ru2. ueq. Qed.
+    Goal Ru1 == Ru3. ueq. Qed.
+    Goal Ru1 == Ru4. ueq. Qed.
+    Goal Ru1 == Ru5. ueq. Qed.
+  End ex1.
 
- 
-  (** Test the ability that if Coq can handle large numbers.
+  Section ex2.
+    (** Test the ability that if Coq can handle large numbers.
     In astronomy, where there are some very large numbers involved,
     and Coq can check the equation or inequalities of these numbers *)
-  (* I have tested such as "1.25e1000" *)
-  Let large_number_ex1 : (1.234567e200 * 2.345678e100 = 2.895896651426e300)%R.
-  Proof. lra. Qed.
+    Local Lemma large_number_ex1 : (1.234567e200 * 2.345678e100 = 2.895896651426e300)%R.
+    Proof. lra. Qed.
 
-  
-  (** 天文学中的一个关系式：3.26 light-year <= parsec <= 3.27 light-year *)
-  
-  Let julian_year := 365.25 * day. (* = 3.15576×10⁷ s *)
-  (* 儒略年，是一种时间测量单位，定义为 365.25 天 *)
+    (* a bigger example *)
+    (* Let large_number_ex2 : (1.234567e400 * 2.345678e600 = 2.895896651426e1000)%R. *)
+    (* Proof. Time lra. (* 2.417secs *) Qed. *)
+    
+    (** 天文学中的一个关系式：3.26 light-year <= parsec <= 3.27 light-year *)
+    
+    (* 儒略年，是一种时间测量单位，定义为 365.25 天 *)
+    Let julian_year := 365.25 * day. (* = 3.15576×10⁷ s *)
 
-  Let light_year := 'c * julian_year. (* = 9.460730473×10¹⁵ *)
-  (* 光年(符号 ly)，是长度单位，定义为是光在真空中传播一儒略年的距离。*)
-  
-  Let astronomical_unit := 149597870700 * 'm.
-  Notation "'au" := astronomical_unit.
-  (* 天文单位(符号au、AU)，是长度单位，大致等于从地球到太阳的距离。
+    (* 光年(符号 ly)，是长度单位，定义为是光在真空中传播一儒略年的距离。*)
+    Let light_year := 'c * julian_year. (* = 9.460730473×10¹⁵ *)
+    
+    (* 天文单位(符号au、AU)，是长度单位，大致等于从地球到太阳的距离。
      最初被认为是地球远日点和近日点的平均值；自 2012 年起，它被准确定义。*)
-  
-  Let parsec := (648000/PI) * 'au.
-  (* 秒差，是一种长度单位，用以测量太阳系以外天体的长度单位。
+    Let astronomical_unit := 149597870700 * 'm.
+    Notation "'au" := astronomical_unit.
+    
+    (* 秒差，是一种长度单位，用以测量太阳系以外天体的长度单位。
      秒差的原理使用了三角学，定义为1天文单位的对角为1角秒时的距离。*)
- 
-  (* we need to define <= relation first, use Quantity, not Unit *) 
-  (* Let parsec_le_lightyear : parsec <= 3.27 * light_year. *)
-  (* Let parsec_ge_lightyear : parsec >= 3.26 * light_year. *)
+    Let parsec := (648000/PI) * 'au.
+    
+    (* we need to define <= relation first, use Quantity, not Unit *) 
+    (* Let parsec_le_lightyear : parsec <= 3.27 * light_year. *)
+    (* Let parsec_ge_lightyear : parsec >= 3.26 * light_year. *)
+  End ex2.
   
 End test.
