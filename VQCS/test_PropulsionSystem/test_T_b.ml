@@ -36,16 +36,6 @@ module Coq__1 = struct
 end
 include Coq__1
 
-type positive =
-| XI of positive
-| XO of positive
-| XH
-
-type z =
-| Z0
-| Zpos of positive
-| Zneg of positive
-
 module Nat =
  struct
   (** val add : int -> int -> int **)
@@ -73,6 +63,16 @@ module Nat =
       m
  end
 
+type positive =
+| XI of positive
+| XO of positive
+| XH
+
+type z =
+| Z0
+| Zpos of positive
+| Zneg of positive
+
 module Pos =
  struct
   type mask =
@@ -99,10 +99,11 @@ module Coq_Pos =
        | XI q0 -> XO (add_carry p q0)
        | XO q0 -> XI (add p q0)
        | XH -> XO (succ p))
-    | XO p -> (match y with
-               | XI q0 -> XI (add p q0)
-               | XO q0 -> XO (add p q0)
-               | XH -> XI p)
+    | XO p ->
+      (match y with
+       | XI q0 -> XI (add p q0)
+       | XO q0 -> XO (add p q0)
+       | XH -> XI p)
     | XH -> (match y with
              | XI q0 -> XO (succ q0)
              | XO q0 -> XI q0
@@ -122,10 +123,11 @@ module Coq_Pos =
        | XI q0 -> XO (add_carry p q0)
        | XO q0 -> XI (add p q0)
        | XH -> XO (succ p))
-    | XH -> (match y with
-             | XI q0 -> XI (succ q0)
-             | XO q0 -> XO (succ q0)
-             | XH -> XI XH)
+    | XH ->
+      (match y with
+       | XI q0 -> XI (succ q0)
+       | XO q0 -> XO (succ q0)
+       | XH -> XI XH)
 
   (** val pred_double : positive -> positive **)
 
@@ -259,7 +261,8 @@ module Coq_Pos =
              | XH -> true
              | _ -> false)
 
-  (** val ggcdn : int -> positive -> positive -> positive * (positive * positive) **)
+  (** val ggcdn :
+      int -> positive -> positive -> positive * (positive * positive) **)
 
   let rec ggcdn n a b =
     (fun fO fS n -> if n=0 then fO () else fS (n-1))
@@ -277,11 +280,15 @@ module Coq_Pos =
             | Gt ->
               let (g, p) = ggcdn n0 (sub a' b') b in
               let (ab, bb) = p in (g, ((add bb (XO ab)), bb)))
-         | XO b0 -> let (g, p) = ggcdn n0 a b0 in let (aa, bb) = p in (g, (aa, (XO bb)))
+         | XO b0 ->
+           let (g, p) = ggcdn n0 a b0 in
+           let (aa, bb) = p in (g, (aa, (XO bb)))
          | XH -> (XH, (a, XH)))
       | XO a0 ->
         (match b with
-         | XI _ -> let (g, p) = ggcdn n0 a0 b in let (aa, bb) = p in (g, ((XO aa), bb))
+         | XI _ ->
+           let (g, p) = ggcdn n0 a0 b in
+           let (aa, bb) = p in (g, ((XO aa), bb))
          | XO b0 -> let (g, p) = ggcdn n0 a0 b0 in ((XO g), p)
          | XH -> (XH, (a, XH)))
       | XH -> (XH, (XH, b)))
@@ -429,9 +436,10 @@ module Z =
     | Zpos x' -> (match y with
                   | Zpos y' -> Coq_Pos.compare x' y'
                   | _ -> Gt)
-    | Zneg x' -> (match y with
-                  | Zneg y' -> compOpp (Coq_Pos.compare x' y')
-                  | _ -> Lt)
+    | Zneg x' ->
+      (match y with
+       | Zneg y' -> compOpp (Coq_Pos.compare x' y')
+       | _ -> Lt)
 
   (** val sgn : z -> z **)
 
@@ -624,12 +632,15 @@ module RbaseSymbolsImpl =
 let rec iPR_2 = function
 | XI p0 ->
   RbaseSymbolsImpl.coq_Rmult
-    (RbaseSymbolsImpl.coq_Rplus RbaseSymbolsImpl.coq_R1 RbaseSymbolsImpl.coq_R1)
+    (RbaseSymbolsImpl.coq_Rplus RbaseSymbolsImpl.coq_R1
+      RbaseSymbolsImpl.coq_R1)
     (RbaseSymbolsImpl.coq_Rplus RbaseSymbolsImpl.coq_R1 (iPR_2 p0))
 | XO p0 ->
   RbaseSymbolsImpl.coq_Rmult
-    (RbaseSymbolsImpl.coq_Rplus RbaseSymbolsImpl.coq_R1 RbaseSymbolsImpl.coq_R1) (iPR_2 p0)
-| XH -> RbaseSymbolsImpl.coq_Rplus RbaseSymbolsImpl.coq_R1 RbaseSymbolsImpl.coq_R1
+    (RbaseSymbolsImpl.coq_Rplus RbaseSymbolsImpl.coq_R1
+      RbaseSymbolsImpl.coq_R1) (iPR_2 p0)
+| XH ->
+  RbaseSymbolsImpl.coq_Rplus RbaseSymbolsImpl.coq_R1 RbaseSymbolsImpl.coq_R1
 
 (** val iPR : positive -> RbaseSymbolsImpl.coq_R **)
 
@@ -662,37 +673,19 @@ module RinvImpl =
     __
  end
 
-(** val rdiv : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R **)
+(** val rdiv :
+    RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R **)
 
 let rdiv r1 r2 =
   RbaseSymbolsImpl.coq_Rmult r1 (RinvImpl.coq_Rinv r2)
 
-(** val q2R : q -> RbaseSymbolsImpl.coq_R **)
-
-let q2R x =
-  RbaseSymbolsImpl.coq_Rmult (iZR x.qnum) (RinvImpl.coq_Rinv (iZR (Zpos x.qden)))
-
-(** val pow0 : RbaseSymbolsImpl.coq_R -> int -> RbaseSymbolsImpl.coq_R **)
-
-let rec pow0 r n =
-  (fun fO fS n -> if n=0 then fO () else fS (n-1))
-    (fun _ -> iZR (Zpos XH))
-    (fun n0 -> RbaseSymbolsImpl.coq_Rmult r (pow0 r n0))
-    n
-
-(** val req_dec_T : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> bool **)
+(** val req_dec_T :
+    RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> bool **)
 
 let req_dec_T = fun r1 r2 ->
   let c = Float.compare r1 r2 in
   if c = 0 then true
   else false
-
-(** val powerRZ : RbaseSymbolsImpl.coq_R -> z -> RbaseSymbolsImpl.coq_R **)
-
-let powerRZ x = function
-| Z0 -> iZR (Zpos XH)
-| Zpos p -> pow0 x (Coq_Pos.to_nat p)
-| Zneg p -> RinvImpl.coq_Rinv (pow0 x (Coq_Pos.to_nat p))
 
 (** val reqb : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> bool **)
 
@@ -728,12 +721,14 @@ let baseUnit_beq x y =
     (match y with
      | BUThermodynamicTemperature -> true
      | _ -> false)
-  | BUAmountOfSubstance -> (match y with
-                            | BUAmountOfSubstance -> true
-                            | _ -> false)
-  | BULuminousIntensity -> (match y with
-                            | BULuminousIntensity -> true
-                            | _ -> false)
+  | BUAmountOfSubstance ->
+    (match y with
+     | BUAmountOfSubstance -> true
+     | _ -> false)
+  | BULuminousIntensity ->
+    (match y with
+     | BULuminousIntensity -> true
+     | _ -> false)
 
 (** val bueqb : baseUnit -> baseUnit -> bool **)
 
@@ -745,25 +740,6 @@ type unit0 =
 | Ubu of baseUnit
 | Uinv of unit0
 | Umul of unit0 * unit0
-
-(** val upowNat : unit0 -> int -> unit0 **)
-
-let rec upowNat u n =
-  (fun fO fS n -> if n=0 then fO () else fS (n-1))
-    (fun _ -> Unone (iZR (Zpos XH)))
-    (fun n' ->
-    (fun fO fS n -> if n=0 then fO () else fS (n-1))
-      (fun _ -> u)
-      (fun _ -> Umul (u, (upowNat u n')))
-      n')
-    n
-
-(** val upow : unit0 -> z -> unit0 **)
-
-let upow u = function
-| Z0 -> Unone (iZR (Zpos XH))
-| Zpos p -> upowNat u (Coq_Pos.to_nat p)
-| Zneg p -> Uinv (upowNat u (Coq_Pos.to_nat p))
 
 (** val ucoef : unit0 -> RbaseSymbolsImpl.coq_R **)
 
@@ -806,8 +782,9 @@ let deqb d1 d2 =
   let (z12, z13) = p8 in
   (&&)
     ((&&)
-      ((&&) ((&&) ((&&) ((&&) (Z.eqb z5 z12) (Z.eqb z6 z13)) (Z.eqb z4 z11)) (Z.eqb z3 z10))
-        (Z.eqb z2 z9)) (Z.eqb z1 z8)) (Z.eqb z0 z7)
+      ((&&)
+        ((&&) ((&&) ((&&) (Z.eqb z5 z12) (Z.eqb z6 z13)) (Z.eqb z4 z11))
+          (Z.eqb z3 z10)) (Z.eqb z2 z9)) (Z.eqb z1 z8)) (Z.eqb z0 z7)
 
 (** val dmap : dims -> (z -> z) -> dims **)
 
@@ -817,7 +794,8 @@ let dmap d f =
   let (p1, z2) = p0 in
   let (p2, z3) = p1 in
   let (p3, z4) = p2 in
-  let (z5, z6) = p3 in (((((((f z5), (f z6)), (f z4)), (f z3)), (f z2)), (f z1)), (f z0))
+  let (z5, z6) = p3 in
+  (((((((f z5), (f z6)), (f z4)), (f z3)), (f z2)), (f z1)), (f z0))
 
 (** val dmap2 : dims -> dims -> (z -> z -> z) -> dims **)
 
@@ -834,7 +812,8 @@ let dmap2 d1 d2 f =
   let (p7, z10) = p6 in
   let (p8, z11) = p7 in
   let (z12, z13) = p8 in
-  (((((((f z5 z12), (f z6 z13)), (f z4 z11)), (f z3 z10)), (f z2 z9)), (f z1 z8)), (f z0 z7))
+  (((((((f z5 z12), (f z6 z13)), (f z4 z11)), (f z3 z10)), (f z2 z9)),
+  (f z1 z8)), (f z0 z7))
 
 (** val dplus : dims -> dims -> dims **)
 
@@ -846,17 +825,12 @@ let dplus d1 d2 =
 let dopp d =
   dmap d Z.opp
 
-(** val dscal : z -> dims -> dims **)
-
-let dscal z0 d =
-  dmap d (fun x -> Z.mul z0 x)
-
 (** val udims : unit0 -> dims **)
 
 let udims u =
-  (((((((udim u BUTime), (udim u BULength)), (udim u BUMass)), (udim u BUElectricCurrent)),
-    (udim u BUThermodynamicTemperature)), (udim u BUAmountOfSubstance)),
-    (udim u BULuminousIntensity))
+  (((((((udim u BUTime), (udim u BULength)), (udim u BUMass)),
+    (udim u BUElectricCurrent)), (udim u BUThermodynamicTemperature)),
+    (udim u BUAmountOfSubstance)), (udim u BULuminousIntensity))
 
 type nunit = RbaseSymbolsImpl.coq_R * dims
 
@@ -883,31 +857,18 @@ let neqb n1 n2 =
 (** val nmul : nunit -> nunit -> nunit **)
 
 let nmul n1 n2 =
-  ((RbaseSymbolsImpl.coq_Rmult (ncoef n1) (ncoef n2)), (dplus (ndims n1) (ndims n2)))
+  ((RbaseSymbolsImpl.coq_Rmult (ncoef n1) (ncoef n2)),
+    (dplus (ndims n1) (ndims n2)))
 
 (** val ninv : nunit -> nunit **)
 
 let ninv n1 =
   ((RinvImpl.coq_Rinv (ncoef n1)), (dopp (ndims n1)))
 
-(** val npow : nunit -> z -> RbaseSymbolsImpl.coq_R * dims **)
-
-let npow n z0 =
-  ((powerRZ (ncoef n) z0), (dscal z0 (ndims n)))
-
 (** val u2n : unit0 -> nunit **)
 
 let u2n u =
   ((ucoef u), (udims u))
-
-module SI_Prefix =
- struct
-  (** val centi : unit0 -> unit0 **)
-
-  let centi u =
-    Umul ((Unone (rdiv (iZR (Zpos XH)) (iZR (Z.pow_pos (Zpos (XO (XI (XO XH)))) (XO XH))))),
-      u)
- end
 
 module SI_Basic =
  struct
@@ -916,24 +877,37 @@ module SI_Basic =
   let second =
     BUTime
 
-  (** val metre : baseUnit **)
+  (** val ampere : baseUnit **)
 
-  let metre =
-    BULength
+  let ampere =
+    BUElectricCurrent
  end
 
 module SI_Accepted =
  struct
+  (** val milliampere : unit0 **)
+
+  let milliampere =
+    Umul ((Unone
+      (rdiv (iZR (Zpos XH))
+        (iZR (Z.pow_pos (Zpos (XO (XI (XO XH)))) (XI XH))))), (Ubu
+      SI_Basic.ampere))
+
   (** val minute : unit0 **)
 
   let minute =
-    Umul ((Unone (iZR (Zpos (XO (XO (XI (XI (XI XH)))))))), (Ubu SI_Basic.second))
+    Umul ((Unone (iZR (Zpos (XO (XO (XI (XI (XI XH)))))))), (Ubu
+      SI_Basic.second))
 
-  (** val litre : unit0 **)
+  (** val hour : unit0 **)
 
-  let litre =
-    Umul ((Unone (rdiv (iZR (Zpos XH)) (iZR (Z.pow_pos (Zpos (XO (XI (XO XH)))) (XI XH))))),
-      (upow (Ubu SI_Basic.metre) (Zpos (XI XH))))
+  let hour =
+    Umul ((Unone (iZR (Zpos (XO (XO (XI (XI (XI XH)))))))), minute)
+
+  (** val milli_amper_hour : unit0 **)
+
+  let milli_amper_hour =
+    Umul (milliampere, hour)
  end
 
 (** val ncvtbleb : nunit -> nunit -> bool **)
@@ -966,18 +940,16 @@ let qval = function
 | Qmake (v, _) -> Some v
 | Qinvalid -> None
 
-(** val qcvtbleb : 'a1 quantity -> 'a1 quantity -> bool **)
+(** val qsameub : 'a1 quantity -> unit0 -> bool **)
 
-let qcvtbleb q1 q2 =
-  match q1 with
-  | Qmake (_, n1) ->
-    (match q2 with
-     | Qmake (_, n2) -> deqb (ndims n1) (ndims n2)
-     | Qinvalid -> false)
+let qsameub q0 u =
+  match q0 with
+  | Qmake (_, n) -> neqb n (u2n u)
   | Qinvalid -> false
 
 (** val q2qn :
-    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> nunit -> 'a1 quantity **)
+    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> nunit -> 'a1
+    quantity **)
 
 let q2qn aRmul q0 nref =
   match q0 with
@@ -988,55 +960,47 @@ let q2qn aRmul q0 nref =
   | Qinvalid -> Qinvalid
 
 (** val q2qu :
-    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> unit0 -> 'a1 quantity **)
+    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> unit0 -> 'a1
+    quantity **)
 
 let q2qu aRmul q0 uref =
   q2qn aRmul q0 (u2n uref)
 
-(** val q2q :
-    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity **)
+(** val qop1 : ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity **)
 
-let q2q aRmul q0 = function
-| Qmake (_, n) -> q2qn aRmul q0 n
+let qop1 f = function
+| Qmake (v, n) -> Qmake ((f v), n)
 | Qinvalid -> Qinvalid
 
-(** val qop2 : ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity **)
+(** val qop2 :
+    ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity **)
 
 let qop2 f q1 q2 =
   match q1 with
   | Qmake (v1, n1) ->
     (match q2 with
-     | Qmake (v2, n2) -> if neqb n1 n2 then Qmake ((f v1 v2), n1) else Qinvalid
+     | Qmake (v2, n2) ->
+       if neqb n1 n2 then Qmake ((f v1 v2), n1) else Qinvalid
      | Qinvalid -> Qinvalid)
   | Qinvalid -> Qinvalid
 
-(** val qop2l :
-    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-    quantity -> 'a1 quantity **)
+(** val qadd :
+    ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity **)
 
-let qop2l aRmul f q1 q2 =
-  if qcvtbleb q1 q2 then qop2 f q1 (q2q aRmul q2 q1) else Qinvalid
+let qadd =
+  qop2
 
-(** val qop2r :
-    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-    quantity -> 'a1 quantity **)
+(** val qopp : ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity **)
 
-let qop2r aRmul f q1 q2 =
-  if qcvtbleb q1 q2 then qop2 f (q2q aRmul q1 q2) q2 else Qinvalid
+let qopp =
+  qop1
 
-(** val qaddl :
-    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-    quantity -> 'a1 quantity **)
+(** val qsub :
+    ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity ->
+    'a1 quantity **)
 
-let qaddl =
-  qop2l
-
-(** val qaddr :
-    (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-    quantity -> 'a1 quantity **)
-
-let qaddr =
-  qop2r
+let qsub aadd aopp q1 q2 =
+  qadd aadd q1 (qopp aopp q2)
 
 (** val qinv : ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity **)
 
@@ -1044,7 +1008,8 @@ let qinv ainv = function
 | Qmake (v, n) -> Qmake ((ainv v), (ninv n))
 | Qinvalid -> Qinvalid
 
-(** val qmul : ('a1 -> 'a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity **)
+(** val qmul :
+    ('a1 -> 'a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity **)
 
 let qmul amulB q1 q2 =
   match q1 with
@@ -1054,15 +1019,9 @@ let qmul amulB q1 q2 =
      | Qinvalid -> Qinvalid)
   | Qinvalid -> Qinvalid
 
-(** val qpow : ('a1 -> z -> 'a1) -> 'a1 quantity -> z -> 'a1 quantity **)
-
-let qpow apowerZ q0 z0 =
-  match q0 with
-  | Qmake (v, n) -> Qmake ((apowerZ v z0), (npow n z0))
-  | Qinvalid -> Qinvalid
-
 (** val qdiv :
-    ('a1 -> 'a2 -> 'a2) -> ('a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity **)
+    ('a1 -> 'a2 -> 'a2) -> ('a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity ->
+    'a2 quantity **)
 
 let qdiv amulB binv q1 q2 =
   qmul amulB q1 (qinv binv q2)
@@ -1084,94 +1043,73 @@ let r2q =
 let q2quR q0 uref =
   q2qu RbaseSymbolsImpl.coq_Rmult q0 uref
 
-(** val qaddlR : quR -> quR -> quR **)
+(** val qsubR : quR -> quR -> quR **)
 
-let qaddlR q1 q2 =
-  qaddl RbaseSymbolsImpl.coq_Rmult RbaseSymbolsImpl.coq_Rplus q1 q2
-
-(** val qaddrR : quR -> quR -> quR **)
-
-let qaddrR q1 q2 =
-  qaddr RbaseSymbolsImpl.coq_Rmult RbaseSymbolsImpl.coq_Rplus q1 q2
+let qsubR q1 q2 =
+  qsub RbaseSymbolsImpl.coq_Rplus RbaseSymbolsImpl.coq_Ropp q1 q2
 
 (** val qmulR : quR -> quR -> quR **)
 
 let qmulR q1 q2 =
   qmul RbaseSymbolsImpl.coq_Rmult q1 q2
 
-(** val qpowR : quR -> z -> quR **)
-
-let qpowR q0 z0 =
-  qpow powerRZ q0 z0
-
 (** val qdivR : quR -> quR -> quR **)
 
 let qdivR q1 q2 =
   qdiv RbaseSymbolsImpl.coq_Rmult RinvImpl.coq_Rinv q1 q2
 
-module Coq_ex_QuR =
+(** val val_0_06 : RbaseSymbolsImpl.coq_R **)
+
+let val_0_06 = 0.06
+
+(** val val_C_b : RbaseSymbolsImpl.coq_R **)
+
+let val_C_b = 4000.
+
+(** val val_C_min : RbaseSymbolsImpl.coq_R **)
+
+let val_C_min = 800.
+
+(** val c_b : quR **)
+
+let c_b =
+  u2qR val_C_b SI_Accepted.milli_amper_hour
+
+(** val c_min : quR **)
+
+let c_min =
+  u2qR val_C_min SI_Accepted.milli_amper_hour
+
+(** val cHK_UNIT : quR -> unit0 -> quR **)
+
+let cHK_UNIT q0 u =
+  if qsameub q0 u then q0 else Qinvalid
+
+(** val cVT_UNIT : quR -> unit0 -> quR **)
+
+let cVT_UNIT =
+  q2quR
+
+(** val get_T_b_by_I_b : quR -> quR **)
+
+let get_T_b_by_I_b i_b =
+  let i_b0 = cHK_UNIT i_b (Ubu SI_Basic.ampere) in
+  cVT_UNIT (qmulR (qdivR (qsubR c_b c_min) i_b0) (r2q val_0_06))
+    SI_Accepted.minute
+
+module T_b_ex =
  struct
-  (** val v1_m_per_s : RbaseSymbolsImpl.coq_R option **)
+  (** val val_T_b_1 : RbaseSymbolsImpl.coq_R option **)
 
-  let v1_m_per_s =
-    let g =
-      u2qR
-        (q2R { qnum = (Zpos (XO (XI (XO (XO (XO (XI XH))))))); qden = (XO (XI (XO XH))) })
-        (Umul ((Ubu SI_Basic.metre), (Uinv (upow (Ubu SI_Basic.second) (Zpos (XO XH))))))
-    in
-    let t1 = u2qR (iZR (Zpos (XO (XI (XI (XI XH)))))) (Ubu SI_Basic.second) in
-    let v1 = qmulR t1 g in qval v1
+  let val_T_b_1 =
+    qval
+      (get_T_b_by_I_b
+        (u2qR (iZR (Zpos (XI (XI (XI XH))))) (Ubu SI_Basic.ampere)))
 
-  (** val s1_s : RbaseSymbolsImpl.coq_R option **)
+  (** val val_T_b_2 : RbaseSymbolsImpl.coq_R option **)
 
-  let s1_s =
-    let g =
-      u2qR
-        (q2R { qnum = (Zpos (XO (XI (XO (XO (XO (XI XH))))))); qden = (XO (XI (XO XH))) })
-        (Umul ((Ubu SI_Basic.metre), (Uinv (upow (Ubu SI_Basic.second) (Zpos (XO XH))))))
-    in
-    let t1 = u2qR (iZR (Zpos (XO (XI (XI (XI XH)))))) (Ubu SI_Basic.second) in
-    let s1 =
-      qmulR (qmulR (r2q (rdiv (iZR (Zpos XH)) (iZR (Zpos (XO XH))))) g)
-        (qpowR t1 (Zpos (XO XH)))
-    in
-    qval s1
-
-  (** val fill_time_s : quR **)
-
-  let fill_time_s =
-    let f1 =
-      u2qR
-        (q2R { qnum = (Zpos (XI (XI (XI (XI (XO (XI (XI (XO XH))))))))); qden = (XO (XI (XO
-          XH))) }) (Umul ((upow (SI_Prefix.centi (Ubu SI_Basic.metre)) (Zpos (XI XH))),
-        (Uinv (Ubu SI_Basic.second))))
-    in
-    let f2 =
-      u2qR (q2R { qnum = (Zpos (XI (XO (XI (XO XH))))); qden = (XO (XI (XO XH))) }) (Umul
-        (SI_Accepted.litre, (Uinv SI_Accepted.minute)))
-    in
-    let v =
-      u2qR (iZR (Zpos (XO (XO (XI (XI (XO (XI (XO (XO XH))))))))))
-        (upow (SI_Prefix.centi (Ubu SI_Basic.metre)) (Zpos (XI XH)))
-    in
-    qdivR v (qaddlR f1 f2)
-
-  (** val fill_time_min : quR **)
-
-  let fill_time_min =
-    let f1 =
-      u2qR
-        (q2R { qnum = (Zpos (XI (XI (XI (XI (XO (XI (XI (XO XH))))))))); qden = (XO (XI (XO
-          XH))) }) (Umul ((upow (SI_Prefix.centi (Ubu SI_Basic.metre)) (Zpos (XI XH))),
-        (Uinv (Ubu SI_Basic.second))))
-    in
-    let f2 =
-      u2qR (q2R { qnum = (Zpos (XI (XO (XI (XO XH))))); qden = (XO (XI (XO XH))) }) (Umul
-        (SI_Accepted.litre, (Uinv SI_Accepted.minute)))
-    in
-    let v =
-      u2qR (iZR (Zpos (XO (XO (XI (XI (XO (XI (XO (XO XH))))))))))
-        (upow (SI_Prefix.centi (Ubu SI_Basic.metre)) (Zpos (XI XH)))
-    in
-    q2quR (qdivR v (qaddrR f1 f2)) SI_Accepted.minute
+  let val_T_b_2 =
+    qval
+      (get_T_b_by_I_b
+        (u2qR (iZR (Zpos (XI (XI (XI XH))))) SI_Accepted.milliampere))
  end

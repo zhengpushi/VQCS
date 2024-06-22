@@ -57,6 +57,9 @@ Qed.
 (** Two normalized units are similar only when they have same dimensions (bool version) *)
 Definition ncvtbleb (n1 n2 : Nunit) : bool := deqb (ndims n1) (ndims n2).
 
+Lemma ncvtbleb_refl : forall n, ncvtbleb n n = true.
+Proof. intros. unfold ncvtbleb. rewrite deqb_refl. auto. Qed.
+
 Lemma ncvtbleb_true_iff : forall n1 n2, ncvtbleb n1 n2 = true <-> ncvtble n1 n2.
 Proof. intros. unfold ncvtbleb, ncvtble. rewrite deqb_true_iff. simpl. easy. Qed.
   
@@ -76,6 +79,9 @@ Definition nconvRate (src ref : Nunit) : option R :=
   if ncvtbleb src ref
   then Some (ncoef src / ncoef ref)%R
   else None.
+
+Lemma nconvRate_eq : forall n, ncoef n <> 0 -> nconvRate n n = Some 1.
+Proof. intros. unfold nconvRate. rewrite ncvtbleb_refl. f_equal. ra. Qed.
 
 (** Convert a [Nunit] `src` to [Nunit] `ref` *)
 Definition nconv (src ref : Nunit) : option (R * Nunit) :=

@@ -85,24 +85,31 @@ Definition qasin (q : QuR) : QuR := qdim0op1 asin q.
 Definition qacos (q : QuR) : QuR := qdim0op1 acos q.
 Definition qatan (q : QuR) : QuR := qdim0op1 atan q.
 
-Notation "'sin' x" := (qsin x) (at level 10) : QuR_scope.
-Notation "'cos' x" := (qcos x) (at level 10) : QuR_scope.
-Notation "'tan' x" := (qtan x) (at level 10) : QuR_scope.
-Notation "'asin' x" := (qasin x) (at level 10) : QuR_scope.
-Notation "'acos' x" := (qacos x) (at level 10) : QuR_scope.
-Notation "'atan' x" := (qatan x) (at level 10) : QuR_scope.
-
+Notation "''sin' x" := (qsin x) (at level 10) : QuR_scope.
+Notation "''cos' x" := (qcos x) (at level 10) : QuR_scope.
+Notation "''tan' x" := (qtan x) (at level 10) : QuR_scope.
+Notation "''asin' x" := (qasin x) (at level 10) : QuR_scope.
+Notation "''acos' x" := (qacos x) (at level 10) : QuR_scope.
+Notation "''atan' x" := (qatan x) (at level 10) : QuR_scope.
 
 (** Automation for quantity equality of R type *)
 Ltac qeqR :=
   (* simplify *)
   intros; cbv;
+  (* help to solve eq/ineq contains PI *)
+  try match goal with
+  | H:context[PI] |- _ => pose proof (PI_bound)
+  | |- context[PI] => pose proof (PI_bound)
+  end;
   (* elim Rbool, solve R contracdiction *)
   autoRbool; auto; try lra;
-  (* elim Qmake, option, tuple *)
+  (* elim Qmake, option, tuple, not *)
   try match goal with | |- Qmake _ _ = Qmake _ _ => f_equal end;
   try match goal with | |- Some _ = Some _ => f_equal end;
   try match goal with | |- (_, _) = (_, _) => f_equal end;
+  try match goal with | |- _ -> False => intro end;
+  (* solve simple cases, such contracdiction *)
+  try easy;
   (* elim R *)
   try lra.
 
@@ -134,6 +141,9 @@ Definition qrootCondbR (q : QuR) (z : Z) : bool :=
   | Qmake v n => (0 <? v) && (0 <? (ncoef n)) && nrootCondb n z
   | _ => false
   end.
+
+(** sqrt *)
+Definition qsqrt (q : QuR) : QuR := qrootR q 2.
 
 Lemma qrootR_qsqr : forall q, qrootCondR q 2 -> qrootR (q * q) 2 = q.
 Proof.
@@ -252,7 +262,7 @@ Section test.
   
   (* sin²θ + cos²θ = 1 *)
   Goal forall r, let theta := u2qR r 'rad in
-            (sin theta)² + (cos theta)² = qoneR.
+            ('sin theta)² + ('cos theta)² = qoneR.
   Proof. qeqR. ra. Qed.
   
   (* ---------------------------------------------------- *)

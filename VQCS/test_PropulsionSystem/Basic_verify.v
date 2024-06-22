@@ -1,22 +1,15 @@
 (*
-  category:     flight control system - propulsion subsystem
-  filename:     Basic_verify.v
-  author:       Zhengpu Shi
-  email:        zhengpushi@nuaa.edu.cn
-  date:         2020.11.17
-  purpose:      Formal verification of Basic module.
+  Copyright 2024 ZhengPu Shi
+  This file is part of VQCS. It is distributed under the MIT
+  "expat license". You should have recieved a LICENSE file with it.
 
-  copyright:    Formalized Engineering Mathematics team of NUAA.
-  website:      http://fem-nuaa.cn
+  purpose   : Formal verification of Basic module - propulsion subsystem
+  author    : Zhengpu Shi
+  date      : 2020.11
 *)
 
 
 Require Export Basic.
-
-(* Open Scope R. *)
-
-
-
 
 (** ** Verification for inverse functions *)
 
@@ -24,21 +17,42 @@ Require Export Basic.
 (** THIS IS A DEMO for manually proof. *)
 
 (** 不指定单位的证明比较困难，因为不能一步展开，需要手动推导 *)
-Lemma verify_trans_N_and_T' N : 0 <= N -> 
-  (QUsameunitb N (#'rpm) = true) ->
-  get_N_by_T (get_T_by_N N) == N.
+Lemma verify_trans_N_and_T' N :
+  (* 0 <= N ->  *)
+  qsameub N 'rpm = true ->
+  get_N_by_T (get_T_by_N N) = N.
 Proof.
-(*   compute. (* Coq crashed *) *)
-  autounfold with fcs.
   intros.
-(*   destruct N. *)
-  Abort.
+  (* compute. (* too slow *) *)
+  autounfold with Q. rewrite H. unfold q2quR.
+  assert (qsameub (q2qu Rmult (rho * C_T * D_p⁴ * (N / 60)²) 'N) 'N = true).
+  { apply qsameub_q2qu. 2:{ cbv. lra. } admit. }
+  rewrite H0.
+  assert (exists (x : R), Qmake x (u2n 'rpm) = N). admit.
+  destruct H1. rewrite <- H1 in *. simpl in *.
+  assert (0 < x). admit.
+  pose proof (PI_bound).
+  f_equal. ra.
+  unfold Z2R. lazy [Rpower].
+  rewrite ln_1. ra. field_simplify; ra.
+  remember (val_rho * val_C_T * (val_D_p * (val_D_p * val_D_p²)))%R as r.
+  replace (2² * PI² / 60² * (r * (x² / 60²)) / r)%R with
+    (2² * PI² * x² / (3600²))%R.
+  2:{ field_simplify_eq. ra. split; ra. split; ra. admit. }
+  replace (2² * PI² * x² / 3600²)%R with ((2 * PI * x / 3600)^2)%R by ra.
+  rewrite ln_pow; ra.
+  replace (/ 2 * (INR 2 * ln (2 * PI * x / 3600)))%R with (ln (2 * PI * x / 3600))%R.
+  2:{ remember (ln (2 * PI * x / 3600)) as r1. cbv. field. }
+  rewrite exp_ln. field_simplify; ra. ra.
+Admitted.
 
+?
 (** 一个辅助引理，证明 Rpower 函数的底数为正 *)
 Fact Pa_Rpower_cond1 : 
   (0 < 1 + - (0.0065 * (val_h * / (273.15 + val_T_t))))%R.
 Proof.
   generalize condL_val_h,condH_val_h,condL_val_T_t,condH_val_T_t; intros.
+  ?
   tac_le.
 Qed.
 
@@ -96,7 +110,7 @@ Proof.
 (*   pfqeq.  (* crash! *) *)
 
   (* ##. open definitions *)
-  autounfold with fcs.
+  autounfold with Q.
   (* ##. clear CHK_UNIT *)
 (*   simpl. *)
   lazy [CHK_UNIT].
@@ -146,7 +160,7 @@ Lemma exp_get_T_by_N (val_N *)
 Ltac tac_qsqrt :=
   match goal with
   | |- (?a * Qsqrt ?b = ?c) => assert (b = (c/a)²) as H1; 
-    try rewrite H1, Qsqrt_Qsqr; pfqeq; autorewrite with fcs R
+    try rewrite H1, Qsqrt_Qsqr; pfqeq; autorewrite with Q R
   end.
   
 (** 进一步精简证明 *)
@@ -155,9 +169,9 @@ Lemma verify_trans_N_and_T (val_N : R) :
     (0 <= val_N)%R ->
     get_N_by_T (get_T_by_N N) = N.
 Proof.
-  intros; autounfold with fcs.
+  intros; autounfold with Q.
   tac_qsimb. tac_qsqrt.
-  - repeat (split; auto with R fcs); try (autorewrite with fcs; lra).
+  - repeat (split; auto with R Q); try (autorewrite with Q; lra).
     + generalize condL_val_T_t, condH_val_T_t; intros; lra.
     + apply Rpower_neq0.
       generalize condL_val_h, condH_val_h;
@@ -174,9 +188,9 @@ Lemma verify_trans_N_and_M (val_N : R) :
     (0 <= val_N)%R ->
     get_N_by_M (get_M_by_N N) = N.
 Proof.
-  intros; autounfold with fcs.
+  intros; autounfold with Q.
   tac_qsimb. tac_qsqrt.
-  - repeat (split; auto with R fcs); try (autorewrite with fcs; lra).
+  - repeat (split; auto with R Q); try (autorewrite with Q; lra).
     + generalize condL_val_T_t, condH_val_T_t; intros; lra.
     + tac_neq_zero. tac_zero_lt.
     + apply Rpower_neq0.
@@ -192,18 +206,18 @@ Qed. *)
 
 (** Simplify cos_acos *)
 
-(** Simplify equation in fcs. *)
+(** Simplify equation in Q. *)
 Ltac simple_equation :=
-  intros; autounfold with fcs;
+  intros; autounfold with Q;
   tac_qsimb;  (* clear qsimb, this step may not exist. *)
   pfqeq;      (* clear qeq *)
-  repeat (try split; auto with R fcs);  (* clear and, 0~n steps. *) 
-  repeat (autorewrite with R fcs; try field; try lra); (* final, 0~n steps. *)
-  repeat (try split; auto with R fcs).  (* clear and, 0~n steps. *) 
+  repeat (try split; auto with R Q);  (* clear and, 0~n steps. *) 
+  repeat (autorewrite with R Q; try field; try lra); (* final, 0~n steps. *)
+  repeat (try split; auto with R Q).  (* clear and, 0~n steps. *) 
   
-(** Simplify equation in fcs (only preprocess, do not compute). *)
+(** Simplify equation in Q (only preprocess, do not compute). *)
 Ltac simple_equation_prep :=
-  intros; autounfold with fcs;
+  intros; autounfold with Q;
   tac_qsimb.
 
 Lemma verify_trans_N_and_E_a (val_N : R) :
@@ -268,7 +282,7 @@ Proof.
   Eval compute in 
    simpl.
    simpl.
-  autounfold with fcs.
+  autounfold with Q.
   
  !!
   lazy.
@@ -344,9 +358,9 @@ Proof.
   idtac c end.
   2:{ simpl. lra. }
   rewrite Qsqr_Qsqrt.
-  2:{ lazy. autorewrite with R fcs.
+  2:{ lazy. autorewrite with R Q.
     destruct (Rle_lt_dec); auto. lra. }
-  pfqeq. autorewrite with R fcs.
+  pfqeq. autorewrite with R Q.
   destruct (Rcase_abs); auto. lra.
   Abort. (* because expand too much, but Rpower will not be solved automaticly.
     So, we need more advanced technology. *)

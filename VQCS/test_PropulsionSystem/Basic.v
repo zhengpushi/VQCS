@@ -1,18 +1,18 @@
 (*
-  category:     flight control system - propulsion subsystem
-  filename:     ExtractionThis.v
+  Copyright 2024 ZhengPu Shi
+  This file is part of VQCS. It is distributed under the MIT
+  "expat license". You should have recieved a LICENSE file with it.
+
+  purpose    : Basic module for propulsion system
   author:       Zhengpu Shi
-  email:        zhengpushi@nuaa.edu.cn
   date:         2020.11.17
-  purpose:      Basic module, also considered as a common module.
-                These definitions and relations are stable almost at any case.
 
   copyright:    Formalized Engineering Mathematics team of NUAA.
   website:      http://fem-nuaa.cn
 *)
 
-(* Require Export QUalgebra. *)
-Require Export QUantity.
+Require Export SI QalgebraR.
+Export SI_Accepted SI_Prefix.
 
 
 (** ** Constants *)
@@ -31,7 +31,7 @@ Parameter
   : R.
 
 (** Defined as [Q]. *)
-Definition value_0_0065 : Q := genQ val_0_0065 ('K/'m)%U.
+Definition value_0_0065 := u2qR val_0_0065 ('K/'m)%U.
 
 
 (** *** GLOBAL *)
@@ -49,19 +49,22 @@ Parameters
 
 
 (** Notice that, T_0, T_t, we use 'K instead ℃, it is correct in such case. *)
-Definition T_0 : Q := genQ val_T_0 'K.
-Definition h : Q := genQ val_h 'm.
-Definition p_0 : Q := genQ val_p_0 'Pa.
-Definition rho_0 : Q := genQ val_rho_0 ('kg / 'm³)%U.
-Definition T_t : Q := genQ val_T_t 'K. (* 
+Definition T_0 : QuR := u2qR val_T_0 'K.
+Definition h : QuR := u2qR val_h 'm.
+Definition p_0 : QuR := u2qR val_p_0 'Pa.
+Definition rho_0 : QuR := u2qR val_rho_0 ('kg / 'm³)%U.
+Definition T_t : QuR := u2qR val_T_t 'K. (* 
   = celsiusRel2k (CelsiusRelative val_T_t). *)
-Definition G : Q := genQ val_G 'N.  (* not 'kg or 'g *)
-Definition I_other : Q := genQ val_I_other 'A.
-Definition p : Q := 
-  p_0 * (QRpower (1 - value_0_0065 * (h / (T_0 + T_t))) val_5_2561).
-  
-Definition rho : Q := (T_0 * p) / (p_0 * (T_0 + T_t)) * rho_0.
-Definition n_r : Q := val_n_r.
+Definition G : QuR := u2qR val_G 'N.  (* not 'kg or 'g *)
+Definition I_other : QuR := u2qR val_I_other 'A.
+Definition p : QuR := p_0 * (qpower (1 - value_0_0065 * (h / (T_0 + T_t))) val_5_2561).
+
+(* a simpler value*)
+(* Definition rho : QuR := (T_0 * p) / (p_0 * (T_0 + T_t)) * rho_0. *)
+Parameter val_rho : R.
+Definition rho : QuR := u2qR val_rho ('kg/('m³))%U.
+             
+Definition n_r : QuR := val_n_r.
 
 
 (** *** PROPELLER *)
@@ -83,27 +86,29 @@ Parameters
 Definition val_PP_alpha_ab : R := 
   (val_PP_epsilon * (atan (val_H_p / (PI * val_D_p))) - val_PP_alpha0).
 
-Definition val_C_T : R := (
-  val_0_25 * PI ^ 3 * val_PP_lambda * (val_PP_zeta ^ 2) * val_B_p * val_PP_K0 
-  * val_PP_alpha_ab / (PI * val_PP_A + val_PP_K0)
-  )%R.
+(* Definition val_C_T : R := *)
+(*   (val_0_25 * PI ^ 3 * val_PP_lambda * (val_PP_zeta ^ 2) * val_B_p * val_PP_K0  *)
+(*                    * val_PP_alpha_ab / (PI * val_PP_A + val_PP_K0))%R. *)
 
-Definition val_C_d : R := (
-  val_C_fd + (PI * val_PP_A * (val_PP_K0 ^ 2) / val_PP_e) * 
-    ((val_PP_alpha_ab / (PI * val_PP_A + val_PP_K0)) ^ 2 )
-  )%R.
+(* Definition val_C_d : R := *)
+(*   (val_C_fd + (PI * val_PP_A * (val_PP_K0 ^ 2) / val_PP_e) *  *)
+(*                 ((val_PP_alpha_ab / (PI * val_PP_A + val_PP_K0)) ^ 2 ))%R. *)
 
-Definition val_C_M : R := (
-  /(8 * val_PP_A) * ((PI * val_PP_zeta * val_B_p) ^ 2) 
-  * val_C_d * val_PP_lambda
-  )%R.
+(* Definition val_C_M : R := *)
+(*   ((8 * val_PP_A) * ((PI * val_PP_zeta * val_B_p) ^ 2)  *)
+(*    * val_C_d * val_PP_lambda)%R. *)
 
-Definition D_p : Q := genQ val_D_p 'm.
-Definition H_p : Q := genQ val_H_p 'm.
-Definition C_T : Q := val_C_T.
-Definition C_d : Q := val_C_d.
-Definition C_M : Q := val_C_M.
 
+(* this parameter shoud be pre-calculated *)
+Parameter val_C_T : R.
+Parameter val_C_d : R.
+Parameter val_C_M : R.
+
+Definition D_p : QuR := u2qR val_D_p 'm.
+Definition H_p : QuR := u2qR val_H_p 'm.
+Definition C_T : QuR := val_C_T.
+Definition C_d : QuR := val_C_d.
+Definition C_M : QuR := val_C_M.
 
 
 (** *** MOTOR *)
@@ -115,13 +120,13 @@ Parameters
   val_R_m 
   val_G_m : R.
 
-Definition I_mMax : Q := genQ val_I_mMax 'A.
-Definition U_m0 : Q := genQ val_U_m0 'V.
-Definition I_m0 : Q := genQ val_I_m0 'A.
-Definition R_m : Q := genQ val_R_m 'Ω.
-Definition G_m : Q := genQ val_G_m 'g.
-Definition K_E : Q := (U_m0 - I_m0 * R_m) / (val_K_V0 * U_m0).
-Definition K_T : Q := val_9_55 * K_E.
+Definition I_mMax : QuR := u2qR val_I_mMax 'A.
+Definition U_m0 : QuR := u2qR val_U_m0 'V.
+Definition I_m0 : QuR := u2qR val_I_m0 'A.
+Definition R_m : QuR := u2qR val_R_m 'Ω.
+Definition G_m : QuR := u2qR val_G_m 'g.
+Definition K_E : QuR := (U_m0 - I_m0 * R_m) / (val_K_V0 * U_m0).
+Definition K_T : QuR := val_9_55 * K_E.
 
 (** *** ESC *)
 Parameters 
@@ -129,9 +134,9 @@ Parameters
   val_R_e 
   val_G_e : R.
 
-Definition I_eMax := genQ val_I_eMax 'A.
-Definition R_e := genQ val_R_e 'Ω.
-Definition G_e := genQ val_G_e 'g.
+Definition I_eMax : QuR := u2qR val_I_eMax 'A.
+Definition R_e : QuR := u2qR val_R_e 'Ω.
+Definition G_e : QuR := u2qR val_G_e 'g.
 
 
 (** *** BATTERY *)
@@ -142,182 +147,226 @@ Parameters
   val_R_b 
   val_U_b : R.
 
-Definition C_b := genQ val_C_b ('mAh).
-Definition C_min := genQ val_C_min 'mAh.
-Definition K_b := val_K_b.
-Definition R_b := genQ val_R_b 'Ω.
-Definition U_b := genQ val_U_b 'V.
+Definition C_b : QuR := u2qR val_C_b ('mAh).
+Definition C_min : QuR := u2qR val_C_min 'mAh.
+Definition K_b : QuR := val_K_b.
+Definition R_b : QuR := u2qR val_R_b 'Ω.
+Definition U_b : QuR := u2qR val_U_b 'V.
 
 
 
 (** ** Definitions of functions *)
 
-(** *** Some demos for advantages by Q with Unit *)
+(* example: check, conversion of the units of parameters or output.
+   * Before added the output unit convertion, the output unit is determined by 
+     the input, though they are the same in physics, but they are not same in 
+     mathematics and computer. 
+   * For example: if the function return 2 'min or 120 's, it will be a mistake after
+     removed the unit symbols, and it is a very common operation. *)
 
-(** First case: CHECK THE INPUT UNIT *)
+(** Check the unit of the input Quantity q with reference Unit u, 
+    if they are equal return q, otherwise return !! *)
+Definition CHK_UNIT (q : QuR) (u : Unit) : QuR :=
+  if qsameub q u then q else !!.
+Hint Unfold CHK_UNIT : Q.
 
-(** The mathematical formula will produce an output for any kind of input. *)
-Definition get_T_by_N__DONNOT_CHECK_INPUT N := 
-  rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2).
+(** Convert the unit of the input Quantity q with reference Unit u, 
+    if it is convertible then return a proper q', otherwise return !! *)
+Definition CVT_UNIT (q : QuR) (u : Unit) : QuR := q2quR q u.
+Hint Unfold CVT_UNIT : Q.
 
-Opaque PI Rpower atan.
-Compute C_T.
-Eval cbv in val_C_T.
-Eval lazy in val_C_T.
-Eval cbv in Qeval (get_T_by_N__DONNOT_CHECK_INPUT (genQ 1 'rpm)).
-Eval cbv in Qeval (get_T_by_N__DONNOT_CHECK_INPUT (genQ 1 'Hz)).
-Eval cbv in Qeval (get_T_by_N__DONNOT_CHECK_INPUT (genQ 1 'A)).
+(* A demo example to showing the advantages of unit system *)
+Module demo1.
+  (** The input parameter `N` could be any unit, and the output could be any unit. *)
+  Definition get_T_by_N_NOCHECK (N : QuR) : QuR := 
+    rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2).
 
-? HOW TO CHECK THE UNIT OF INPUT PARAMETER,
-? and, IF NEED TO CHECK?
-(** After added the input check, we must give an input with correct unit. *)
-Definition get_T_by_N__CHECK_INPUT N := 
-  if negb (QUsameunitb N (#'rpm)) then !! else
-  rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2).
+  (* Eval cbv in get_T_by_N_NOCHECK (u2qR 1 'rpm). *)
+  (* Eval cbv in get_T_by_N_NOCHECK (u2qR 60 'Hz). *)
+  (* Eval cbv in get_T_by_N_NOCHECK (u2qR 1 'A). *)
 
-(* Compute QUunit (get_T_by_N__CHECK_INPUT (genQ 1 'rpm)).
-Compute QUunit (get_T_by_N__CHECK_INPUT (genQ 1 'Hz)).
-Compute QUunit (get_T_by_N__CHECK_INPUT (genQ 1 'A)).
- *)
+  (** we can check the unit of the input parameter *)
+  Definition get_T_by_N_CHECK_INPUT (N : QuR) : QuR :=
+    let N := CHK_UNIT N 'rpm in
+    rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2).
 
+  (* Eval cbv in get_T_by_N_CHECK_INPUT (u2qR 1 'rpm). *)
+  (* Eval cbv in get_T_by_N_CHECK_INPUT (u2qR 60 'Hz). *)
+  (* Eval cbv in get_T_by_N_CHECK_INPUT (u2qR 1 'A). *)
 
-(** Second case: CHECK AND CONVERT THE OUTPUT UNIT *)
+  (* now, only 'rpm is accepted *)
+  Goal get_T_by_N_CHECK_INPUT (u2qR 1 'rpm) <> !!. qeqR. Qed.
+  Goal get_T_by_N_CHECK_INPUT (u2qR 60 'Hz) = !!. qeqR. Qed.
+  Goal get_T_by_N_CHECK_INPUT (u2qR 1 'A) = !!. qeqR. Qed.
 
-(** Before added the output unit convertion, the output unit is determined by 
-the input, though they are the same in physics, but they are not same in 
-mathematics and computer. 
-For example: if the function return 2 'min or 120 's, it will be a mistake after
- removed the unit symbols, and it is a very common operation.
-*)
+  (** we can convert the unit of the input parameter *)
+  Definition get_T_by_N_CONVERT_INPUT N := 
+    let N := CVT_UNIT N 'rpm in
+    rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2).
 
-(** Notice that, only input unit check can't promise the output unit is 
-correct. *)
-Definition get_T_by_N__DONNOT_CHK_CVT_OUTPUT_ex1 N := 
-  if negb (QUsameunitb N (#'rpm)) then !! else  (* correct input check *)
-  rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2).
+  (* now, 'rpm and 'Hz are accepted *)
+  Goal get_T_by_N_CONVERT_INPUT (u2qR 1 'rpm) <> !!. qeqR. Qed.
+  Goal get_T_by_N_CONVERT_INPUT (u2qR 60 'Hz) <> !!. qeqR. Qed.
+  Goal get_T_by_N_CONVERT_INPUT (u2qR 1 'A) = !!. qeqR. Qed.
 
-Definition get_T_by_N__DONNOT_CHK_CVT_OUTPUT_ex2 N := 
-  if negb (QUsameunitb N (#'s)) then !! else  (* error input check *)
-  rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2).
+  (** we can convert the unit of the output parameter
+      1. the output has a fixed unit, which is beneficial for caller which need 
+         exactly unit.
+      2. the function itself also accept any convertible units
+      3. any not convertible units will be rejected. *)
+  Definition get_T_by_N_CONVERT_OUTPUT N := 
+    CVT_UNIT (rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2)) 'N.
 
-(* Eval lazy in (get_T_by_N__DONNOT_CHK_CVT_OUTPUT_ex1 (genQ 1 'rpm)).
-Compute QUunit (get_T_by_N__DONNOT_CHK_CVT_OUTPUT_ex1 (genQ 1 'rpm)).
-Compute QUunit (get_T_by_N__DONNOT_CHK_CVT_OUTPUT_ex2 (genQ 1 's)). *)
+  (* Compute qunit (get_T_by_N_CONVERT_OUTPUT (u2qR 1 'rpm)). *)
+  (* Compute qunit (get_T_by_N_CONVERT_OUTPUT (u2qR 60 'Hz)). *)
+  (* Compute qunit (get_T_by_N_CONVERT_OUTPUT (u2qR 1 'A)). *)
 
-
-(** After added the output check and convertion, even though you forget the 
-input check, the output unit won't mistake. And another benefit is that the 
-output unit will be converted from compatible unit to a fixed unit.
-For example, output 2 'min will be converted to 120 's. *)
-Definition get_T_by_N__CHK_CVT_OUTPUT N := 
-  QUconv (rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2)) 'N.
-
-(* Compute QUunit (get_T_by_N__CHK_CVT_OUTPUT (genQ 1 'rpm)).
-Compute QUunit (get_T_by_N__CHK_CVT_OUTPUT (genQ 60 'Hz)).
-Compute QUunit (get_T_by_N__CHK_CVT_OUTPUT (genQ 60 'A)). *)
-
-(* Eval lazy in (get_T_by_N__CHK_CVT_OUTPUT (genQ 60 'Hz)). *)
-
-
-(** CHECK INPUT vs. CHECK OUTPUT vs. CONVERT OUTPUT ?
-1. CHECK INPUT will check the input has completely matched unit
-2. CHECK OUTPUT will check the output has completely matched unit
-3. CONVERT OUTPUT will automaticaly convert the output unit to the expected 
-unit if they are compatible.
-4. suggest that these three operations always enabled.
-5. In fact, QUconv finished the CHECK OUTPUT and CONVERT OUTPUT sametime.
-*)
-
-(** Definitions for check and convertion, to simplify the writing. *)
-
-(** Check a Q with reference unit *)
-Definition CHK_UNIT (q : Q) (refunit : Unit) : Q :=
-  if (QUsameunitb q (#refunit)) then q else !!.
-
+  (* 总结几种不同的做法：
+     1. 检查输入，则要求输入具有指定的单位
+     2. 检查输出，则验证函数的输出具有指定的单位
+     3. 转换输入，则接收可转换的输入参数
+     4. 转换输出，则将输出的单位统一为指定的单位
+     另外，无论输入参数是什么，函数体的设计是假定输入参数为SI的一贯单位来考虑的（待补充）
+     因此，有多种做法，这里推荐一种：检查输入，转换输出。优点是：确定性和适应性。*)
+End demo1.
 
 
 (** *** Basic functions *)
 
 (** demo for won't force change the output unit, keep what it is *)
 Definition get_T_by_N N := 
-  let N := CHK_UNIT N 'rpm in 
-  QUconv (rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2)) 'N.
+  let N := CHK_UNIT N 'rpm in
+  let _ret := rho * C_T * (D_p ^ 4) * ((N / 60) ^ 2) in
+  CVT_UNIT _ret 'N.
+Hint Unfold get_T_by_N : Q.
 
-(* Compute QUunit (get_T_by_N (genQ 1 'rpm)). *)
-
+(* 验证 get_T_by_N 函数确实能否返回期望的单位，排除函数内部的单位错误 *)
+Lemma get_T_by_N_unit : forall N, qsameu N 'rpm -> qsameu (get_T_by_N N) 'N.
+Proof.
+  intros. autounfold with Q. lazy [qsameu q2quR q2qu q2qn] in *.
+  destruct N; auto. rewrite H. simpl.
+  rewrite neqb_refl. simpl. auto.
+Qed.
 
 Definition get_M_by_N N := 
   let N := CHK_UNIT N 'rpm in 
-  QUconv (C_M * rho * ((N / 60) ^ 2) * (D_p ^ 5)) ('N*'m)%U.
+  CVT_UNIT (C_M * rho * ((N / 60) ^ 2) * (D_p ^ 5)) ('N*'m)%U.
 
 Definition get_E_a_by_N N := 
   let N := CHK_UNIT N 'rpm in 
-  QUconv (K_E * N) 'V.
+  CVT_UNIT (K_E * N) 'V.
 
-(* Definition get_M_by_I_m I_m := 
-  if negb (QUsameunitb I_m ('A)) then !! else
-  K_T * (I_m - I_m0).
+Definition get_M_by_I_m I_m :=
+  let I_m := CHK_UNIT I_m 'A in
+  CVT_UNIT (K_T * (I_m - I_m0)) ('N*'m)%U.
 
-Definition get_U_m_by_E_a_and_I_m E_a I_m := 
-  if negb ((QUsameunitb E_a 'V) && (QUsameunitb I_m 'A)) then !! else
-  E_a + R_m * I_m.
+Definition get_U_m_by_E_a_and_I_m E_a I_m :=
+  let E_a := CHK_UNIT E_a 'V in
+  let I_m := CHK_UNIT I_m 'A in
+  CVT_UNIT (E_a + R_m * I_m) 'V.
 
-Definition get_U_eo_by_U_m_and_I_m U_m I_m := 
-  if negb ((QUsameunitb U_m 'V) && (QUsameunitb I_m 'A)) then !! else
-  U_m + I_m * R_e.
+Section test.
+  Variable E_a I_m : R.
 
-Definition get_U_eo_by_sigma_e sigma_e := 
-  if negb (QUsameunitb sigma_e 1) then !! else
-  sigma_e * U_b.
+  Goal qsameub (get_U_m_by_E_a_and_I_m (u2qR E_a 'V) (u2qR I_m 'A)) 'V = true.
+  Proof. qeqR. Qed.
 
-Definition get_I_e_by_sigma_e_and_I_m sigma_e I_m := 
-  if negb ((QUsameunitb sigma_e 1) && (QUsameunitb I_m 'A)) then !! else
-  sigma_e * I_m.
+  (* we wrongly use 'mA for I_m *)
+  Goal qsameub (get_U_m_by_E_a_and_I_m (u2qR E_a 'V) (u2qR I_m 'mA)) 'V = false.
+  Proof. qeqR. Qed.
+
+  (* we wrongly wanted to get 'mV for output *)
+  Goal qsameub (get_U_m_by_E_a_and_I_m (u2qR E_a 'V) (u2qR I_m 'A)) (_m 'V) = false.
+  Proof. qeqR. Qed.
+End test.
+
+Definition get_U_eo_by_U_m_and_I_m U_m I_m :=
+  let U_m := CHK_UNIT U_m 'V in
+  let I_m := CHK_UNIT I_m 'A in
+  CVT_UNIT (U_m + I_m * R_e) 'V.
+
+Definition get_U_eo_by_sigma_e sigma_e :=
+  let sigma_e := CHK_UNIT sigma_e 1 in
+  CVT_UNIT (sigma_e * U_b) 'V.
+
+Definition get_I_e_by_sigma_e_and_I_m sigma_e I_m :=
+  let sigma_e := CHK_UNIT sigma_e 1 in
+  let I_m := CHK_UNIT I_m 'A in
+  CVT_UNIT (sigma_e * I_m) 'A.
 
 Definition get_I_b_by_I_e I_e :=
-  if negb (QUsameunitb I_e 'A) then !! else
-  n_r * I_e + I_other.
+  let I_e := CHK_UNIT I_e 'A in
+  CVT_UNIT (n_r * I_e + I_other) 'A.
 
 Definition get_U_e_by_I_b I_b :=
-  if negb (QUsameunitb I_b 'A) then !! else
-  U_b - I_b * R_b.
+  let I_b := CHK_UNIT I_b 'A in
+  CVT_UNIT (U_b - I_b * R_b) 'V.
 
+(* Tips: 一个很好的案例来说明检查单位的好处。
+   C_b, C_min : 电池容量(mAh)，电池最小剩余容量(mAh)
+   I_b : 电池放电电流 ('A)
+   T_b : 电池时间 (分钟)
+   所以，此处预估了电池使用寿命 T_b = ((C_b - C_min) / I_b * (60/1000)，单位才是分钟，
+   这就是 val_0_06 := 0.06 的来历。
+   如果不知道时间单位是什么，这里的公式的正确性无从谈起。*)
 Definition get_T_b_by_I_b I_b :=
-  if negb (QUsameunitb I_b 'A) then !! else
-  (C_b - C_min) / I_b * val_0_06.
+  let I_b := CHK_UNIT I_b 'A in
+  CVT_UNIT ((C_b - C_min) / I_b * val_0_06) 'min.
+
+(* 在OCaml中，对电池时间的预估，数据来自全权老师的书 *)
+Module T_b_ex.
+  (* C_b = 4000mAh, 
+     C_min = 20% * C_b = 800mAh,
+     I_b = 15A
+     T_b = (4000-800)/15*0.06 ≈ 12.8 min *)
+  Extract Constant val_0_06 => "0.06".
+  Extract Constant val_C_b => "4000.".
+  Extract Constant val_C_min => "800.".
+  (* 应当得到 12.8 的结果 *)
+  Example val_T_b_1 := qval (get_T_b_by_I_b (u2qR 15 'A)).
+  (* 错误的使用 mA，看能否被成功识别 *)
+  Example val_T_b_2 := qval (get_T_b_by_I_b (u2qR 15 'mA)).
+
+  Extraction "test_T_b.ml" val_T_b_1 val_T_b_2.
+(* 
+utop[1]> T_b_ex.val_T_b_1;;
+- : float option = Some 0.768
+utop[2]> T_b_ex.val_T_b_2;;
+- : float option = None
+ *)
+End T_b_ex.
 
 Definition get_G_maxload_by_T T :=
-  if negb (QUsameunitb T 'N) then !! else
-  n_r * T - G.
+  let T := CHK_UNIT T 'N in
+  CVT_UNIT (n_r * T - G) 'N.
 
 Definition get_theta_max_by_T T :=
-  if negb (QUsameunitb T 'N) then !! else
-  Qacos (G / (n_r * T)).
+  let T := CHK_UNIT T 'N in
+  CVT_UNIT ('acos (G / (n_r * T))) 1.
 
 Definition get_eta_by_M_and_N_and_I_b M N I_b :=
-  if negb ((QUsameunitb M ('N*'m)) && (QUsameunitb N 'rpm) && (QUsameunitb I_b 'A)) 
-  then !! else
-  ((2 * PI) / 60) * n_r * M * N / (U_b * I_b).
-*)
+  let M := CHK_UNIT M ('N*'m)%U in
+  let N := CHK_UNIT N 'rpm in
+  let I_b := CHK_UNIT I_b 'A in
+  CVT_UNIT (((2 * PI) / 60) * n_r * M * N / (U_b * I_b)) 1.
+
 
 (** *** Basic inverse functions *)
 
 Definition get_N_by_T T :=
   let T := CHK_UNIT T 'N in 
-  QUconv (60 * QUsqrt (T /(rho * C_T * (D_p ^ 4)))) 'rpm.
+  CVT_UNIT (60 * qsqrt (T /(rho * C_T * (D_p ^ 4)))) 'rpm.
 
-(* Compute QUunit (get_N_by_T (genQ 1 'N)). *)
+
+Definition get_N_by_M M :=
+  let M := CHK_UNIT M ('N*'m)%U in
+  CVT_UNIT (60 * (qsqrt (M / (rho * (D_p ^ 5) * C_M)))) 'rpm.
 
 (*
-Definition get_N_by_M M :=
-  if negb (QUsameunitb M ('N*'m)) then !! else
-  60 * (Qsqrt (M / (rho * (D_p ^ 5) * C_M))).
-*)
-
 Definition get_N_by_E_a E_a :=
   if negb (QUsameunitb E_a (#'V)) then !! else
   E_a / K_E.
-(*
+
 Definition get_I_m_by_M M :=
   if negb (QUsameunitb M ('N*'m)) then !! else
   M / K_T + I_m0.
@@ -440,92 +489,7 @@ Definition get_N_by_U_eo U_eo :=
   * (-K_E + Qsqrt((K_E ^ 2) 
   - ((R_m + R_e) * C_M * rho * (D_p ^ 5)) / (900 * K_T)
   * ((R_m + R_e) * I_m0 - U_eo))).
-
-
-(** *** Simplest Form of Function (SFF) *)
-
-Definition get_T_by_G_maxload_sff G_maxload :=
-  if negb (QUsameunitb G_maxload 'N) then !! else
-  let x := G_maxload in
-  let a := / n_r in
-  let b := G / n_r in
-    a * x + b.
-
-Definition get_G_maxload_by_T_sff T :=
-  if negb (QUsameunitb T 'N) then !! else
-  let x := T in
-  let a := n_r in
-  let b := -G in
-    a * x + b.
-
-Definition get_N_by_T_sff T :=
-  if negb (QUsameunitb T 'N) then !! else
-  let x := T in
-  let a := 3600 / (rho * C_T * D_p ^ 4) in
-    Qsqrt (a * x).
-
-Definition get_T_by_N_sff N :=
-  if negb (QUsameunitb N 'rpm) then !! else
-  let x := N in
-  let a := (rho * C_T * D_p ^ 4) / 3600 in
-    a * x ^ 2.
-
-Definition get_M_by_T_sff T :=
-  if negb (QUsameunitb T 'N) then !! else
-  let x := T in
-  let a := C_M * D_p / C_T in
-    a * x.
-
-Definition get_T_by_M_sff M :=
-  if negb (QUsameunitb M ('N*'m)) then !! else
-  let x := M in
-  let a := C_T / (C_M * D_p) in
-    a * x.
-
-Definition get_M_by_N_sff N :=
-  if negb (QUsameunitb N 'rpm) then !! else
-  let x := N in
-  let a := (C_M * rho * D_p ^ 5) / 3600 in
-    a * x ^ 2.
-
-Definition get_N_by_M_sff M :=
-  if negb (QUsameunitb M ('N*'m)) then !! else
-  let x := M in
-  let a := 3600 / (C_M * rho * D_p ^ 5) in
-    Qsqrt (a * x).
-
-Definition get_N_by_E_a_sff E_a :=
-  if negb (QUsameunitb E_a 'A) then !! else (* todo, I left a bug designed. *)
-  let x := E_a in
-  let a := /K_E in
-    a * x.
-
-Definition get_E_a_by_N_sff N :=
-  if negb (QUsameunitb N 'rpm) then !! else
-  let x := N in
-  let a := K_E in
-    a * x.
-
-Definition get_E_a_by_T_sff T := 
-  if negb (QUsameunitb T 'N) then !! else
-  let x := T in
-  let a := 60 * K_E * Qsqrt (/(rho * C_T * D_p ^ 4)) in
-    a * (Qsqrt x).
-
-Definition get_T_by_E_a_sff E_a :=
-  if negb (QUsameunitb E_a 'V) then !! else
-  let x := E_a in
-  let a := rho * C_T * D_p ^ 4 * (/(60 * K_E)) ^ 2 in
-    a * x ^ 2.
-
-Definition get_U_m_by_N_sff N := 
-  if negb (QUsameunitb N 'rpm) then !! else
-  let x := N in
-  let a := R_m * C_M * rho * (D_p ^ 5) 
-    / (3600 * K_T) in
-  let b := K_E in
-  let c := R_m * I_m0 in
-    a * x ^ 2 + b * x + c. *)
+  *)
 
 
 (** ** Reasonable axioms of the system *)
@@ -588,21 +552,21 @@ Axiom gt0_val_K_V0 : (0 < val_K_V0)%R.  (* Todo: check this *)
 
 Global Hint Unfold 
   get_E_a_by_N
-(*   get_E_a_by_T
+  (* get_E_a_by_T *)
   get_G_maxload_by_T
-  get_I_m_by_M
-  get_I_m_by_T
+  (* get_I_m_by_M *)
+  (* get_I_m_by_T *)
   get_I_b_by_I_e
-  get_I_b_by_T_b
-  get_I_b_by_U_e
-  get_I_e_by_I_b
-  get_I_e_by_E_a_and_I_m
+  (* get_I_b_by_T_b *)
+  (* get_I_b_by_U_e *)
+  (* get_I_e_by_I_b *)
+  (* get_I_e_by_E_a_and_I_m *)
   get_I_e_by_sigma_e_and_I_m
-  get_I_e_by_T
+  (* get_I_e_by_T *)
   get_M_by_N
-  get_M_by_T
+  (* get_M_by_T *)
   get_M_by_I_m
-  get_N_by_M *)
+  get_N_by_M
   get_N_by_T
 (*  get_N_by_E_a
   get_N_by_U_m
@@ -628,21 +592,9 @@ Global Hint Unfold
   get_U_m_by_M
   get_U_m_by_T
   get_U_eo_by_E_a_and_I_m
-  get_U_eo_by_U_m_and_I_m
-  get_T_by_G_maxload_sff
-  get_G_maxload_by_T_sff
-  get_N_by_T_sff
-  get_T_by_N_sff
-  get_M_by_T_sff
-  get_T_by_M_sff
-  get_M_by_N_sff
-  get_N_by_M_sff
-  get_N_by_E_a_sff
-  get_E_a_by_N_sff
-  get_E_a_by_T_sff
-  get_T_by_E_a_sff
-  get_U_m_by_N_sff  *)
-  : fcs.
+  get_U_eo_by_U_m_and_I_m *)
+  : Q.
+
 Global Hint Resolve
   gt0_val_p_0
   gt0_val_rho_0
@@ -674,7 +626,7 @@ Global Hint Resolve
   gt0_val_C_b_minus_C_min
   gt0_val_U_m0
   gt0_val_K_V0
-  : fcs.
+  : Q.
 
 Hint Rewrite 
   const_val_0_0065
@@ -684,7 +636,7 @@ Hint Rewrite
   const_val_9_55
   const_val_0_06
   const_val_T_0
-  : fcs.
+  : Q.
 
 
 (* lemmas and proof details, please see "Basic_proof.v" *)

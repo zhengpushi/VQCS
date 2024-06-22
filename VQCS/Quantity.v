@@ -40,7 +40,7 @@
 
 Require Export Unit Nunit Nconv Uconv.
 
-From FinMatrix Require Import MatrixR.
+From FinMatrix Require Import Matrix.
 Require Import SI.
 Import SI_Accepted SI_Prefix.
 
@@ -94,12 +94,49 @@ Definition qdims {tA} (q : @Quantity tA) : option Dims :=
   | _ => None
   end.
 
+Lemma qeq_if_qval_qcof_qdims : forall {tA} (q1 q2 : @Quantity tA),
+    qval q1 = qval q2 -> qcoef q1 = qcoef q2 -> qdims q1 = qdims q2 -> q1 = q2.
+Proof.
+  intros. destruct q1, q2; simpl in *; try easy. inv H. f_equal.
+  destruct n,n0. inv H0; inv H1. auto.
+Qed.
+
 (** Get [Unit] of a [Quantity] `q` *)
 Definition qunit {tA} (q : @Quantity tA) : option Unit :=
   match q with
   | Qmake v n => Some (n2u n)
   | _ => None
   end.
+
+(** Check that if the [Quantity] `q` has same [Unit] with `u` (proposition version) *)
+Definition qsameu {tA} (q : @Quantity tA) (u : Unit) : Prop :=
+  match q with
+  | Qmake v n => n = (u2n u)
+  | _ => False
+  end.
+
+(** Check that if the [Quantity] `q` has same [Unit] with `u` (boolean version) *)
+Definition qsameub {tA} (q : @Quantity tA) (u : Unit) : bool :=
+  match q with
+  | Qmake v n => neqb n (u2n u)
+  | _ => false
+  end.
+
+Lemma qsameub_reflect : forall {tA} (q : @Quantity tA) u,
+    reflect (qsameu q u) (qsameub q u).
+Proof.
+  intros. unfold qsameu, qsameub. destruct q; try constructor; auto.
+  bdestruct (neqb n (u2n u)); constructor; auto.
+Qed.
+Hint Resolve qsameub_reflect : bdestruct.
+
+Lemma qsameub_true_iff : forall {tA} (q : @Quantity tA) u,
+    qsameub q u = true <-> qsameu q u.
+Proof. intros. bdestruct (qsameub q u); try tauto. easy. Qed.
+
+Lemma qsameub_false_iff : forall {tA} (q : @Quantity tA) u,
+    qsameub q u = false <-> ~ qsameu q u.
+Proof. intros. bdestruct (qsameub q u); try tauto. easy. Qed.
 
 
 (** Two [Quantity]s are convertible (proposition version *)
@@ -140,6 +177,17 @@ Section more_ARmul.
     | Qmake v n => q2qn q n
     | _ => !!
     end.
+
+  (** qsameu (q2qu q u) u *)
+  Lemma qsameu_q2qu : forall q u, qsameu q u -> ucoef u <> 0 -> qsameu (q2qu q u) u.
+  Proof.
+    intros. unfold qsameu in *. unfold q2qu, q2qn in *. destruct q; auto.
+    rewrite H. rewrite nconvRate_eq; auto.
+  Qed.
+
+  (** qsameub (q2qu q u) u = true *)
+  Lemma qsameub_q2qu : forall q u, qsameu q u -> ucoef u <> 0 -> qsameub (q2qu q u) u = true.
+  Proof. intros. apply qsameub_true_iff. apply qsameu_q2qu; auto. Qed.
   
   (** Get the value of a [Quantity] `q` respect to [Nunit] `nref` *)
   Definition qvaln (q : @Quantity tA) (nref : Nunit) : option tA :=
@@ -189,7 +237,8 @@ End ex_salar.
 (* 示例：向量 *)
 Section ex_vector.
   Notation qvalu := (qvalu vscal).
-  Notation q2qu := (q2qu vscal).
+  Notation q2qu := (q2qu (vscal (Amul:=Rmult))).
+  Notation l2v := (@l2v R 0).
 
   (* 位移矢量，[px py pz] meter = [100*px 100*py 100*pz] cm *)
   Section displacement.

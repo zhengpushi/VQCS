@@ -19,6 +19,15 @@ type 'a sig0 = 'a
 
 val add : int -> int -> int
 
+module Nat :
+ sig
+  val add : int -> int -> int
+
+  val mul : int -> int -> int
+
+  val pow : int -> int -> int
+ end
+
 type positive =
 | XI of positive
 | XO of positive
@@ -28,15 +37,6 @@ type z =
 | Z0
 | Zpos of positive
 | Zneg of positive
-
-module Nat :
- sig
-  val add : int -> int -> int
-
-  val mul : int -> int -> int
-
-  val pow : int -> int -> int
- end
 
 module Pos :
  sig
@@ -181,15 +181,10 @@ module type RinvSig =
 module RinvImpl :
  RinvSig
 
-val rdiv : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R
-
-val q2R : q -> RbaseSymbolsImpl.coq_R
-
-val pow0 : RbaseSymbolsImpl.coq_R -> int -> RbaseSymbolsImpl.coq_R
+val rdiv :
+  RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R
 
 val req_dec_T : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> bool
-
-val powerRZ : RbaseSymbolsImpl.coq_R -> z -> RbaseSymbolsImpl.coq_R
 
 val reqb : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> bool
 
@@ -212,10 +207,6 @@ type unit0 =
 | Uinv of unit0
 | Umul of unit0 * unit0
 
-val upowNat : unit0 -> int -> unit0
-
-val upow : unit0 -> z -> unit0
-
 val ucoef : unit0 -> RbaseSymbolsImpl.coq_R
 
 val udim : unit0 -> baseUnit -> z
@@ -234,8 +225,6 @@ val dplus : dims -> dims -> dims
 
 val dopp : dims -> dims
 
-val dscal : z -> dims -> dims
-
 val udims : unit0 -> dims
 
 type nunit = RbaseSymbolsImpl.coq_R * dims
@@ -252,27 +241,24 @@ val nmul : nunit -> nunit -> nunit
 
 val ninv : nunit -> nunit
 
-val npow : nunit -> z -> RbaseSymbolsImpl.coq_R * dims
-
 val u2n : unit0 -> nunit
-
-module SI_Prefix :
- sig
-  val centi : unit0 -> unit0
- end
 
 module SI_Basic :
  sig
   val second : baseUnit
 
-  val metre : baseUnit
+  val ampere : baseUnit
  end
 
 module SI_Accepted :
  sig
+  val milliampere : unit0
+
   val minute : unit0
 
-  val litre : unit0
+  val hour : unit0
+
+  val milli_amper_hour : unit0
  end
 
 val ncvtbleb : nunit -> nunit -> bool
@@ -289,41 +275,35 @@ val a2q : 'a1 -> 'a1 quantity
 
 val qval : 'a1 quantity -> 'a1 option
 
-val qcvtbleb : 'a1 quantity -> 'a1 quantity -> bool
+val qsameub : 'a1 quantity -> unit0 -> bool
 
-val q2qn : (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> nunit -> 'a1 quantity
+val q2qn :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> nunit -> 'a1
+  quantity
 
-val q2qu : (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> unit0 -> 'a1 quantity
+val q2qu :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> unit0 -> 'a1
+  quantity
 
-val q2q :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity
+val qop1 : ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity
 
 val qop2 : ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity
 
-val qop2l :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-  quantity -> 'a1 quantity
+val qadd : ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity
 
-val qop2r :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-  quantity -> 'a1 quantity
+val qopp : ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity
 
-val qaddl :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-  quantity -> 'a1 quantity
-
-val qaddr :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-  quantity -> 'a1 quantity
+val qsub :
+  ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1
+  quantity
 
 val qinv : ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity
 
 val qmul : ('a1 -> 'a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity
 
-val qpow : ('a1 -> z -> 'a1) -> 'a1 quantity -> z -> 'a1 quantity
-
 val qdiv :
-  ('a1 -> 'a2 -> 'a2) -> ('a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity
+  ('a1 -> 'a2 -> 'a2) -> ('a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2
+  quantity
 
 type quR = RbaseSymbolsImpl.coq_R quantity
 
@@ -333,23 +313,31 @@ val r2q : RbaseSymbolsImpl.coq_R -> quR
 
 val q2quR : quR -> unit0 -> quR
 
-val qaddlR : quR -> quR -> quR
-
-val qaddrR : quR -> quR -> quR
+val qsubR : quR -> quR -> quR
 
 val qmulR : quR -> quR -> quR
 
-val qpowR : quR -> z -> quR
-
 val qdivR : quR -> quR -> quR
 
-module Coq_ex_QuR :
+val val_0_06 : RbaseSymbolsImpl.coq_R
+
+val val_C_b : RbaseSymbolsImpl.coq_R
+
+val val_C_min : RbaseSymbolsImpl.coq_R
+
+val c_b : quR
+
+val c_min : quR
+
+val cHK_UNIT : quR -> unit0 -> quR
+
+val cVT_UNIT : quR -> unit0 -> quR
+
+val get_T_b_by_I_b : quR -> quR
+
+module T_b_ex :
  sig
-  val v1_m_per_s : RbaseSymbolsImpl.coq_R option
+  val val_T_b_1 : RbaseSymbolsImpl.coq_R option
 
-  val s1_s : RbaseSymbolsImpl.coq_R option
-
-  val fill_time_s : quR
-
-  val fill_time_min : quR
+  val val_T_b_2 : RbaseSymbolsImpl.coq_R option
  end
