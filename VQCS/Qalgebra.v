@@ -40,15 +40,15 @@ Definition qop2 {A} (f : A -> A -> A) (q1 q2 : @Quantity A) : @Quantity A :=
 
 (** General binary quantity operation on convertible untis, adopting the unit of 
     the left operand q1 *)
-Definition qop2UnitL {A} (ARmul : R -> A -> A) (f : A -> A -> A)
+Definition qop2l {A} (ARmul : R -> A -> A) (f : A -> A -> A)
   (q1 q2 : @Quantity A) : @Quantity A :=
-  if qcvtbleb q1 q2 then qop2 f q1 (qconv ARmul q2 q1) else !!.
+  if qcvtbleb q1 q2 then qop2 f q1 (q2q ARmul q2 q1) else !!.
 
 (** General binary quantity operation on convertible untis, adopting the unit of 
     the right operand q2 *)
-Definition qop2UnitR {A} (ARmul : R -> A -> A) (f : A -> A -> A)
+Definition qop2r {A} (ARmul : R -> A -> A) (f : A -> A -> A)
   (q1 q2 : @Quantity A) : @Quantity A :=
-  if qcvtbleb q1 q2 then qop2 f (qconv ARmul q1 q2) q2 else !!.
+  if qcvtbleb q1 q2 then qop2 f (q2q ARmul q1 q2) q2 else !!.
 
 (** General unary quantity operation, on which the quantity is dimensionless *)
 Definition qdim0op1 {A} (f : A -> A) (q : @Quantity A) : @Quantity A :=
@@ -78,12 +78,12 @@ Section qadd_qopp_qsub.
   Infix "+" := qadd : Quantity_scope.
 
   (** Quantity addition using the unit of the left operand q1 *)
-  Definition qaddUnitL (q1 q2 : Quantity) : Quantity := qop2UnitL ARmul Aadd q1 q2.
-  Infix "'+" := qaddUnitL : Quantity_scope.
+  Definition qaddl (q1 q2 : Quantity) : Quantity := qop2l ARmul Aadd q1 q2.
+  Infix "'+" := qaddl : Quantity_scope.
 
   (** Quantity addition using the unit of the right operand q1 *)
-  Definition qaddUnitR (q1 q2 : Quantity) : Quantity := qop2UnitR ARmul Aadd q1 q2.
-  Infix "+'" := qaddUnitR : Quantity_scope.
+  Definition qaddr (q1 q2 : Quantity) : Quantity := qop2r ARmul Aadd q1 q2.
+  Infix "+'" := qaddr : Quantity_scope.
 
   (** Quantity opposition *)
   Definition qopp (q : Quantity) : Quantity := qop1 Aopp q.
@@ -94,12 +94,12 @@ Section qadd_qopp_qsub.
   Infix "-" := qsub : Quantity_scope.
 
   (** Quantity subtraction using the unit of the left operand q1 *)
-  Definition qsubUnitL (q1 q2 : Quantity) : Quantity := q1 '+ - q2.
-  Infix "'-" := qsubUnitL : Quantity_scope.
+  Definition qsubl (q1 q2 : Quantity) : Quantity := q1 '+ - q2.
+  Infix "'-" := qsubl : Quantity_scope.
   
   (** Quantity subtraction using the unit of the right operand q1 *)
-  Definition qsubUnitR (q1 q2 : Quantity) : Quantity := q1 +' - q2.
-  Infix "-'" := qsubUnitR : Quantity_scope.
+  Definition qsubr (q1 q2 : Quantity) : Quantity := q1 +' - q2.
+  Infix "-'" := qsubr : Quantity_scope.
   
   Context `{HASGroup : ASGroup _ Aadd}.
 

@@ -181,7 +181,8 @@ module type RinvSig =
 module RinvImpl :
  RinvSig
 
-val rdiv : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R
+val rdiv :
+  RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R
 
 val q2R : q -> RbaseSymbolsImpl.coq_R
 
@@ -291,30 +292,35 @@ val qval : 'a1 quantity -> 'a1 option
 
 val qcvtbleb : 'a1 quantity -> 'a1 quantity -> bool
 
-val q2qn : (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> nunit -> 'a1 quantity
+val q2qn :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> nunit -> 'a1
+  quantity
 
-val q2qu : (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> unit0 -> 'a1 quantity
+val q2qu :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> unit0 -> 'a1
+  quantity
 
 val q2q :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity ->
+  'a1 quantity
 
 val qop2 : ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity
 
 val qop2l :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-  quantity -> 'a1 quantity
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1
+  quantity -> 'a1 quantity -> 'a1 quantity
 
 val qop2r :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-  quantity -> 'a1 quantity
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1
+  quantity -> 'a1 quantity -> 'a1 quantity
 
 val qaddl :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-  quantity -> 'a1 quantity
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1
+  quantity -> 'a1 quantity -> 'a1 quantity
 
 val qaddr :
-  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
-  quantity -> 'a1 quantity
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1
+  quantity -> 'a1 quantity -> 'a1 quantity
 
 val qinv : ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity
 
@@ -323,7 +329,8 @@ val qmul : ('a1 -> 'a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity
 val qpow : ('a1 -> z -> 'a1) -> 'a1 quantity -> z -> 'a1 quantity
 
 val qdiv :
-  ('a1 -> 'a2 -> 'a2) -> ('a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity
+  ('a1 -> 'a2 -> 'a2) -> ('a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2
+  quantity
 
 type quR = RbaseSymbolsImpl.coq_R quantity
 

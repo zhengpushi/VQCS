@@ -67,10 +67,10 @@ Notation "!!" := Qinvalid (at level 3) : Quantity_scope.
 Definition qone {A} (Aone : A) : @Quantity A := Qmake Aone nunitOne.
 
 (** Make a [Quantity] from [Unit] *)
-Definition qmakeU {A} (v : A) (u : Unit) := Qmake v (u2n u).
+Definition u2q {A} (v : A) (u : Unit) := Qmake v (u2n u).
 
 (** Make a dimensionless [Quantity] from A type *)
-Definition qmakeA {A} (v : A) := Qmake v nunitOne.
+Definition a2q {A} (v : A) := Qmake v nunitOne.
 
 
 (** Get the value of a [Quantity] with its own [Unit] *)
@@ -108,27 +108,12 @@ Definition qcvtbleb {A} (q1 q2 : @Quantity A) : bool :=
   | _, _ => false
   end.
 
-Section more.
+Section qconv.
   Context {A : Type}.
   Context (ARmul : R -> A -> A).
-  
-  (** Get the value of a [Quantity] `q` respect to [Nunit] `nref` *)
-  Definition qvalByN (q : @Quantity A) (nref : Nunit) : option A :=
-    match q with
-    | Qmake v n =>
-        match nconvRate n nref with
-        | Some rate => Some (ARmul rate v)
-        | _ => None
-        end
-    | _ => None
-    end.
-
-  (** Get the value of a [Quantity] `q` respect to [Unit] `uref` *)
-  Definition qvalByU (q : Quantity) (uref : Unit) : option A :=
-    qvalByN q (u2n uref).
 
   (** Convert a [Quantity] `q` with [Nunit] `nref` *)
-  Definition qconvN (q : @Quantity A) (nref : Nunit) : Quantity :=
+  Definition q2qn (q : @Quantity A) (nref : Nunit) : Quantity :=
     match q with
     | Qmake v n =>
         match nconvRate n nref with
@@ -139,35 +124,43 @@ Section more.
     end.
 
   (** Convert a [Quantity] `q` with [Unit] `uref` *)
-  Definition qconvU (q : @Quantity A) (uref : Unit) : Quantity := qconvN q (u2n uref).
+  Definition q2qu (q : @Quantity A) (uref : Unit) : Quantity := q2qn q (u2n uref).
 
   (** Convert a [Quantity] `q` with [Quantity] `qref` *)
-  Definition qconv (q : @Quantity A) (qref : @Quantity A) : Quantity :=
+  Definition q2q (q : @Quantity A) (qref : @Quantity A) : Quantity :=
     match qref with
-    | Qmake v n => qconvN q n
+    | Qmake v n => q2qn q n
     | _ => !!
     end.
   
-End more.
+  (** Get the value of a [Quantity] `q` respect to [Nunit] `nref` *)
+  Definition qvaln (q : @Quantity A) (nref : Nunit) : option A :=
+    qval (q2qn q nref).
+
+  (** Get the value of a [Quantity] `q` respect to [Unit] `uref` *)
+  Definition qvalu (q : Quantity) (uref : Unit) : option A :=
+    qvaln q (u2n uref).
+  
+End qconv.
 
 (* 示例：标量 *)
 Section ex_salar.
-  Notation qvalByU := (qvalByU Rmult).
-  Notation qconvU := (qconvU Rmult).
+  Notation qvalu := (qvalu Rmult).
+  Notation q2qu := (q2qu Rmult).
 
   (* 时间，0.5 hrs = 30 min *)
   Section time.
-    Let t1 := qmakeU 0.5 'hrs.
-    Let t2 := qmakeU 30 'min.
+    Let t1 := u2q 0.5 'hrs.
+    Let t2 := u2q 30 'min.
 
     (* Compute qcvtbleb t1 t2. *)
     
-    Goal qvalByU t1 'hrs = Some 0.5.
-    Proof. simpl; f_equal; lra. Qed.
+    Goal qvalu t1 'hrs = Some 0.5.
+    Proof. cbn. f_equal. lra. Qed.
 
     (* Eval cbn in qconv t1 'min. *)
 
-    Goal qconvU t1 'min = t2.
+    Goal q2qu t1 'min = t2.
     Proof. cbv. f_equal. lra. Qed.
   End time.
 
@@ -175,19 +168,19 @@ End ex_salar.
   
 (* 示例：向量 *)
 Section ex_vector.
-  Notation qvalByU := (qvalByU vscal).
-  Notation qconvU := (qconvU vscal).
+  Notation qvalu := (qvalu vscal).
+  Notation q2qu := (q2qu vscal).
 
   (* 位移矢量，[px py pz] meter = [100*px 100*py 100*pz] cm *)
   Section displacement.
     Variable px py pz : R.
-    Let p1 := qmakeU (@l2v 3 [px;py;pz]) 'm.
+    Let p1 := u2q (@l2v 3 [px;py;pz]) 'm.
 
     Notation "'厘米" := (_c 'm).
 
     (* Eval cbn in qvalByU p1 '厘米. *)
     
-    Goal qconvU p1 '厘米 = qmakeU (l2v [100*px;100*py;100*pz]%R) '厘米.
+    Goal q2qu p1 '厘米 = u2q (l2v [100*px;100*py;100*pz]%R) '厘米.
     Proof. cbv. f_equal. veq; lra. Qed.
   End displacement.
 End ex_vector.

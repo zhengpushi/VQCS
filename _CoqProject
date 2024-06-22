@@ -2,6 +2,8 @@
 
 -arg -w -arg -notation-overridden
 -arg -w -arg -hiding-delimiting-key
+-arg -w -arg -uniform-inheritance
+-arg -w -arg -extraction-opaque-accessed
 # -arg -w -arg -deprecated-hint-without-locality
 # -arg -w -arg -redundant-canonical-projection
 # -arg -w -arg -ambiguous-paths
@@ -18,4 +20,5 @@ VQCS/Uconv.v
 VQCS/Quantity.v
 VQCS/Qalgebra.v
 VQCS/QalgebraR.v
+VQCS/QalgebraRV.v
 
