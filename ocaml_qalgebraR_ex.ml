@@ -970,8 +970,8 @@ let ncvtbleb n1 n2 =
 let nconvRate src ref =
   if ncvtbleb src ref then Some (rdiv (ncoef src) (ncoef ref)) else None
 
-type 'a quantity =
-| Qmake of 'a * nunit
+type 'tA quantity =
+| Qmake of 'tA * nunit
 | Qinvalid
 
 (** val u2q : 'a1 -> unit0 -> 'a1 quantity **)

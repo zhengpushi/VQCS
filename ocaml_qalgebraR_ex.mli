@@ -280,8 +280,8 @@ val ncvtbleb : nunit -> nunit -> bool
 
 val nconvRate : nunit -> nunit -> RbaseSymbolsImpl.coq_R option
 
-type 'a quantity =
-| Qmake of 'a * nunit
+type 'tA quantity =
+| Qmake of 'tA * nunit
 | Qinvalid
 
 val u2q : 'a1 -> unit0 -> 'a1 quantity

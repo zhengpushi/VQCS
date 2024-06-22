@@ -150,6 +150,28 @@ Proof.
   unfold nrootCond. logic.
 Qed.
 
+(** boolean comparison: q1 equal to q2 *)
+Definition qeqbR (q1 q2 : QuR) : bool := qcmpb Rmult Reqb q1 q2.
+(** boolean comparison: q1 less than q2 *)
+Definition qltbR (q1 q2 : QuR) : bool := qcmpb Rmult Rltb q1 q2.
+(** boolean comparison: q1 less than or equal to q2 *)
+Definition qlebR (q1 q2 : QuR) : bool := qcmpb Rmult Rleb q1 q2.
+
+Infix "=?"  := qeqbR : QuR_scope.
+Infix "<?"  := qltbR : QuR_scope.
+Infix "<=?" := qlebR : QuR_scope.
+
+(** [qeqbR] is true, it is reflexive. *)
+Lemma qeqbR_true_refl q : q =? q = true.
+Proof.
+  (* Note, if q is !!, then it is not true, *)
+Abort.
+
+(** [qeqbR] is commutative *)
+Lemma qeqbR_comm q1 q2 : (q1 =? q2) = (q2 =? q1).
+Proof.
+Abort.
+
 
 (* ######################################################################### *)
 (** * Examples *)
@@ -220,6 +242,12 @@ Section test.
   Proof. qeqR. Qed.
 
   (* ---------------------------------------------------- *)
+  (* boolean comparison *)
+  Goal u2qR 3 'N <? u2qR 5 'N = true. qeqR. Qed.
+  Goal u2qR 3 'A <? u2qR 5 'N = false. qeqR. Qed.
+  Goal u2qR 3 ('N*'m)%U <? u2qR 5 ('m²*'N*/'m)%U = true. qeqR. Qed.
+
+  (* ---------------------------------------------------- *)
   (* 三角函数 *)
   
   (* sin²θ + cos²θ = 1 *)
@@ -245,6 +273,7 @@ Section test.
     - field_simplify. pose proof (Rpower_invn 3). cbv in H. apply H; try lra; try lia.
     - field_simplify. pose proof (Rpower_invn 3). cbv in H. apply H; try lra; try lia.
   Qed.
+  
 End test.
 
 Module ex_QuR.

@@ -55,8 +55,8 @@ Open Scope Quantity_scope.
 (** ** Definition and basic operatios of [Quantity] *)
 
 (** Definition of [Quantity] *)
-Inductive Quantity {A : Type} :=
-| Qmake (v : A) (n : Nunit)
+Inductive Quantity {tA : Type} :=
+| Qmake (v : tA) (n : Nunit)
 | Qinvalid.
 
 Bind Scope Quantity_scope with Quantity.
@@ -64,56 +64,64 @@ Bind Scope Quantity_scope with Quantity.
 Notation "!!" := Qinvalid (at level 3) : Quantity_scope.
 
 (** quantity one which its value is 1 and has dimensionless unit *)
-Definition qone {A} (Aone : A) : @Quantity A := Qmake Aone nunitOne.
+Definition qone {tA} (Aone : tA) : @Quantity tA := Qmake Aone nunitOne.
 
 (** Make a [Quantity] from [Unit] *)
-Definition u2q {A} (v : A) (u : Unit) := Qmake v (u2n u).
+Definition u2q {tA} (v : tA) (u : Unit) := Qmake v (u2n u).
 
-(** Make a dimensionless [Quantity] from A type *)
-Definition a2q {A} (v : A) := Qmake v nunitOne.
+(** Make a dimensionless [Quantity] from tA type *)
+Definition a2q {tA} (v : tA) := Qmake v nunitOne.
 
 
 (** Get the value of a [Quantity] with its own [Unit] *)
-Definition qval {A} (q : Quantity) : option A :=
+Definition qval {tA} (q : Quantity) : option tA :=
   match q with
   | Qmake v n => Some v
   | _ => None
   end.
 
 (** Get coefficent of a [Quantity] *)
-Definition qcoef {A} (q : @Quantity A) : option R :=
+Definition qcoef {tA} (q : @Quantity tA) : option R :=
   match q with
   | Qmake v (c, d) => Some c
   | _ => None
   end.
 
 (** Get dimensions of a [Quantity] *)
-Definition qdims {A} (q : @Quantity A) : option Dims :=
+Definition qdims {tA} (q : @Quantity tA) : option Dims :=
   match q with
   | Qmake v (c, d) => Some d
   | _ => None
   end.
 
+(** Get [Unit] of a [Quantity] `q` *)
+Definition qunit {tA} (q : @Quantity tA) : option Unit :=
+  match q with
+  | Qmake v n => Some (n2u n)
+  | _ => None
+  end.
+
+
 (** Two [Quantity]s are convertible (proposition version *)
-Definition qcvtble {A} (q1 q2 : @Quantity A) : Prop :=
+Definition qcvtble {tA} (q1 q2 : @Quantity tA) : Prop :=
   match q1, q2 with
   | Qmake v1 n1, Qmake v2 n2 => ndims n1 = ndims n2
   | _, _ => False
   end.
 
 (** Two [Quantity]s are convertible (boolean version) *)
-Definition qcvtbleb {A} (q1 q2 : @Quantity A) : bool :=
+Definition qcvtbleb {tA} (q1 q2 : @Quantity tA) : bool :=
   match q1, q2 with
   | Qmake v1 n1, Qmake v2 n2 => deqb (ndims n1) (ndims n2)
   | _, _ => false
   end.
 
-Section qconv.
-  Context {A : Type}.
-  Context (ARmul : R -> A -> A).
+(* more operations or properties for [Quantity] if we have ARmul: R -> tA -> tA  *)
+Section more_ARmul.
+  Context {tA} (ARmul : R -> tA -> tA).
 
   (** Convert a [Quantity] `q` with [Nunit] `nref` *)
-  Definition q2qn (q : @Quantity A) (nref : Nunit) : Quantity :=
+  Definition q2qn (q : @Quantity tA) (nref : Nunit) : Quantity :=
     match q with
     | Qmake v n =>
         match nconvRate n nref with
@@ -124,24 +132,36 @@ Section qconv.
     end.
 
   (** Convert a [Quantity] `q` with [Unit] `uref` *)
-  Definition q2qu (q : @Quantity A) (uref : Unit) : Quantity := q2qn q (u2n uref).
+  Definition q2qu (q : @Quantity tA) (uref : Unit) : Quantity := q2qn q (u2n uref).
 
   (** Convert a [Quantity] `q` with [Quantity] `qref` *)
-  Definition q2q (q : @Quantity A) (qref : @Quantity A) : Quantity :=
+  Definition q2q (q : @Quantity tA) (qref : @Quantity tA) : Quantity :=
     match qref with
     | Qmake v n => q2qn q n
     | _ => !!
     end.
   
   (** Get the value of a [Quantity] `q` respect to [Nunit] `nref` *)
-  Definition qvaln (q : @Quantity A) (nref : Nunit) : option A :=
+  Definition qvaln (q : @Quantity tA) (nref : Nunit) : option tA :=
     qval (q2qn q nref).
 
   (** Get the value of a [Quantity] `q` respect to [Unit] `uref` *)
-  Definition qvalu (q : Quantity) (uref : Unit) : option A :=
+  Definition qvalu (q : @Quantity tA) (uref : Unit) : option tA :=
     qvaln q (u2n uref).
+
+  (** Boolean comparison of two quantities *)
+  Definition qcmpb (Acmpb : tA -> tA -> bool) (q1 q2 : @Quantity tA) : bool :=
+    match q1, q2 with
+    | Qmake v1 n1, Qmake v2 n2 =>
+        match nconv n1 n2 with
+        | Some (k, _) => Acmpb (ARmul k v1) v2
+        | _ => false
+        end
+    (* note that, if any input quantity is invalid, the result is false *)
+    | _, _ => false
+    end.
   
-End qconv.
+End more_ARmul.
 
 (* 示例：标量 *)
 Section ex_salar.
