@@ -32,15 +32,29 @@ Coercion qmakeByR : R >-> Quantity.
 Notation qone := (qone 1).
 
 Notation qcvtble := (@qcvtble R).
+Notation qconvN := (qconvN Rmult).
+Notation qconvU := (qconvU Rmult).
 Notation qconv := (qconv Rmult).
 
 Notation qadd := (qadd Rplus).
+Notation qaddUnitL := (qaddUnitL Rmult Rplus).
+Notation qaddUnitR := (qaddUnitR Rmult Rplus).
+Notation qopp := (qopp Ropp).
+Notation qsub := (qsub Rplus Ropp).
+Notation qsubUnitL := (qsubUnitL Rmult Rplus Ropp).
+Notation qsubUnitR := (qsubUnitR Rmult Rplus Ropp).
 Notation qmul := (qmul Rmult).
 Notation qpow := (qpow powerRZ).
 Notation qinv := (qinv Rinv).
 Notation qdiv := (qdiv Rmult Rinv).
 
 Infix "+" := qadd : Quantity_scope.
+Infix "'+" := qaddUnitL : Quantity_scope.
+Infix "+'" := qaddUnitR : Quantity_scope.
+Notation "- q" := (qopp q) : Quantity_scope.
+Infix "-" := qsub : Quantity_scope.
+Infix "'-" := qsubUnitL : Quantity_scope.
+Infix "-'" := qsubUnitR : Quantity_scope.
 Infix "*" := qmul : Quantity_scope.
 Infix "^" := qpow : Quantity_scope.
 Notation " q ² " := (q ^ 2) : Quantity_scope.
@@ -74,8 +88,9 @@ Ltac qeqR :=
   intros; cbv;
   (* elim Rbool, solve R contracdiction *)
   autoRbool; auto; try lra;
-  (* elim Qmake *)
+  (* elim Qmake, option, tuple *)
   try match goal with | |- Quantity.Qmake _ _ = Quantity.Qmake _ _ => f_equal end;
+  try match goal with | |- Some _ = Some _ => f_equal end;
   try match goal with | |- (_, _) = (_, _) => f_equal end;
   (* elim R *)
   try lra.
@@ -138,14 +153,30 @@ Section test.
   Goal (qmakeU 3 's) + (qmakeU 2 's) = (qmakeU 1 's) + (qmakeU 4 's).
   Proof. qeqR. Qed.
   
-  (* plus with different Unit is not supported, need manual convertion *)
+  (* plus with different Unit directly is wrong *)
   
   (* 1 min + 60 s = !! *)
   Goal (qmakeU 1 'min) + (qmakeU 60 's) = !!.
   Proof. qeqR. Qed.
 
+  (* we can manually make a unit conversion *)
+
   (* qconv (1 min) s + 60 s = 120 s *)
-  Goal qconv (qmakeU 1 'min) 's + (qmakeU 60 's) = qmakeU 120 's.
+  Goal qconvU (qmakeU 1 'min) 's + (qmakeU 60 's) = qmakeU 120 's.
+  Proof. qeqR. Qed.
+
+  (* 1 min + qconv (60 s) min = 2 min *)
+  Goal qmakeU 1 'min + qconvU (qmakeU 60 's) 'min = qmakeU 2 'min.
+  Proof. qeqR. Qed.
+
+  (* we also provided the auto conversion based on left/right units using '+ or +' *)
+
+  (* 1 min '+ 60 s = 2 min *)
+  Goal (qmakeU 1 'min) '+ (qmakeU 60 's) = qmakeU 2 'min.
+  Proof. qeqR. Qed.
+
+  (* 1 min +' 60 s = 120 s *)
+  Goal (qmakeU 1 'min) +' (qmakeU 60 's) = qmakeU 120 's.
   Proof. qeqR. Qed.
 
   (* ---------------------------------------------------- *)
@@ -156,7 +187,7 @@ Section test.
   Proof. qeqR. Qed.
 
   (* 2 'A * 3 'Ω = qconv (6000 'mV) 'V *)
-  Goal (qmakeU 2 'A) * qmakeU 3 'Ω = qconv (qmakeU 6000 _m 'V) 'V.
+  Goal (qmakeU 2 'A) * qmakeU 3 'Ω = qconvU (qmakeU 6000 _m 'V) 'V.
   Proof. qeqR. Qed.
 
     (* (4 m) ^ 3 = 64 m³  *)
@@ -167,7 +198,7 @@ Section test.
   (* inversion *)
 
   (* qconv (/ (3 min)) Hz = (1/180) Hz *)
-  Goal (qconv (/(qmakeU 3 'min)) 'Hz) = qmakeU (1/180)%R 'Hz.
+  Goal (qconvU (/(qmakeU 3 'min)) 'Hz) = qmakeU (1/180)%R 'Hz.
   Proof. qeqR. Qed.
 
   (* ---------------------------------------------------- *)
@@ -176,51 +207,6 @@ Section test.
   (* (10 m) / (5 m/s) = 2 s *)
   Goal (qmakeU 10 'm) / (qmakeU 5 ('m/'s)%U) = qmakeU 2 's.
   Proof. qeqR. Qed.
-  
-  (* ---------------------------------------------------- *)
-  (* 运动学中的一个场景：自由落体运动 *)
-  Section Motion.
-    (* 自由落体运动，从t0时刻开始下落，求t1,t2时刻的速度、距离:
-       已知：
-          重力加速度 g = 9.8 m/s^2
-          时间 t1 = 30 s
-          时间 t2 = 1 min
-       则：
-          在t1时刻的速度 v1 = g*t1 = 294 m/s
-          在t2时刻的速度 v2 = g*t2 = 588 m/s
-          在t1时刻的距离 s1 = (1/2)*g*t1^2 = 4410 m
-          在t2时刻的距离 s2 = (1/2)*g*t2^2 = 17640 m *)
-    Let g : Quantity := qmakeU 9.8 ('m/('s^2))%U.
-    Let t1 := qmakeU 30 's.
-    Let t2 := qmakeU 1 'min.
-    Let v1 := t1 * g.
-    Let v2 := t1 * g.
-    Let s1 := (1/2)%R * g * t1 ^ 2.
-    Let s2 := (1/2)%R * g * t2 ^ 2.
-
-    (* v1 = 294 m/s *)
-    Goal v1 = qmakeU 294 ('m/'s)%U.
-    Proof. qeqR. Qed.
-
-    (* s1 = 4.41 km *)
-    Goal s1 = qconv (qmakeU 4.41 'km) 'm.
-    Proof. qeqR. Qed.
-  End Motion.
-
-  (* ---------------------------------------------------- *)
-  (* 动力学中的简单问题 *)
-  
-  Section test1.
-    (** example2: two taps(水龙头), one 36.7cm^3/s, another 2.1L/min, need to fill 
-        300cm^3 cup, how long? *)
-    Example f1 := qmakeU 36.7 ((_c 'm)³/'s)%U.
-    Example f2 := qmakeU 2.1 ('L/'min)%U.
-    Example V := qmakeU 300 ((_c 'm)³)%U.
-
-    Example fill_time1 := (qconv (V / (f1 + f2)) 's).
-    Eval cbv in (qval fill_time1).
-
-  End test1.
 
   (* ---------------------------------------------------- *)
   (* 三角函数 *)
@@ -250,4 +236,85 @@ Section test.
   Qed.
 End test.
 
-(* Extraction "ocaml_test_fill_time.ml" fill_time1. *)
+Module ex.
+  
+  (* ---------------------------------------------------- *)
+  (* 自由落体运动 *)
+  Section ex1.
+    (* 自由落体运动，从t0时刻开始下落，求t1,t2时刻的速度、距离:
+       已知：
+          重力加速度 g = 9.8 m/s^2
+          时间 t1 = 30 s
+          时间 t2 = 1 min
+       则：
+          在t1时刻的速度 v1 = g*t1 = 294 m/s
+          在t2时刻的速度 v2 = g*t2 = 588 m/s
+          在t1时刻的距离 s1 = (1/2)*g*t1^2 = 4410 m
+          在t2时刻的距离 s2 = (1/2)*g*t2^2 = 17640 m *)
+    Let g : Quantity := qmakeU 9.8 ('m/('s^2))%U.
+    Let t1 := qmakeU 30 's.
+    Let t2 := qmakeU 1 'min.
+    Let v1 := t1 * g.
+    Let v2 := t1 * g.
+    Let s1 := (1/2)%R * g * t1 ^ 2.
+    Let s2 := (1/2)%R * g * t2 ^ 2.
+
+    (* v1 = 294 m/s *)
+    Goal v1 = qmakeU 294 ('m/'s)%U.
+    Proof. qeqR. Qed.
+
+    (* s1 = 4410 m *)
+    Goal s1 = qmakeU 4410 'm.
+    Proof. qeqR. Qed.
+    
+    Example v1_m_per_s := qval v1.
+    Example s1_s := qval s1.
+  End ex1.
+
+  (* ---------------------------------------------------- *)
+  (* 流速与时间的问题 *)
+  Section ex2.
+    (* two taps(水龙头), one 36.7cm^3/s, another 2.1L/min, need to fill 
+       300cm^3 cup, how long?
+       答：1L/min=1dm^3/min=1000/60 (cm^3/s) = 50/3 (cm^3/s)
+       所以，300 / (36.7+2.1*50/3) s ≈ 4.18 s ≈ 0.0697 min *)
+    Let f1 := qmakeU 36.7 ((_c 'm)³/'s)%U.
+    Let f2 := qmakeU 2.1 ('L/'min)%U.
+    Let V := qmakeU 300 ((_c 'm)³)%U.
+    
+    Example fill_time_s := V / (f1 '+ f2).
+    Example fill_time_min := qconvU (V / (f1 +' f2)) 'min.
+
+    Goal qval fill_time_s = Some (300/(36.7+2.1*50/3))%R.
+    Proof. qeqR. Qed.
+
+    Goal qval (f1 '+ f2) = Some (36.7+2.1*50/3)%R. qeqR. Qed.
+    Goal qval (f1 +' f2) = Some (36.7*3/50+2.1)%R. qeqR. Qed.
+    Goal qdims (fill_time_s) = Some (udims 's). qeqR. Qed.
+    Goal qdims (fill_time_min) = Some (udims 's). qeqR. Qed.
+    Goal qcoef (fill_time_s) = Some (ucoef 's). qeqR. Qed.
+    Goal qcoef (fill_time_min) = Some (ucoef 'min). qeqR. Qed.
+    Goal qcoef (f1 '+ f2) = Some (ucoef ((_c 'm)^3/'s)%U). qeqR. Qed.
+    Goal qcoef (f1 +' f2) = Some (ucoef ('L/'min)%U). qeqR. Qed.
+    Goal qcoef (f1 '+ f2) = Some (1e-6). qeqR. Qed.
+    Goal qcoef (f1 +' f2) = Some (1e-3/60)%R. qeqR. Qed.
+    Goal qval fill_time_min = qval (fill_time_s / 60). qeqR. Qed.
+  End ex2.
+End ex.
+
+Extraction "ocaml_qalgebraR_ex.ml" ex.
+
+(* 
+utop[2]> Coq_ex.v1_m_per_s;;
+- : float option = Some 294.
+utop[3]> Coq_ex.s1_s;;
+- : float option = Some 4410.
+utop[4]> Coq_ex.fill_time_s;;
+- : float quantity =
+Qmake (4.18410041841004166,
+ (1., ((((((Zpos XH, Z0), Z0), Z0), Z0), Z0), Z0)))
+utop[5]> Coq_ex.fill_time_min;;
+- : float quantity =
+Qmake (0.0697350069735007,
+ (60., ((((((Zpos XH, Z0), Z0), Z0), Z0), Z0), Z0)))
+ *)

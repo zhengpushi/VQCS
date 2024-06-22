@@ -24,19 +24,31 @@ Generalizable Variable tB Badd Bzero Bopp Bmul Bone Binv.
 (* ======================================================================= *)
 (** ** General algebraic operations of quantity *)
 
-(** General unary quantity operation which won't change it's unit *)
+(** General unary quantity operation *)
 Definition qop1 {A} (f : A -> A) (q : @Quantity A) : @Quantity A :=
   match q with
   | Qmake v n => Qmake (f v) n
   | _ => !!
   end.
 
-(** General binary quantity operation which won't change it's unit *)
+(** General binary quantity operation on same unit *)
 Definition qop2 {A} (f : A -> A -> A) (q1 q2 : @Quantity A) : @Quantity A :=
   match q1, q2 with
   | Qmake v1 n1, Qmake v2 n2 => if neqb n1 n2 then Qmake (f v1 v2)%A n1 else !!
   | _, _ => !!
   end.
+
+(** General binary quantity operation on convertible untis, adopting the unit of 
+    the left operand q1 *)
+Definition qop2UnitL {A} (ARmul : R -> A -> A) (f : A -> A -> A)
+  (q1 q2 : @Quantity A) : @Quantity A :=
+  if qcvtbleb q1 q2 then qop2 f q1 (qconv ARmul q2 q1) else !!.
+
+(** General binary quantity operation on convertible untis, adopting the unit of 
+    the right operand q2 *)
+Definition qop2UnitR {A} (ARmul : R -> A -> A) (f : A -> A -> A)
+  (q1 q2 : @Quantity A) : @Quantity A :=
+  if qcvtbleb q1 q2 then qop2 f (qconv ARmul q1 q2) q2 else !!.
 
 (** General unary quantity operation, on which the quantity is dimensionless *)
 Definition qdim0op1 {A} (f : A -> A) (q : @Quantity A) : @Quantity A :=
@@ -59,21 +71,36 @@ Definition qdim0op2 {A} (f : A -> A -> A) (q1 q2 : @Quantity A) : @Quantity A :=
 
 (** Quantity addition/opposition/subtraction *)
 Section qadd_qopp_qsub.
-  Context {A} (Aadd : A -> A -> A) (Aopp : A -> A).
+  Context {A} (ARmul : R -> A -> A) (Aadd : A -> A -> A) (Aopp : A -> A).
 
-  (** Quantity addition *)
+  (** Quantity addition using same unit *)
   Definition qadd (q1 q2 : Quantity) : Quantity := qop2 Aadd q1 q2.
   Infix "+" := qadd : Quantity_scope.
+
+  (** Quantity addition using the unit of the left operand q1 *)
+  Definition qaddUnitL (q1 q2 : Quantity) : Quantity := qop2UnitL ARmul Aadd q1 q2.
+  Infix "'+" := qaddUnitL : Quantity_scope.
+
+  (** Quantity addition using the unit of the right operand q1 *)
+  Definition qaddUnitR (q1 q2 : Quantity) : Quantity := qop2UnitR ARmul Aadd q1 q2.
+  Infix "+'" := qaddUnitR : Quantity_scope.
 
   (** Quantity opposition *)
   Definition qopp (q : Quantity) : Quantity := qop1 Aopp q.
   Notation "- q" := (qopp q) : Quantity_scope.
 
-  (** Quantity subtraction *)
+  (** Quantity subtraction using same unit  *)
   Definition qsub (q1 q2 : Quantity) : Quantity := q1 + - q2.
   Infix "-" := qsub : Quantity_scope.
 
-
+  (** Quantity subtraction using the unit of the left operand q1 *)
+  Definition qsubUnitL (q1 q2 : Quantity) : Quantity := q1 '+ - q2.
+  Infix "'-" := qsubUnitL : Quantity_scope.
+  
+  (** Quantity subtraction using the unit of the right operand q1 *)
+  Definition qsubUnitR (q1 q2 : Quantity) : Quantity := q1 +' - q2.
+  Infix "-'" := qsubUnitR : Quantity_scope.
+  
   Context `{HASGroup : ASGroup _ Aadd}.
 
   (** [qadd] is associative. *)

@@ -185,7 +185,11 @@ val rdiv : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.
 
 val q2R : q -> RbaseSymbolsImpl.coq_R
 
+val pow0 : RbaseSymbolsImpl.coq_R -> int -> RbaseSymbolsImpl.coq_R
+
 val req_dec_T : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> bool
+
+val powerRZ : RbaseSymbolsImpl.coq_R -> z -> RbaseSymbolsImpl.coq_R
 
 val reqb : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R -> bool
 
@@ -218,6 +222,8 @@ val udim : unit0 -> baseUnit -> z
 
 type dims = (((((z * z) * z) * z) * z) * z) * z
 
+val dzero : dims
+
 val deqb : dims -> dims -> bool
 
 val dmap : dims -> (z -> z) -> dims
@@ -228,6 +234,8 @@ val dplus : dims -> dims -> dims
 
 val dopp : dims -> dims
 
+val dscal : z -> dims -> dims
+
 val udims : unit0 -> dims
 
 type nunit = RbaseSymbolsImpl.coq_R * dims
@@ -236,11 +244,15 @@ val ncoef : nunit -> RbaseSymbolsImpl.coq_R
 
 val ndims : nunit -> dims
 
+val nunitOne : nunit
+
 val neqb : nunit -> nunit -> bool
 
 val nmul : nunit -> nunit -> nunit
 
 val ninv : nunit -> nunit
+
+val npow : nunit -> z -> RbaseSymbolsImpl.coq_R * dims
 
 val u2n : unit0 -> nunit
 
@@ -273,23 +285,55 @@ type 'a quantity =
 
 val qmakeU : 'a1 -> unit0 -> 'a1 quantity
 
-val qconv : (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> unit0 -> 'a1 quantity
+val qmakeA : 'a1 -> 'a1 quantity
+
+val qval : 'a1 quantity -> 'a1 option
+
+val qcvtbleb : 'a1 quantity -> 'a1 quantity -> bool
+
+val qconvN : (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> nunit -> 'a1 quantity
+
+val qconvU : (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> unit0 -> 'a1 quantity
+
+val qconv :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity
 
 val qop2 : ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity
 
-val qadd : ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity -> 'a1 quantity
+val qop2UnitL :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
+  quantity -> 'a1 quantity
+
+val qop2UnitR :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
+  quantity -> 'a1 quantity
+
+val qaddUnitL :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
+  quantity -> 'a1 quantity
+
+val qaddUnitR :
+  (RbaseSymbolsImpl.coq_R -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> 'a1 quantity -> 'a1
+  quantity -> 'a1 quantity
 
 val qinv : ('a1 -> 'a1) -> 'a1 quantity -> 'a1 quantity
 
 val qmul : ('a1 -> 'a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity
 
+val qpow : ('a1 -> z -> 'a1) -> 'a1 quantity -> z -> 'a1 quantity
+
 val qdiv :
   ('a1 -> 'a2 -> 'a2) -> ('a2 -> 'a2) -> 'a1 quantity -> 'a2 quantity -> 'a2 quantity
 
-val f1 : RbaseSymbolsImpl.coq_R quantity
+val qmakeByR : RbaseSymbolsImpl.coq_R -> RbaseSymbolsImpl.coq_R quantity
 
-val f2 : RbaseSymbolsImpl.coq_R quantity
+module Coq_ex :
+ sig
+  val v1_m_per_s : RbaseSymbolsImpl.coq_R option
 
-val v : RbaseSymbolsImpl.coq_R quantity
+  val s1_s : RbaseSymbolsImpl.coq_R option
 
-val fill_time1 : RbaseSymbolsImpl.coq_R quantity
+  val fill_time_s : RbaseSymbolsImpl.coq_R quantity
+
+  val fill_time_min : RbaseSymbolsImpl.coq_R quantity
+ end

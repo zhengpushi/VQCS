@@ -110,15 +110,14 @@ Definition qcvtbleb {A} (q1 q2 : @Quantity A) : bool :=
 
 Section more.
   Context {A : Type}.
-  Context (Ascal : R -> A -> A).
-  Infix "s*" := Ascal.
+  Context (ARmul : R -> A -> A).
   
   (** Get the value of a [Quantity] `q` respect to [Nunit] `nref` *)
   Definition qvalByN (q : @Quantity A) (nref : Nunit) : option A :=
     match q with
     | Qmake v n =>
         match nconvRate n nref with
-        | Some rate => Some (rate s* v)
+        | Some rate => Some (ARmul rate v)
         | _ => None
         end
     | _ => None
@@ -128,23 +127,33 @@ Section more.
   Definition qvalByU (q : Quantity) (uref : Unit) : option A :=
     qvalByN q (u2n uref).
 
-  (** Convert a [Quantity] `q` with [Unit] `uref` *)
-  Definition qconv (q : @Quantity A) (uref : Unit) : Quantity :=
-    let nref := u2n uref in
+  (** Convert a [Quantity] `q` with [Nunit] `nref` *)
+  Definition qconvN (q : @Quantity A) (nref : Nunit) : Quantity :=
     match q with
     | Qmake v n =>
         match nconvRate n nref with
-        | Some rate => Qmake (rate s* v) nref
+        | Some rate => Qmake (ARmul rate v) nref
         | _ => !!
         end
     | _ => !!
     end.
+
+  (** Convert a [Quantity] `q` with [Unit] `uref` *)
+  Definition qconvU (q : @Quantity A) (uref : Unit) : Quantity := qconvN q (u2n uref).
+
+  (** Convert a [Quantity] `q` with [Quantity] `qref` *)
+  Definition qconv (q : @Quantity A) (qref : @Quantity A) : Quantity :=
+    match qref with
+    | Qmake v n => qconvN q n
+    | _ => !!
+    end.
+  
 End more.
 
 (* 示例：标量 *)
 Section ex_salar.
   Notation qvalByU := (qvalByU Rmult).
-  Notation qconv := (qconv Rmult).
+  Notation qconvU := (qconvU Rmult).
 
   (* 时间，0.5 hrs = 30 min *)
   Section time.
@@ -158,7 +167,7 @@ Section ex_salar.
 
     (* Eval cbn in qconv t1 'min. *)
 
-    Goal qconv t1 'min = t2.
+    Goal qconvU t1 'min = t2.
     Proof. cbv. f_equal. lra. Qed.
   End time.
 
@@ -167,7 +176,7 @@ End ex_salar.
 (* 示例：向量 *)
 Section ex_vector.
   Notation qvalByU := (qvalByU vscal).
-  Notation qconv := (qconv vscal).
+  Notation qconvU := (qconvU vscal).
 
   (* 位移矢量，[px py pz] meter = [100*px 100*py 100*pz] cm *)
   Section displacement.
@@ -178,7 +187,7 @@ Section ex_vector.
 
     (* Eval cbn in qvalByU p1 '厘米. *)
     
-    Goal qconv p1 '厘米 = qmakeU (l2v [100*px;100*py;100*pz]%R) '厘米.
+    Goal qconvU p1 '厘米 = qmakeU (l2v [100*px;100*py;100*pz]%R) '厘米.
     Proof. cbv. f_equal. veq; lra. Qed.
   End displacement.
 End ex_vector.

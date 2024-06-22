@@ -32,6 +32,12 @@ Reserved Notation "a ⁴" (at level 1, format "a ⁴").
 Reserved Notation "a ⁵" (at level 1, format "a ⁵").
 Reserved Notation "a ⁶" (at level 1, format "a ⁶").
 
+Reserved Infix "'+" (at level 50, left associativity).  (* add with left unit *)
+Reserved Infix "+'" (at level 50, left associativity).  (* add with right unit *)
+Reserved Infix "'-" (at level 50, left associativity).  (* sub with left unit *)
+Reserved Infix "-'" (at level 50, left associativity).  (* sub with right unit *)
+
+
 (* ======================================================================= *)
 (** ** Tactics *)
 
