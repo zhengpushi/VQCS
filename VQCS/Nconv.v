@@ -1,10 +1,10 @@
 (*
-  Copyright 2024 ZhengPu Shi
+  Copyright 2024 Zhengpu Shi
   This file is part of VQCS. It is distributed under the MIT
   "expat license". You should have recieved a LICENSE file with it.
 
   purpose   : Conversion between normalized units
-  author    : ZhengPu Shi
+  author    : Zhengpu Shi
   date      : 2022.04
 *)
 
