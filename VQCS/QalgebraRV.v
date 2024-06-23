@@ -86,9 +86,6 @@ Notation "q .1" := (q.[#0]) : QuRV_scope.
 Notation "q .2" := (q.[#1]) : QuRV_scope.
 Notation "q .3" := (q.[#2]) : QuRV_scope.
 Notation "q .4" := (q.[#3]) : QuRV_scope.
-Notation "q .x" := (q.1) : QuRV_scope.
-Notation "q .y" := (q.2) : QuRV_scope.
-Notation "q .z" := (q.3) : QuRV_scope.
 
 
 (** scalar product for a R quantity and a RV quantity *)
