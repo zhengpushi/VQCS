@@ -37,69 +37,6 @@ Reserved Infix "+'" (at level 50, left associativity).  (* add with right unit *
 Reserved Infix "'-" (at level 50, left associativity).  (* sub with left unit *)
 Reserved Infix "-'" (at level 50, left associativity).  (* sub with right unit *)
 
-
-(* ======================================================================= *)
-(** ** Tactics *)
-
-(** inversion and subst *)
-Ltac inv H := inversion H; subst; clear H.
-
-(** destruct by sumbool comparison procedure.
-    Note that we should register the reflection to "bdestruct" database *)
-Ltac bdestruct X :=
-  let H := fresh in
-  let e := fresh "e" in
-  evar (e: Prop);
-  assert (H: reflect e X); subst e;
-  [ try eauto with bdestruct
-  | destruct H as [H|H]].
-
-(** Z.eqb reflects Z.eq *)
-Hint Resolve Z.eqb_spec : bdestruct.
-
-(** simplify the logic expressions *)
-Ltac logic :=
-  repeat
-    (match goal with
-     (* solve it *)
-     | [H : ?P |- ?P] => exact H
-     | [|- True] => constructor
-     | [H : False |- _] => destruct H
-
-     (* simplify it *)
-     | [|- _ /\ _ ] => constructor
-     | [|- _ -> _] => intro
-     | [|- not _ ] => intro
-     | [|- _ <-> _ ] => split; intros
-     | [H : _ /\ _ |- _] => destruct H
-     | [H : _ \/ _ |- _] => destruct H
-
-     (* rewriting *)
-     (* | [H1 : ?P -> ?Q, H2 : ?P |- _] => pose proof (H1 H2) *)
-     (* | [H : ?a = ?b |- _ ]  => try progress (rewrite H) *)
-     | [H : ?a <> ?b |- False]   => destruct H
-     end;
-     try congruence).
-
-(** Solve simple logic about "bool" *)
-Ltac autoBool :=
-  repeat
-    let H := fresh "H" in 
-    match goal with
-    (* b = false <-> b <> true *)
-    | |- ?b = false <-> ?b <> true => split
-    (* b = true <-> b <> false *)
-    | |- ?b = false <-> ?b <> true => split
-    (* b = false -> b <> true *)
-    | H: ?b = false |- ?b <> true => rewrite H
-    (* b <> true -> b = false *)
-    | H: ?b <> true |- ?b = false => apply not_true_is_false
-    (* a && b = true |- _ ==> a = true, b = true |- _ *)
-    | H: ?a && ?b = true |- _ => apply andb_prop in H
-    end;
-    logic.
-
-
 (* ======================================================================= *)
 (** ** Properties for even numbers of Z type *)
 Section Z.
