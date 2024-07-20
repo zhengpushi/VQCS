@@ -81,6 +81,9 @@ Definition uconv (src ref : Unit) : option (R * Unit) :=
   else None.
 
 Section test.
+  (* Eval cbn in uconvRate 'hrs 'min. *)
+  (* Compute uconv 'hrs 's. *)
+
   Goal uconvRate 'hrs 'min = Some 60.
   Proof. cbv. f_equal. lra. Qed.
 

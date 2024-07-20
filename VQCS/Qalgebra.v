@@ -25,14 +25,14 @@ Generalizable Variable tB Badd Bzero Bopp Bmul Bone Binv.
 (** ** General algebraic operations of quantity *)
 
 (** General unary quantity operation *)
-Definition qop1 {A} (f : A -> A) (q : @Quantity A) : @Quantity A :=
+Definition qop1 {tA} (f : tA -> tA) (q : @Quantity tA) : @Quantity tA :=
   match q with
   | Qmake v n => Qmake (f v) n
   | _ => !!
   end.
 
 (** General binary quantity operation on same unit *)
-Definition qop2 {A} (f : A -> A -> A) (q1 q2 : @Quantity A) : @Quantity A :=
+Definition qop2 {tA} (f : tA -> tA -> tA) (q1 q2 : @Quantity tA) : @Quantity tA :=
   match q1, q2 with
   | Qmake v1 n1, Qmake v2 n2 => if neqb n1 n2 then Qmake (f v1 v2)%A n1 else !!
   | _, _ => !!
@@ -40,25 +40,26 @@ Definition qop2 {A} (f : A -> A -> A) (q1 q2 : @Quantity A) : @Quantity A :=
 
 (** General binary quantity operation on convertible untis, adopting the unit of 
     the left operand q1 *)
-Definition qop2l {A} (ARmul : R -> A -> A) (f : A -> A -> A)
-  (q1 q2 : @Quantity A) : @Quantity A :=
+Definition qop2l {tA} (ARmul : R -> tA -> tA) (f : tA -> tA -> tA)
+  (q1 q2 : @Quantity tA) : @Quantity tA :=
   if qcvtbleb q1 q2 then qop2 f q1 (q2q ARmul q2 q1) else !!.
 
 (** General binary quantity operation on convertible untis, adopting the unit of 
     the right operand q2 *)
-Definition qop2r {A} (ARmul : R -> A -> A) (f : A -> A -> A)
-  (q1 q2 : @Quantity A) : @Quantity A :=
+Definition qop2r {tA} (ARmul : R -> tA -> tA) (f : tA -> tA -> tA)
+  (q1 q2 : @Quantity tA) : @Quantity tA :=
   if qcvtbleb q1 q2 then qop2 f (q2q ARmul q1 q2) q2 else !!.
 
 (** General unary quantity operation, on which the quantity is dimensionless *)
-Definition qdim0op1 {A} (f : A -> A) (q : @Quantity A) : @Quantity A :=
+Definition qdim0op1 {tA} (f : tA -> tA) (q : @Quantity tA) : @Quantity tA :=
   match q with
   | Qmake v n => if ndim1b n then Qmake (f v) n else !!
   | _ => !!
   end.
 
 (** General binary quantity operation, on which the quantity is dimensionless *)
-Definition qdim0op2 {A} (f : A -> A -> A) (q1 q2 : @Quantity A) : @Quantity A :=
+Definition qdim0op2 {tA} (f : tA -> tA -> tA) (q1 q2 : @Quantity tA)
+  : @Quantity tA :=
   match q1, q2 with
   | Qmake v1 n1, Qmake v2 n2 =>
       if ndim1b n1 && ndim1b n2 then Qmake (f v1 v2) n1 else !!
@@ -71,7 +72,7 @@ Definition qdim0op2 {A} (f : A -> A -> A) (q1 q2 : @Quantity A) : @Quantity A :=
 
 (** Quantity addition/opposition/subtraction *)
 Section qadd_qopp_qsub.
-  Context {A} (ARmul : R -> A -> A) (Aadd : A -> A -> A) (Aopp : A -> A).
+  Context {tA} (ARmul : R -> tA -> tA) (Aadd : tA -> tA -> tA) (Aopp : tA -> tA).
 
   (** Quantity addition using same unit *)
   Definition qadd (q1 q2 : Quantity) : Quantity := qop2 Aadd q1 q2.
@@ -232,5 +233,37 @@ Section qmul_specific.
 
   Lemma qmul_1_r q : q * qone = q.
   Proof. rewrite qmul_comm. apply qmul_1_l. Qed.
+
+  Instance qmul_Monoid : Monoid qmul qone.
+  Proof.
+    repeat constructor.
+    all: try apply qmul_assoc; try apply qmul_1_l; try apply qmul_1_r;
+      try apply qmul_comm.
+  Qed.
+    
+  Instance qmul_AMonoid : AMonoid qmul qone.
+  Proof.
+    repeat constructor.
+    all: try apply qmul_assoc; try apply qmul_1_l; try apply qmul_1_r;
+      try apply qmul_comm.
+  Qed.
+
+  Context `{HAGroup : AGroup tA Amul Aone Ainv}.
+  Notation qinv := (qinv Ainv).
+
+  Lemma qmul_qinv_l : forall q, q <> !! -> qcoef q <> Some 0 -> qinv q * q = qone.
+  Proof.
+    intros. unfold qmul, qinv, qone. destruct q as [v n|]; auto; try easy.
+    f_equal. apply HAGroup.
+    apply nmul_ninv_l. cbv in H0. destruct n. simpl. intro. destruct H0.
+    rewrite H1. auto.
+  Qed.
+  
+  Instance qmul_Group : Group qmul qone qinv.
+  Proof.
+    repeat constructor.
+    all: try apply qmul_assoc; try apply qmul_1_l; try apply qmul_1_r;
+      try apply qmul_comm.
+  Abort.
   
 End qmul_specific.

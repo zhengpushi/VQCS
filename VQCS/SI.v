@@ -40,13 +40,6 @@ Delimit Scope SI_scope with SI.
 Open Scope SI.
 
 (* ======================================================================= *)
-(** ** Tactics *)
-
-(** proof unit equality *)
-Ltac ueq :=
-  compute; f_equal; field.
-
-(* ======================================================================= *)
 (** ** Decimal multiples and sub-multiples of SI *)
 Module SI_Prefix.
 
@@ -194,6 +187,9 @@ Module SI_Derived.
   Lemma joule_spec : 'J == 'N * 'm.
   Proof. ueq. Qed.
   
+  Lemma pascal_spec2 : 'Pa == 'J / 'm³.
+  Proof. ueq. Qed.
+  
   (* power,radiant flux, 功率,辐射[能]通量(瓦特), 1W=1J/s=1kg*m^2/s^3 *)
   Definition watt := 'kg * 'm² * (/'s³).
   Notation "'W" := (watt) (at level 5) : SI_scope.
@@ -210,6 +206,10 @@ Module SI_Derived.
   Notation "'V" := (volt) (at level 5) : SI_scope.
   
   Lemma volt_spec : 'V == 'W / 'A.
+  Proof. ueq. Qed.
+
+  (* (N.m)/A = V.s *)
+  Example N_m_A_V_s : ('N * 'm) / 'A == 'V * 's.
   Proof. ueq. Qed.
   
   (* capacitance,电容(法拉), 1F=1C/V=1/kg/m^2 *s^4*A^2 *)
@@ -497,6 +497,10 @@ Module SI_Accepted.
   (** round speed, round per minute *)
   Definition round_per_minute := (2 * PI)%R /'min.
   Notation "'rpm" := (round_per_minute) (at level 5) : SI_scope.
+
+  (* (N.m)/A = 60(V/rpm) *)
+  Example N_m_A_V_rpm : ('N * 'm) / 'A == ((2*PI) / 60) * ('V / 'rpm).
+  Proof. ueq. ra. Qed.
   
   (** battery capacity *)
   Definition milli_amper_hour := 'mA * 'hrs.
@@ -641,7 +645,7 @@ Section test.
    ✓8314.46261815324       L ⋅ Pa ⋅ K−1 ⋅ mol−1
    ✓8.31446261815324 	    L ⋅ kPa ⋅ K−1 ⋅ mol−1
    ✓0.0831446261815324 	L ⋅ bar ⋅ K−1 ⋅ mol−1
-   ✓8.31446261815324×107 	erg ⋅ K−1 ⋅ mol−1
+     8.31446261815324×107 	erg ⋅ K−1 ⋅ mol−1
      1.985875279009 	    BTU ⋅ lbmol−1 ⋅ °R−1
      0.082057366080960 	    L ⋅ atm ⋅ K−1 ⋅ mol−1
      62.363598221529 	    L ⋅ Torr ⋅ K−1 ⋅ mol−1
@@ -657,22 +661,27 @@ Section test.
      L      升             体积       已定义
      Pa     帕斯卡         压强       已定义
      kPa    千帕斯卡       压强       现在定义 = 1000 Pa = 'k 'Pa
-     bar    巴             压强       现在定义 = 100 kPa = 'h 'kPa
+     bar    巴             压强       现在定义 = 1e-5 Pa
+     mbar   毫巴           压强       现在定义 = 100 kPa = 'h 'kPa
      erh    --             能量       现在定义 = 1e-7 J = 1e-7 * 'J
      atm    一个标准大气压  压强
      *)
 
     Let killoPa := _k 'Pa.
+    Let bar := (1e5) * 'Pa.
+    Notation "'bar" := (bar) (at level 5) : SI_scope.
     Let Ru1 : Unit := 'J / 'K / 'mol.
     Let Ru2 : Unit := 'm³ * 'Pa / 'K / 'mol.
     Let Ru3 : Unit := 'kg * 'm² / 's² / 'K / 'mol.
     Let Ru4 : Unit := 1000 * 'L * 'Pa / 'K / 'mol. (* added 1000 *)
-    Let Ru5 : Unit := 'L * _k 'Pa / 'K / 'mol. (* added 1000 *)
+    Let Ru5 : Unit := 'L * _k 'Pa / 'K / 'mol.
+    Let Ru6 : Unit := 0.01 * 'L * 'bar / 'K / 'mol.
 
     Goal Ru1 == Ru2. ueq. Qed.
     Goal Ru1 == Ru3. ueq. Qed.
     Goal Ru1 == Ru4. ueq. Qed.
     Goal Ru1 == Ru5. ueq. Qed.
+    Goal Ru1 == Ru6. ueq. Qed.
   End ex1.
 
   Section ex2.

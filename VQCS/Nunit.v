@@ -526,6 +526,19 @@ Proof. intros. rewrite nmul_comm. apply nmul_1_l. Qed.
 (** ** Inverse of [Nunit] *)
 Definition ninv (n1 : Nunit) : Nunit := (Rinv (ncoef n1), dopp (ndims n1)).
 
+Lemma nmul_ninv_l : forall n : Nunit, ncoef n <> 0 -> nmul (ninv n) n = nunitOne.
+Proof.
+  intros. destruct n. des_dims1 d. unfold ninv, nmul, nunitOne, dzero. cbn.
+  f_equal. field. auto. repeat f_equal; lia.
+Qed.
+
+Lemma nmul_ninv_r : forall n : Nunit, ncoef n <> 0 -> nmul n (ninv n) = nunitOne.
+Proof.
+  intros. destruct n. des_dims1 d. unfold ninv, nmul, nunitOne, dzero. cbn.
+  f_equal. field. auto. repeat f_equal; lia.
+Qed.
+
+
 (* ======================================================================= *)
 (** ** Division of [Nunit] *)
 Definition ndiv (n1 n2 : Nunit) : Nunit := nmul n1 (ninv n2).
@@ -607,12 +620,10 @@ Section test.
   (* (10m)^3 = 1000 m^3 *)
   Goal npow (u2n (10 * m)) 3 = u2n (1000 * m * m * m).
   Proof. cbv. f_equal. lra. Qed.
-
   
   (* 3\sqrt(1000 m^3) = 10 m *)
   Goal npow (u2n (10 * m)) 3 = u2n (1000 * m * m * m).
   Proof. cbv. f_equal. lra. Qed.
-
   
 End test.
 
@@ -623,13 +634,13 @@ Proof. intros. reflexivity. Qed.
 (** Dimension of [u2n u] has known form *)
 Lemma udim_u2n : forall u,
     let '(coef, (ds, dm, dkg, dA, dK, dmol, dcd)) := u2n u in
-    udim u BUTime = ds /\
-      udim u BULength = dm /\
-      udim u BUMass = dkg /\
-      udim u BUElectricCurrent = dA /\
-      udim u BUThermodynamicTemperature = dK /\
-      udim u BUAmountOfSubstance = dmol /\
-      udim u BULuminousIntensity = dcd.
+    udim u &T = ds /\
+      udim u &L = dm /\
+      udim u &M = dkg /\
+      udim u &I = dA /\
+      udim u &Q = dK /\
+      udim u &N = dmol /\
+      udim u &J = dcd.
 Proof. intros. simpl. repeat split; auto. Qed.
 
 (** [ndims] of [u2n u] is [udims u] *)
@@ -880,6 +891,12 @@ Definition ueq (u1 u2 : Unit) : Prop := u2n u1 = u2n u2.
 
 Infix "==" := (ueq) (at level 70) : Unit_scope.
 
+
+(** A tactic for unit equality *)
+Ltac ueq :=
+  compute; f_equal; try lra; try field.
+
+
 (** [ueq] iff [ueqb]. *)
 Lemma ueq_iff_ueqb u1 u2 : (u1 == u2) <-> (u1 =? u2 = true).
 Proof.
@@ -904,18 +921,13 @@ Proof. intros. simpl. unfold ueq. rewrite neq_iff. simpl. easy. Qed.
 
 (** [ueq] is an equivalence relation. *)
 Lemma ueq_refl : forall (u : Unit), u == u.
-Proof. intros. unfold ueq. reflexivity. Qed.
+Proof. intros. unfold ueq. auto. Qed.
 
 Lemma ueq_sym : forall (u1 u2 : Unit), u1 == u2 -> u2 == u1.
-Proof.
-  intros u1 u2. rewrite !ueq_iff_ueqb. rewrite ueqb_comm. auto.
-Qed.
+Proof. intros. unfold ueq. auto. Qed.
 
 Lemma ueq_trans : forall (u1 u2 u3 : Unit), u1 == u2 -> u2 == u3 -> u1 == u3.
-Proof.
-  intros until u3. rewrite !ueq_iff_ueqb, !ueqb_true_iff.
-  intros. rewrite H; auto.
-Qed.
+Proof. intros. unfold ueq in *. rewrite H,H0. auto. Qed.
 
 #[export] Instance ueq_equiv : Equivalence ueq.
 Proof.

@@ -35,6 +35,7 @@ Coercion r2q : R >-> QuR.
 Definition qoneR : QuR := qone 1.
 
 Definition qcvtbleR (q1 q2 : QuR) : Prop := qcvtble q1 q2.
+Definition qcvtblebR (q1 q2 : QuR) : bool := qcvtbleb q1 q2.
 Definition q2qnR (q : QuR) (nref : Nunit) : QuR  := q2qn Rmult q nref.
 Definition q2quR (q : QuR) (uref : Unit) : QuR := q2qu Rmult q uref.
 Definition q2qR (q qref : QuR) : QuR := q2q Rmult q qref.

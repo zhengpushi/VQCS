@@ -63,14 +63,26 @@ Bind Scope Quantity_scope with Quantity.
 
 Notation "!!" := Qinvalid (at level 3) : Quantity_scope.
 
-(** quantity one which its value is 1 and has dimensionless unit *)
-Definition qone {tA} (Aone : tA) : @Quantity tA := Qmake Aone nunitOne.
-
 (** Make a [Quantity] from [Unit] *)
 Definition u2q {tA} (v : tA) (u : Unit) := Qmake v (u2n u).
 
 (** Make a dimensionless [Quantity] from tA type *)
 Definition a2q {tA} (v : tA) := Qmake v nunitOne.
+
+(** quantity one which its value is 1 and has dimensionless unit *)
+(* Definition qone {tA} (Aone : tA) := a2q Aone. *)
+Definition qone {tA} (Aone : tA) : @Quantity tA := Qmake Aone nunitOne.
+
+(* 关于K_T和K_E的单位问题 *)
+(* Eval cbv in u2q 1 (('N * 'm) / 'A). *)
+(* = Qmake R1 ((R1 * R1 * / (R1 * R1) * R1 * / R1)%R, ((-2)%Z, 2%Z, 1%Z, (-1)%Z, 0%Z, 0%Z, 0%Z)) *)
+(* Eval cbv in u2q 1 ('V / 'rpm). *)
+(* 
+  = Qmake R1
+    ((R1 * (R1 * R1) * / (R1 * (R1 * R1)) * / R1 *
+     / ((R1 + R1) * PI * / ((R1 + R1) * ((R1 + R1) * (R1 + (R1 + R1) * (R1 + (R1 + R1) * (R1 + (R1 + R1))))) * R1)))%R,
+    ((-2)%Z, 2%Z, 1%Z, (-1)%Z, 0%Z, 0%Z, 0%Z))
+ *)
 
 
 (** Get the value of a [Quantity] with its own [Unit] *)
@@ -83,14 +95,14 @@ Definition qval {tA} (q : Quantity) : option tA :=
 (** Get coefficent of a [Quantity] *)
 Definition qcoef {tA} (q : @Quantity tA) : option R :=
   match q with
-  | Qmake v (c, d) => Some c
+  | Qmake _ (c, _) => Some c
   | _ => None
   end.
 
 (** Get dimensions of a [Quantity] *)
 Definition qdims {tA} (q : @Quantity tA) : option Dims :=
   match q with
-  | Qmake v (c, d) => Some d
+  | Qmake _ (_, d) => Some d
   | _ => None
   end.
 

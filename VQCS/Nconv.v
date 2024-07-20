@@ -90,6 +90,9 @@ Definition nconv (src ref : Nunit) : option (R * Nunit) :=
   else None.
 
 Section test.
+  (* Eval cbn in nconvRate (u2n 'hrs) (u2n 'min). (* Some 60 *) *)
+  (* Eval cbn in nconv (u2n 'hrs) (u2n 's). (* Some (60, u2n 's) *) *)
+  
   Goal nconvRate (u2n 'hrs) (u2n 'min) = Some 60.
   Proof. cbv. f_equal. lra. Qed.
 
