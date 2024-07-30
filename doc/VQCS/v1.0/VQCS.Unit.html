@@ -1,0 +1,993 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="resources/coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="resources/coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resources/config.js"></script>
+<script type="text/javascript" src="resources/coqdocjs.js"></script>
+<title>FinMatrix Library</title>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../index.html">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">VQCS.Unit</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="VQCS.Utils.html#"><span class="id" title="library">Utils</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Delimit</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">Unit_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">U</span>.<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">Unit_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab7"></a><h1 class="section">BaseUnit, which come from SI</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab8"></a><h2 class="section">Definition of BaseUnit</h2>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Inductive</span> <a id="BaseUnit" class="idref" href="#BaseUnit"><span class="id" title="definition, inductive"><span id="BaseUnit_rect" class="id"><span id="BaseUnit_ind" class="id"><span id="BaseUnit_rec" class="id"><span id="BaseUnit_sind" class="id">BaseUnit</span></span></span></span></span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+| <a id="BUTime" class="idref" href="#BUTime"><span class="id" title="constructor">BUTime</span></a><br/>
+| <a id="BULength" class="idref" href="#BULength"><span class="id" title="constructor">BULength</span></a><br/>
+| <a id="BUMass" class="idref" href="#BUMass"><span class="id" title="constructor">BUMass</span></a><br/>
+| <a id="BUElectricCurrent" class="idref" href="#BUElectricCurrent"><span class="id" title="constructor">BUElectricCurrent</span></a><br/>
+| <a id="BUThermodynamicTemperature" class="idref" href="#BUThermodynamicTemperature"><span class="id" title="constructor">BUThermodynamicTemperature</span></a><br/>
+| <a id="BUAmountOfSubstance" class="idref" href="#BUAmountOfSubstance"><span class="id" title="constructor">BUAmountOfSubstance</span></a><br/>
+| <a id="BULuminousIntensity" class="idref" href="#BULuminousIntensity"><span class="id" title="constructor">BULuminousIntensity</span></a><br/>
+<br/>
+.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="::Unit_scope:'&amp;T'" class="idref" href="#::Unit_scope:'&amp;T'"><span class="id" title="notation">&quot;</span></a>&amp;T" := (<a class="idref" href="VQCS.Unit.html#BUTime"><span class="id" title="constructor">BUTime</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="::Unit_scope:'&amp;L'" class="idref" href="#::Unit_scope:'&amp;L'"><span class="id" title="notation">&quot;</span></a>&amp;L" := (<a class="idref" href="VQCS.Unit.html#BULength"><span class="id" title="constructor">BULength</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="::Unit_scope:'&amp;M'" class="idref" href="#::Unit_scope:'&amp;M'"><span class="id" title="notation">&quot;</span></a>&amp;M" := (<a class="idref" href="VQCS.Unit.html#BUMass"><span class="id" title="constructor">BUMass</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="::Unit_scope:'&amp;I'" class="idref" href="#::Unit_scope:'&amp;I'"><span class="id" title="notation">&quot;</span></a>&amp;I" := (<a class="idref" href="VQCS.Unit.html#BUElectricCurrent"><span class="id" title="constructor">BUElectricCurrent</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="::Unit_scope:'&amp;Q'" class="idref" href="#::Unit_scope:'&amp;Q'"><span class="id" title="notation">&quot;</span></a>&amp;Q" := (<a class="idref" href="VQCS.Unit.html#BUThermodynamicTemperature"><span class="id" title="constructor">BUThermodynamicTemperature</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="::Unit_scope:'&amp;N'" class="idref" href="#::Unit_scope:'&amp;N'"><span class="id" title="notation">&quot;</span></a>&amp;N" := (<a class="idref" href="VQCS.Unit.html#BUAmountOfSubstance"><span class="id" title="constructor">BUAmountOfSubstance</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="::Unit_scope:'&amp;J'" class="idref" href="#::Unit_scope:'&amp;J'"><span class="id" title="notation">&quot;</span></a>&amp;J" := (<a class="idref" href="VQCS.Unit.html#BULuminousIntensity"><span class="id" title="constructor">BULuminousIntensity</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0) : <span class="id" title="var">Unit_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab9"></a><h2 class="section">Conversion between <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a></span> and <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a></span></h2>
+
+<div class="paragraph"> </div>
+
+ Conversion from <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a></span> to <span class="inlinecode"><span class="id" title="var">Nat</span></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="bu2nat" class="idref" href="#bu2nat"><span class="id" title="definition">bu2nat</span></a> (<a id="b:3" class="idref" href="#b:3"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Unit.html#b:3"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">T</span></a> =&gt; 0 | <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;L'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;L'"><span class="id" title="notation">L</span></a> =&gt; 1 | <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;M'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;M'"><span class="id" title="notation">M</span></a> =&gt; 2 | <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;I'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;I'"><span class="id" title="notation">I</span></a> =&gt; 3 | <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;Q'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;Q'"><span class="id" title="notation">Q</span></a> =&gt; 4 | <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;N'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;N'"><span class="id" title="notation">N</span></a> =&gt; 5 | <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;J'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;J'"><span class="id" title="notation">J</span></a> =&gt; 6<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Conversion from <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a></span> to <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="nat2bu" class="idref" href="#nat2bu"><span class="id" title="definition">nat2bu</span></a> (<a id="n:5" class="idref" href="#n:5"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a> :=<br/>
+&nbsp;&nbsp;(<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Unit.html#n:5"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| 0 =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">T</span></a> | 1 =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;L'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;L'"><span class="id" title="notation">L</span></a> | 2 =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;M'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;M'"><span class="id" title="notation">M</span></a> | 3 =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;I'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;I'"><span class="id" title="notation">I</span></a> | 4 =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;Q'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;Q'"><span class="id" title="notation">Q</span></a><br/>
+&nbsp;&nbsp;| 5 =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;N'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;N'"><span class="id" title="notation">N</span></a> | 6 =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;J'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;J'"><span class="id" title="notation">J</span></a> | <span class="id" title="var">_</span> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>)%<span class="id" title="var">nat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The valid condition of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="nat2bu_validCond" class="idref" href="#nat2bu_validCond"><span class="id" title="definition">nat2bu_validCond</span></a> (<a id="n:7" class="idref" href="#n:7"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <span class="id" title="keyword">Prop</span> := (<a class="idref" href="VQCS.Unit.html#n:7"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> 7)%<span class="id" title="var">nat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+if the given <span class="inlinecode"><span class="id" title="var">n</span></span> is valid, then nat2bu have valid value  
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="nat2bu_Some" class="idref" href="#nat2bu_Some"><span class="id" title="lemma">nat2bu_Some</span></a> : <span class="id" title="keyword">forall</span> <a id="n:8" class="idref" href="#n:8"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#nat2bu_validCond"><span class="id" title="definition">nat2bu_validCond</span></a> <a class="idref" href="VQCS.Unit.html#n:8"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">exists</span></a> <a id="b:9" class="idref" href="#b:9"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a> <a class="idref" href="VQCS.Unit.html#n:8"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#b:9"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#nat2bu_validCond"><span class="id" title="definition">nat2bu_validCond</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">do</span> 7 (<span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>; [<span class="id" title="tactic">eexists</span>; <span class="id" title="tactic">reflexivity</span>|]). <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+if the given <span class="inlinecode"><span class="id" title="var">n</span></span> is invalid, then nat2bu have invalid value  
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="nat2bu_None" class="idref" href="#nat2bu_None"><span class="id" title="lemma">nat2bu_None</span></a> : <span class="id" title="keyword">forall</span> <a id="n:10" class="idref" href="#n:10"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">~(</span></a><a class="idref" href="VQCS.Unit.html#nat2bu_validCond"><span class="id" title="definition">nat2bu_validCond</span></a> <a class="idref" href="VQCS.Unit.html#n:10"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a> <a class="idref" href="VQCS.Unit.html#n:10"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#nat2bu_validCond"><span class="id" title="definition">nat2bu_validCond</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">do</span> 7 (<span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>; [<span class="id" title="var">lia</span>|]). <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Inversion of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="nat2bu_inv" class="idref" href="#nat2bu_inv"><span class="id" title="lemma">nat2bu_inv</span></a> : <span class="id" title="keyword">forall</span> <a id="n:11" class="idref" href="#n:11"><span class="id" title="binder">n</span></a> <a id="b:12" class="idref" href="#b:12"><span class="id" title="binder">b</span></a>, <a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a> <a class="idref" href="VQCS.Unit.html#n:11"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#b:12"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#n:11"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#bu2nat"><span class="id" title="definition">bu2nat</span></a> <a class="idref" href="VQCS.Unit.html#b:12"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">do</span> 7 (<span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>; [<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>|]).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="var">easy</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#bu2nat"><span class="id" title="definition">bu2nat</span></a></span> o <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a></span> is identity 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="bu2nat_nat2bu_id" class="idref" href="#bu2nat_nat2bu_id"><span class="id" title="lemma">bu2nat_nat2bu_id</span></a> : <span class="id" title="keyword">forall</span> <a id="n:13" class="idref" href="#n:13"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#nat2bu_validCond"><span class="id" title="definition">nat2bu_validCond</span></a> <a class="idref" href="VQCS.Unit.html#n:13"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">exists</span></a> <a id="b:14" class="idref" href="#b:14"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a> <a class="idref" href="VQCS.Unit.html#n:13"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#b:14"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">/\</span></a> <a class="idref" href="VQCS.Unit.html#bu2nat"><span class="id" title="definition">bu2nat</span></a> <a class="idref" href="VQCS.Unit.html#b:14"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#n:13"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> (<a class="idref" href="VQCS.Unit.html#nat2bu_Some"><span class="id" title="lemma">nat2bu_Some</span></a> <span class="id" title="var">n</span> <span class="id" title="var">H</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">exists</span> <span class="id" title="var">x</span>. <span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#nat2bu_inv"><span class="id" title="lemma">nat2bu_inv</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a></span> o <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#bu2nat"><span class="id" title="definition">bu2nat</span></a></span> is identity 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="nat2bu_bu2nat_id" class="idref" href="#nat2bu_bu2nat_id"><span class="id" title="lemma">nat2bu_bu2nat_id</span></a> : <span class="id" title="keyword">forall</span> <a id="b:15" class="idref" href="#b:15"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>, <a class="idref" href="VQCS.Unit.html#nat2bu"><span class="id" title="definition">nat2bu</span></a> (<a class="idref" href="VQCS.Unit.html#bu2nat"><span class="id" title="definition">bu2nat</span></a> <a class="idref" href="VQCS.Unit.html#b:15"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="VQCS.Unit.html#b:15"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">b</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab10"></a><h2 class="section">Equality of BaseUnit</h2>
+
+<div class="paragraph"> </div>
+
+ Generate some simple functions and propertie:
+<pre>
+    BaseUnit_beq : BaseUnit -&gt; BaseUnit -&gt; bool
+    BaseUnit_eq_dec : forall x y : BaseUnit, {x = y} + {x &lt;&gt; y}
+</pre>
+ 
+</div>
+<div class="code">
+<span class="id" title="keyword">Scheme</span> <a id="BaseUnit_eq_dec" class="idref" href="#BaseUnit_eq_dec"><span class="id" title="definition">Equality</span></a> <a id="BaseUnit_eq_dec" class="idref" href="#BaseUnit_eq_dec"><span class="id" title="definition">for</span></a> <a id="BaseUnit_eq_dec" class="idref" href="#BaseUnit_eq_dec"><span class="id" title="definition">BaseUnit</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A short name for boolean equality of <span class="inlinecode"><span class="id" title="var">BasicUnit</span></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="bueqb" class="idref" href="#bueqb"><span class="id" title="definition">bueqb</span></a> := <a class="idref" href="VQCS.Unit.html#BaseUnit_beq"><span class="id" title="definition">BaseUnit_beq</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+bueqb is true，iff b1 = b2. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="bueqb_true_iff" class="idref" href="#bueqb_true_iff"><span class="id" title="lemma">bueqb_true_iff</span></a> : <span class="id" title="keyword">forall</span> <a id="b1:16" class="idref" href="#b1:16"><span class="id" title="binder">b1</span></a> <a id="b2:17" class="idref" href="#b2:17"><span class="id" title="binder">b2</span></a>, <a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <a class="idref" href="VQCS.Unit.html#b1:16"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#b2:17"><span class="id" title="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">&lt;-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b1:16"><span class="id" title="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#b2:17"><span class="id" title="variable">b2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">split</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> <span class="id" title="var">b1</span>,<span class="id" title="var">b2</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *; <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> <span class="id" title="var">b1</span>,<span class="id" title="var">b2</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *; <span class="id" title="var">easy</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+bueqb is false, iff b1 &lt;&gt; b2. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="bueqb_false_iff" class="idref" href="#bueqb_false_iff"><span class="id" title="lemma">bueqb_false_iff</span></a> : <span class="id" title="keyword">forall</span> <a id="b1:18" class="idref" href="#b1:18"><span class="id" title="binder">b1</span></a> <a id="b2:19" class="idref" href="#b2:19"><span class="id" title="binder">b2</span></a>, <a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <a class="idref" href="VQCS.Unit.html#b1:18"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#b2:19"><span class="id" title="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">&lt;-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b1:18"><span class="id" title="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b2:19"><span class="id" title="variable">b2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">rewrite</span> &lt;- <a class="idref" href="VQCS.Unit.html#bueqb_true_iff"><span class="id" title="lemma">bueqb_true_iff</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <span class="id" title="var">b1</span> <span class="id" title="var">b2</span>); <span class="id" title="tactic">split</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="var">easy</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a></span> reflect equality of BaseUnit 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="bueqb_reflect" class="idref" href="#bueqb_reflect"><span class="id" title="lemma">bueqb_reflect</span></a> : <span class="id" title="keyword">forall</span> <a id="b1:20" class="idref" href="#b1:20"><span class="id" title="binder">b1</span></a> <a id="b2:21" class="idref" href="#b2:21"><span class="id" title="binder">b2</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Bool.Bool.html#reflect"><span class="id" title="inductive">reflect</span></a> (<a class="idref" href="VQCS.Unit.html#b1:20"><span class="id" title="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#b2:21"><span class="id" title="variable">b2</span></a>) (<a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <a class="idref" href="VQCS.Unit.html#b1:20"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#b2:21"><span class="id" title="variable">b2</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> (<a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <span class="id" title="var">b1</span> <span class="id" title="var">b2</span>) <span class="id" title="var">eqn</span>:<span class="id" title="var">E1</span>; <span class="id" title="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#bueqb_true_iff"><span class="id" title="lemma">bueqb_true_iff</span></a>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#bueqb_false_iff"><span class="id" title="lemma">bueqb_false_iff</span></a>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">bueqb_reflect</span> : <span class="id" title="var">bdestruct</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a></span> = true is reflexive. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="bueqb_refl" class="idref" href="#bueqb_refl"><span class="id" title="lemma">bueqb_refl</span></a> <a id="b:22" class="idref" href="#b:22"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <a class="idref" href="VQCS.Unit.html#b:22"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#b:22"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#bueqb_true_iff"><span class="id" title="lemma">bueqb_true_iff</span></a>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab11"></a><h1 class="section">Unit: syntax representation of a unit</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab12"></a><h2 class="section">Definition of Unit</h2>
+
+<div class="paragraph"> </div>
+
+ Unit is an AST that can represent any unit. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Inductive</span> <a id="Unit" class="idref" href="#Unit"><span class="id" title="definition, inductive"><span id="Unit_rect" class="id"><span id="Unit_ind" class="id"><span id="Unit_rec" class="id"><span id="Unit_sind" class="id">Unit</span></span></span></span></span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+| <a id="Unone" class="idref" href="#Unone"><span class="id" title="constructor">Unone</span></a> (<a id="coef:25" class="idref" href="#coef:25"><span class="id" title="binder">coef</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R"><span class="id" title="axiom">R</span></a>) :&gt; <a class="idref" href="VQCS.Unit.html#Unit:23"><span class="id" title="inductive">Unit</span></a>        <br/>
+| <a id="Ubu" class="idref" href="#Ubu"><span class="id" title="constructor">Ubu</span></a> (<a id="bu:26" class="idref" href="#bu:26"><span class="id" title="binder">bu</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) :&gt; <a class="idref" href="VQCS.Unit.html#Unit:23"><span class="id" title="inductive">Unit</span></a>     <br/>
+| <a id="Uinv" class="idref" href="#Uinv"><span class="id" title="constructor">Uinv</span></a> (<a id="u:27" class="idref" href="#u:27"><span class="id" title="binder">u</span></a> : <a class="idref" href="VQCS.Unit.html#Unit:23"><span class="id" title="inductive">Unit</span></a>)         <br/>
+| <a id="Umul" class="idref" href="#Umul"><span class="id" title="constructor">Umul</span></a> (<a id="u1:28" class="idref" href="#u1:28"><span class="id" title="binder">u1</span></a> <a id="u2:29" class="idref" href="#u2:29"><span class="id" title="binder">u2</span></a> : <a class="idref" href="VQCS.Unit.html#Unit:23"><span class="id" title="inductive">Unit</span></a>). 
+<br/>
+</div>
+
+<div class="doc">
+Notation for constructor of unit 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="b1d43900a1845c22db7542c07bb56c94" class="idref" href="#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">&quot;</span></a>u1 * u2" := (<a class="idref" href="VQCS.Unit.html#Umul"><span class="id" title="constructor">Umul</span></a> <span class="id" title="var">u1</span> <span class="id" title="var">u2</span>) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="42bdf6b817ec1166171d3c6858283aa3" class="idref" href="#42bdf6b817ec1166171d3c6858283aa3"><span class="id" title="notation">&quot;</span></a> / u" := (<a class="idref" href="VQCS.Unit.html#Uinv"><span class="id" title="constructor">Uinv</span></a> <span class="id" title="var">u</span>) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="7be3e5bf04efea9467117039f6126c3d" class="idref" href="#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">&quot;</span></a>u1 / u2" := (<span class="id" title="var">u1</span> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#42bdf6b817ec1166171d3c6858283aa3"><span class="id" title="notation">/</span></a> <span class="id" title="var">u2</span><a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">)</span></a>) : <span class="id" title="var">Unit_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab13"></a><h2 class="section">Properties for <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a></span></h2>
+
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Umul"><span class="id" title="constructor">Umul</span></a></span> is injective 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="umul_inj" class="idref" href="#umul_inj"><span class="id" title="lemma">umul_inj</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:30" class="idref" href="#u1:30"><span class="id" title="binder">u1</span></a> <a id="u2:31" class="idref" href="#u2:31"><span class="id" title="binder">u2</span></a> <a id="u3:32" class="idref" href="#u3:32"><span class="id" title="binder">u3</span></a> <a id="u4:33" class="idref" href="#u4:33"><span class="id" title="binder">u4</span></a>, <a class="idref" href="VQCS.Unit.html#u1:30"><span class="id" title="variable">u1</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u2:31"><span class="id" title="variable">u2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u3:32"><span class="id" title="variable">u3</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u4:33"><span class="id" title="variable">u4</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#u1:30"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u3:32"><span class="id" title="variable">u3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">/\</span></a> <a class="idref" href="VQCS.Unit.html#u2:31"><span class="id" title="variable">u2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u4:33"><span class="id" title="variable">u4</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+u * u1 = u * u2 -&gt; u1 = u2 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="umul_cancel_l" class="idref" href="#umul_cancel_l"><span class="id" title="lemma">umul_cancel_l</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:34" class="idref" href="#u1:34"><span class="id" title="binder">u1</span></a> <a id="u2:35" class="idref" href="#u2:35"><span class="id" title="binder">u2</span></a> <a id="u:36" class="idref" href="#u:36"><span class="id" title="binder">u</span></a>, <a class="idref" href="VQCS.Unit.html#u:36"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u1:34"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u:36"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u2:35"><span class="id" title="variable">u2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#u1:34"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u2:35"><span class="id" title="variable">u2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+u1 * u = u2 * u -&gt; u1 = u2 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="umul_cancel_r" class="idref" href="#umul_cancel_r"><span class="id" title="lemma">umul_cancel_r</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:37" class="idref" href="#u1:37"><span class="id" title="binder">u1</span></a> <a id="u2:38" class="idref" href="#u2:38"><span class="id" title="binder">u2</span></a> <a id="u:39" class="idref" href="#u:39"><span class="id" title="binder">u</span></a>, <a class="idref" href="VQCS.Unit.html#u1:37"><span class="id" title="variable">u1</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u:39"><span class="id" title="variable">u</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u2:38"><span class="id" title="variable">u2</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u:39"><span class="id" title="variable">u</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#u1:37"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u2:38"><span class="id" title="variable">u2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+u1 &lt;&gt; u1 * u2 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="umul_eq_contro_l" class="idref" href="#umul_eq_contro_l"><span class="id" title="lemma">umul_eq_contro_l</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:40" class="idref" href="#u1:40"><span class="id" title="binder">u1</span></a> <a id="u2:41" class="idref" href="#u2:41"><span class="id" title="binder">u2</span></a>, <a class="idref" href="VQCS.Unit.html#u1:40"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#u1:40"><span class="id" title="variable">u1</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u2:41"><span class="id" title="variable">u2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">u1</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>; <span class="id" title="var">inv</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHu1_1</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H1</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+u1 &lt;&gt; u2 * u1 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="umul_eq_contro_r" class="idref" href="#umul_eq_contro_r"><span class="id" title="lemma">umul_eq_contro_r</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:42" class="idref" href="#u1:42"><span class="id" title="binder">u1</span></a> <a id="u2:43" class="idref" href="#u2:43"><span class="id" title="binder">u2</span></a>, <a class="idref" href="VQCS.Unit.html#u1:42"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#u2:43"><span class="id" title="variable">u2</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u1:42"><span class="id" title="variable">u1</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">u1</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>; <span class="id" title="var">inv</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHu1_2</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H2</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Power of a unit 
+<div class="paragraph"> </div>
+
+ Natual number power of a unit 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <a id="upowNat" class="idref" href="#upowNat"><span class="id" title="definition">upowNat</span></a> (<a id="u:44" class="idref" href="#u:44"><span class="id" title="binder">u</span></a> : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a>) (<a id="n:45" class="idref" href="#n:45"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Unit.html#n:45"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> =&gt; <a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> 0 =&gt; <a class="idref" href="VQCS.Unit.html#u:44"><span class="id" title="variable">u</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span> =&gt; <a class="idref" href="VQCS.Unit.html#Umul"><span class="id" title="constructor">Umul</span></a> <a class="idref" href="VQCS.Unit.html#u:44"><span class="id" title="variable">u</span></a> (<a class="idref" href="VQCS.Unit.html#upowNat:46"><span class="id" title="definition">upowNat</span></a> <a class="idref" href="VQCS.Unit.html#u:44"><span class="id" title="variable">u</span></a> <span class="id" title="var">n'</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Integer number power of a unit  
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="upow" class="idref" href="#upow"><span class="id" title="definition">upow</span></a> (<a id="u:48" class="idref" href="#u:48"><span class="id" title="binder">u</span></a> : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a>) (<a id="z:49" class="idref" href="#z:49"><span class="id" title="binder">z</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Unit.html#z:49"><span class="id" title="variable">z</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z0"><span class="id" title="constructor">Z0</span></a> =&gt; <a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Zpos"><span class="id" title="constructor">Zpos</span></a> <span class="id" title="var">p</span> =&gt; <a class="idref" href="VQCS.Unit.html#upowNat"><span class="id" title="definition">upowNat</span></a> <a class="idref" href="VQCS.Unit.html#u:48"><span class="id" title="variable">u</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.PArith.BinPos.html#Pos.to_nat"><span class="id" title="definition">Pos.to_nat</span></a> <span class="id" title="var">p</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Zneg"><span class="id" title="constructor">Zneg</span></a> <span class="id" title="var">p</span> =&gt; <a class="idref" href="VQCS.Unit.html#Uinv"><span class="id" title="constructor">Uinv</span></a> (<a class="idref" href="VQCS.Unit.html#upowNat"><span class="id" title="definition">upowNat</span></a> <a class="idref" href="VQCS.Unit.html#u:48"><span class="id" title="variable">u</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.PArith.BinPos.html#Pos.to_nat"><span class="id" title="definition">Pos.to_nat</span></a> <span class="id" title="var">p</span>))<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="0b3572f9c100c802f8cfb5e3068d59fe" class="idref" href="#0b3572f9c100c802f8cfb5e3068d59fe"><span class="id" title="notation">&quot;</span></a>a ^ z" := (<a class="idref" href="VQCS.Unit.html#upow"><span class="id" title="definition">upow</span></a> <span class="id" title="var">a</span> <span class="id" title="var">z</span>) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="547c0858b0ead0bec587452c2e8e351d" class="idref" href="#547c0858b0ead0bec587452c2e8e351d"><span class="id" title="notation">&quot;</span></a>a ²" := (<span class="id" title="var">a</span> <a class="idref" href="VQCS.Unit.html#0b3572f9c100c802f8cfb5e3068d59fe"><span class="id" title="notation">^</span></a> 2) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="54e6c272dfcf5b0edb944f9e9dda7fa4" class="idref" href="#54e6c272dfcf5b0edb944f9e9dda7fa4"><span class="id" title="notation">&quot;</span></a>a ³" := (<span class="id" title="var">a</span> <a class="idref" href="VQCS.Unit.html#0b3572f9c100c802f8cfb5e3068d59fe"><span class="id" title="notation">^</span></a> 3) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="b5bd492e377b1bed967502f7edd25917" class="idref" href="#b5bd492e377b1bed967502f7edd25917"><span class="id" title="notation">&quot;</span></a>a ⁴" := (<span class="id" title="var">a</span> <a class="idref" href="VQCS.Unit.html#0b3572f9c100c802f8cfb5e3068d59fe"><span class="id" title="notation">^</span></a> 4) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="1b02df47e71979b2b1807d86423882e7" class="idref" href="#1b02df47e71979b2b1807d86423882e7"><span class="id" title="notation">&quot;</span></a>a ⁵" := (<span class="id" title="var">a</span> <a class="idref" href="VQCS.Unit.html#0b3572f9c100c802f8cfb5e3068d59fe"><span class="id" title="notation">^</span></a> 5) : <span class="id" title="var">Unit_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="93e0a64f24fdabf1acd66baf86f40498" class="idref" href="#93e0a64f24fdabf1acd66baf86f40498"><span class="id" title="notation">&quot;</span></a>a ⁶" := (<span class="id" title="var">a</span> <a class="idref" href="VQCS.Unit.html#0b3572f9c100c802f8cfb5e3068d59fe"><span class="id" title="notation">^</span></a> 6) : <span class="id" title="var">Unit_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="test" class="idref" href="#test"><span class="id" title="section">test</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.m" class="idref" href="#test.m"><span class="id" title="variable">m</span></a> := <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;L'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;L'"><span class="id" title="notation">L</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.m3" class="idref" href="#test.m3"><span class="id" title="variable">m3</span></a> := <a class="idref" href="VQCS.Unit.html#test.m"><span class="id" title="variable">m</span></a> <a class="idref" href="VQCS.Unit.html#0b3572f9c100c802f8cfb5e3068d59fe"><span class="id" title="notation">^</span></a> 3.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.kg" class="idref" href="#test.kg"><span class="id" title="variable">kg</span></a> := <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;M'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;M'"><span class="id" title="notation">M</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.s" class="idref" href="#test.s"><span class="id" title="variable">s</span></a> := <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">T</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.hour" class="idref" href="#test.hour"><span class="id" title="variable">hour</span></a> := 3600 <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#test.s"><span class="id" title="variable">s</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.km" class="idref" href="#test.km"><span class="id" title="variable">km</span></a> := 1000 <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#test.m"><span class="id" title="variable">m</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.N" class="idref" href="#test.N"><span class="id" title="variable">N</span></a> := 2 <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#test.kg"><span class="id" title="variable">kg</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#test.m"><span class="id" title="variable">m</span></a><a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">)</span></a> <a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#test.s"><span class="id" title="variable">s</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#test.s"><span class="id" title="variable">s</span></a><a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">)</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.N'" class="idref" href="#test.N'"><span class="id" title="variable">N'</span></a> := <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">(</span></a>2 <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#test.kg"><span class="id" title="variable">kg</span></a> <a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#test.s"><span class="id" title="variable">s</span></a><a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">)</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#test.m"><span class="id" title="variable">m</span></a> <a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#test.s"><span class="id" title="variable">s</span></a><a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Considering that how to make sure N == N'? 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Goal</span> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">N</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">=</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">N'</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">cbv</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Abort</span>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Unit.html#test"><span class="id" title="section">test</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab14"></a><h2 class="section">Coefficient of a Unit</h2>
+
+<div class="paragraph"> </div>
+
+ Get coefficient of a Unit 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <a id="ucoef" class="idref" href="#ucoef"><span class="id" title="definition">ucoef</span></a> (<a id="u:51" class="idref" href="#u:51"><span class="id" title="binder">u</span></a> : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R"><span class="id" title="axiom">R</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Unit.html#u:51"><span class="id" title="variable">u</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> <span class="id" title="var">c</span> =&gt; <span class="id" title="var">c</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#Ubu"><span class="id" title="constructor">Ubu</span></a> <span class="id" title="var">bu</span> =&gt; 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#Uinv"><span class="id" title="constructor">Uinv</span></a> <span class="id" title="var">u1</span> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#Rinv"><span class="id" title="abbreviation">Rinv</span></a> (<a class="idref" href="VQCS.Unit.html#ucoef:52"><span class="id" title="definition">ucoef</span></a> <span class="id" title="var">u1</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#Umul"><span class="id" title="constructor">Umul</span></a> <span class="id" title="var">u1</span> <span class="id" title="var">u2</span> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rmult"><span class="id" title="axiom">Rmult</span></a> (<a class="idref" href="VQCS.Unit.html#ucoef:52"><span class="id" title="definition">ucoef</span></a> <span class="id" title="var">u1</span>) (<a class="idref" href="VQCS.Unit.html#ucoef:52"><span class="id" title="definition">ucoef</span></a> <span class="id" title="var">u2</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="test" class="idref" href="#test"><span class="id" title="section">test</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.rpm" class="idref" href="#test.rpm"><span class="id" title="variable">rpm</span></a> := 2 <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rtrigo1.html#PI"><span class="id" title="definition">PI</span></a> <a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">(</span></a>60 <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">T</span></a><a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Goal</span> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">ucoef</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">rpm</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">=</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">PI</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">/30)%</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">R</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">cbv</span>. <span class="id" title="tactic">field</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Unit.html#test"><span class="id" title="section">test</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a></span> equal to its value 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucoef_Unone" class="idref" href="#ucoef_Unone"><span class="id" title="lemma">ucoef_Unone</span></a> : <span class="id" title="keyword">forall</span> <a id="r:54" class="idref" href="#r:54"><span class="id" title="binder">r</span></a>, <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> <a class="idref" href="VQCS.Unit.html#r:54"><span class="id" title="variable">r</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#r:54"><span class="id" title="variable">r</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Ubu"><span class="id" title="constructor">Ubu</span></a></span> equal to 1 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucoef_Ubu" class="idref" href="#ucoef_Ubu"><span class="id" title="lemma">ucoef_Ubu</span></a> : <span class="id" title="keyword">forall</span> <a id="b:55" class="idref" href="#b:55"><span class="id" title="binder">b</span></a>, <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#Ubu"><span class="id" title="constructor">Ubu</span></a> <a class="idref" href="VQCS.Unit.html#b:55"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Uinv"><span class="id" title="constructor">Uinv</span></a></span> equal to <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#Rinv"><span class="id" title="abbreviation">Rinv</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucoef_Uinv" class="idref" href="#ucoef_Uinv"><span class="id" title="lemma">ucoef_Uinv</span></a> : <span class="id" title="keyword">forall</span> <a id="u:56" class="idref" href="#u:56"><span class="id" title="binder">u</span></a>, <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#42bdf6b817ec1166171d3c6858283aa3"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#u:56"><span class="id" title="variable">u</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#2299a6ef56270a66cc1b95489d0f6e3a"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> <a class="idref" href="VQCS.Unit.html#u:56"><span class="id" title="variable">u</span></a>)%<span class="id" title="var">R</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Umul"><span class="id" title="constructor">Umul</span></a></span> equal to <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rmult"><span class="id" title="axiom">Rmult</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucoef_Umul" class="idref" href="#ucoef_Umul"><span class="id" title="lemma">ucoef_Umul</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:57" class="idref" href="#u1:57"><span class="id" title="binder">u1</span></a> <a id="u2:58" class="idref" href="#u2:58"><span class="id" title="binder">u2</span></a>, <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#u1:57"><span class="id" title="variable">u1</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u2:58"><span class="id" title="variable">u2</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> (<a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> <a class="idref" href="VQCS.Unit.html#u1:57"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#e1dae7ed53bffa765009199d058dd327"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> <a class="idref" href="VQCS.Unit.html#u2:58"><span class="id" title="variable">u2</span></a>)%<span class="id" title="var">R</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab15"></a><h2 class="section">Dimension of a unit</h2>
+
+<div class="paragraph"> </div>
+
+ Get dimension of a unit with given base unit 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <a id="udim" class="idref" href="#udim"><span class="id" title="definition">udim</span></a> (<a id="u:59" class="idref" href="#u:59"><span class="id" title="binder">u</span></a> : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a>) (<a id="b:60" class="idref" href="#b:60"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Unit.html#u:59"><span class="id" title="variable">u</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> <span class="id" title="var">c</span> =&gt; 0<br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#Ubu"><span class="id" title="constructor">Ubu</span></a> <span class="id" title="var">bu</span> =&gt; <span class="id" title="keyword">if</span> <a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <span class="id" title="var">bu</span> <a class="idref" href="VQCS.Unit.html#b:60"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">then</span> 1 <span class="id" title="keyword">else</span> 0<br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#Uinv"><span class="id" title="constructor">Uinv</span></a> <span class="id" title="var">u1</span> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#Z.opp"><span class="id" title="definition">Z.opp</span></a> (<a class="idref" href="VQCS.Unit.html#udim:61"><span class="id" title="definition">udim</span></a> <span class="id" title="var">u1</span> <a class="idref" href="VQCS.Unit.html#b:60"><span class="id" title="variable">b</span></a>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Unit.html#Umul"><span class="id" title="constructor">Umul</span></a> <span class="id" title="var">u1</span> <span class="id" title="var">u2</span> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#Z.add"><span class="id" title="definition">Z.add</span></a> (<a class="idref" href="VQCS.Unit.html#udim:61"><span class="id" title="definition">udim</span></a> <span class="id" title="var">u1</span> <a class="idref" href="VQCS.Unit.html#b:60"><span class="id" title="variable">b</span></a>) (<a class="idref" href="VQCS.Unit.html#udim:61"><span class="id" title="definition">udim</span></a> <span class="id" title="var">u2</span> <a class="idref" href="VQCS.Unit.html#b:60"><span class="id" title="variable">b</span></a>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="test" class="idref" href="#test"><span class="id" title="section">test</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.m" class="idref" href="#test.m"><span class="id" title="variable">m</span></a> := <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;L'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;L'"><span class="id" title="notation">L</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.kg" class="idref" href="#test.kg"><span class="id" title="variable">kg</span></a> := <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;M'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;M'"><span class="id" title="notation">M</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.s" class="idref" href="#test.s"><span class="id" title="variable">s</span></a> := <a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">&amp;</span></a><a class="idref" href="VQCS.Unit.html#::Unit_scope:'&amp;T'"><span class="id" title="notation">T</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="test.ex1" class="idref" href="#test.ex1"><span class="id" title="variable">ex1</span></a> : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a> := 100 <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#test.kg"><span class="id" title="variable">kg</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#test.m"><span class="id" title="variable">m</span></a> <a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#test.s"><span class="id" title="variable">s</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#test.s"><span class="id" title="variable">s</span></a><a class="idref" href="VQCS.Unit.html#7be3e5bf04efea9467117039f6126c3d"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Goal</span> <a id="Unnamed_thm0" class="idref" href="#Unnamed_thm0"><span class="id" title="definition">udim</span></a> <a id="Unnamed_thm0" class="idref" href="#Unnamed_thm0"><span class="id" title="definition">ex1</span></a> <a id="Unnamed_thm0" class="idref" href="#Unnamed_thm0"><span class="id" title="definition">&amp;</span></a><a id="Unnamed_thm0" class="idref" href="#Unnamed_thm0"><span class="id" title="definition">T</span></a> <a id="Unnamed_thm0" class="idref" href="#Unnamed_thm0"><span class="id" title="definition">=</span></a> <a id="Unnamed_thm0" class="idref" href="#Unnamed_thm0"><span class="id" title="definition">(-2)%</span></a><a id="Unnamed_thm0" class="idref" href="#Unnamed_thm0"><span class="id" title="definition">Z</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Unit.html#test"><span class="id" title="section">test</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a></span> equal 0. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_Unone" class="idref" href="#udim_Unone"><span class="id" title="lemma">udim_Unone</span></a> : <span class="id" title="keyword">forall</span> <a id="r:63" class="idref" href="#r:63"><span class="id" title="binder">r</span></a> <a id="b:64" class="idref" href="#b:64"><span class="id" title="binder">b</span></a>, <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> <a class="idref" href="VQCS.Unit.html#r:63"><span class="id" title="variable">r</span></a>) <a class="idref" href="VQCS.Unit.html#b:64"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0%<span class="id" title="var">Z</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Ubu"><span class="id" title="constructor">Ubu</span></a></span> with same key equal 1. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_Ubu_same" class="idref" href="#udim_Ubu_same"><span class="id" title="lemma">udim_Ubu_same</span></a> : <span class="id" title="keyword">forall</span> <a id="b:65" class="idref" href="#b:65"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>, <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#b:65"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#b:65"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#Z.of_nat"><span class="id" title="definition">Z.of_nat</span></a> 1.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#bueqb_refl"><span class="id" title="lemma">bueqb_refl</span></a>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Ubu"><span class="id" title="constructor">Ubu</span></a></span> with different key equal 0. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_Ubu_diff" class="idref" href="#udim_Ubu_diff"><span class="id" title="lemma">udim_Ubu_diff</span></a> : <span class="id" title="keyword">forall</span> <a id="b:66" class="idref" href="#b:66"><span class="id" title="binder">b</span></a> <a id="b':67" class="idref" href="#b':67"><span class="id" title="binder">b'</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>, <a class="idref" href="VQCS.Unit.html#b:66"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b':67"><span class="id" title="variable">b'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#b:66"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#b':67"><span class="id" title="variable">b'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0%<span class="id" title="var">Z</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#bueqb_false_iff"><span class="id" title="lemma">bueqb_false_iff</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Uinv"><span class="id" title="constructor">Uinv</span></a></span> equal to <span class="inlinecode"><span class="id" title="var">Z.opp</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_Uinv" class="idref" href="#udim_Uinv"><span class="id" title="lemma">udim_Uinv</span></a> : <span class="id" title="keyword">forall</span> <a id="u:68" class="idref" href="#u:68"><span class="id" title="binder">u</span></a> <a id="b:69" class="idref" href="#b:69"><span class="id" title="binder">b</span></a>, <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#42bdf6b817ec1166171d3c6858283aa3"><span class="id" title="notation">/</span></a><a class="idref" href="VQCS.Unit.html#u:68"><span class="id" title="variable">u</span></a>) <a class="idref" href="VQCS.Unit.html#b:69"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#Z.opp"><span class="id" title="definition">Z.opp</span></a> (<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#u:68"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b:69"><span class="id" title="variable">b</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Umul"><span class="id" title="constructor">Umul</span></a></span> equal to <span class="inlinecode"><span class="id" title="var">Z.plus</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_Umul" class="idref" href="#udim_Umul"><span class="id" title="lemma">udim_Umul</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:70" class="idref" href="#u1:70"><span class="id" title="binder">u1</span></a> <a id="u2:71" class="idref" href="#u2:71"><span class="id" title="binder">u2</span></a> <a id="b:72" class="idref" href="#b:72"><span class="id" title="binder">b</span></a>, <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#u1:70"><span class="id" title="variable">u1</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u2:71"><span class="id" title="variable">u2</span></a>) <a class="idref" href="VQCS.Unit.html#b:72"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#Z.add"><span class="id" title="definition">Z.add</span></a> (<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#u1:70"><span class="id" title="variable">u1</span></a> <a class="idref" href="VQCS.Unit.html#b:72"><span class="id" title="variable">b</span></a>) (<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#u2:71"><span class="id" title="variable">u2</span></a> <a class="idref" href="VQCS.Unit.html#b:72"><span class="id" title="variable">b</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#upowNat"><span class="id" title="definition">upowNat</span></a></span> equal to <span class="inlinecode"><span class="id" title="var">nat.mult</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_upowNat" class="idref" href="#udim_upowNat"><span class="id" title="lemma">udim_upowNat</span></a> : <span class="id" title="keyword">forall</span> <a id="u:73" class="idref" href="#u:73"><span class="id" title="binder">u</span></a> <a id="bu:74" class="idref" href="#bu:74"><span class="id" title="binder">bu</span></a> <a id="n:75" class="idref" href="#n:75"><span class="id" title="binder">n</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#upowNat"><span class="id" title="definition">upowNat</span></a> <a class="idref" href="VQCS.Unit.html#u:73"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#n:75"><span class="id" title="variable">n</span></a>) <a class="idref" href="VQCS.Unit.html#bu:74"><span class="id" title="variable">bu</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#Z.of_nat"><span class="id" title="definition">Z.of_nat</span></a> <a class="idref" href="VQCS.Unit.html#n:75"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">*</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#u:73"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#bu:74"><span class="id" title="variable">bu</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">Z</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> (<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <span class="id" title="var">u</span> <span class="id" title="var">bu</span>); <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHn</span>. <span class="id" title="tactic">destruct</span> (<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <span class="id" title="var">u</span> <span class="id" title="var">bu</span>); <span class="id" title="tactic">auto</span>; <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#upow"><span class="id" title="definition">upow</span></a></span> equal to Z.mult. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_upow" class="idref" href="#udim_upow"><span class="id" title="lemma">udim_upow</span></a> : <span class="id" title="keyword">forall</span> <a id="u:76" class="idref" href="#u:76"><span class="id" title="binder">u</span></a> <a id="bu:77" class="idref" href="#bu:77"><span class="id" title="binder">bu</span></a> <a id="z:78" class="idref" href="#z:78"><span class="id" title="binder">z</span></a>,  <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#u:76"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#0b3572f9c100c802f8cfb5e3068d59fe"><span class="id" title="notation">^</span></a> <a class="idref" href="VQCS.Unit.html#z:78"><span class="id" title="variable">z</span></a>) <a class="idref" href="VQCS.Unit.html#bu:77"><span class="id" title="variable">bu</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#u:76"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#bu:77"><span class="id" title="variable">bu</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#z:78"><span class="id" title="variable">z</span></a>)%<span class="id" title="var">Z</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#upow"><span class="id" title="definition">upow</span></a>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">z</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_upowNat"><span class="id" title="lemma">udim_upowNat</span></a>; <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab16"></a><h2 class="section">Generate a unit by power of a base unit</h2>
+
+<div class="paragraph"> </div>
+
+ Generate a unit by natural number power of a base unit 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <a id="ugenByBUNat" class="idref" href="#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> (<a id="b:79" class="idref" href="#b:79"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) (<a id="n:80" class="idref" href="#n:80"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Unit.html#n:80"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> =&gt; 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> =&gt; <a class="idref" href="VQCS.Unit.html#b:79"><span class="id" title="variable">b</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span> =&gt; <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#ugenByBUNat:81"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:79"><span class="id" title="variable">b</span></a> <span class="id" title="var">n'</span><a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">)</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#b:79"><span class="id" title="variable">b</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="test" class="idref" href="#test"><span class="id" title="section">test</span></a>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Unit.html#test"><span class="id" title="section">test</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a></span> is injective for exponent 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ugenByBUNat_inj_exp" class="idref" href="#ugenByBUNat_inj_exp"><span class="id" title="lemma">ugenByBUNat_inj_exp</span></a> : <span class="id" title="keyword">forall</span> <a id="n1:83" class="idref" href="#n1:83"><span class="id" title="binder">n1</span></a> <a id="n2:84" class="idref" href="#n2:84"><span class="id" title="binder">n2</span></a> <a id="b:85" class="idref" href="#b:85"><span class="id" title="binder">b</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:85"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#n1:83"><span class="id" title="variable">n1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:85"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#n2:84"><span class="id" title="variable">n2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#n1:83"><span class="id" title="variable">n1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#n2:84"><span class="id" title="variable">n2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n1</span>, <span class="id" title="var">n2</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">n2</span>; <span class="id" title="var">easy</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n1</span>; <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">n1</span>, <span class="id" title="var">n2</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="var">easy</span>. <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#umul_cancel_r"><span class="id" title="lemma">umul_cancel_r</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHn1</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a></span> is injective for <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ugenByBUNat_inj_BU" class="idref" href="#ugenByBUNat_inj_BU"><span class="id" title="lemma">ugenByBUNat_inj_BU</span></a> : <span class="id" title="keyword">forall</span> <a id="n:86" class="idref" href="#n:86"><span class="id" title="binder">n</span></a> <a id="b1:87" class="idref" href="#b1:87"><span class="id" title="binder">b1</span></a> <a id="b2:88" class="idref" href="#b2:88"><span class="id" title="binder">b2</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="VQCS.Unit.html#n:86"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a> 0)%<span class="id" title="var">nat</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b1:87"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#n:86"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b2:88"><span class="id" title="variable">b2</span></a> <a class="idref" href="VQCS.Unit.html#n:86"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b1:87"><span class="id" title="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#b2:88"><span class="id" title="variable">b2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *. <span class="id" title="var">lia</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#umul_inj"><span class="id" title="lemma">umul_inj</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode">(<span class="id" title="var">Pos.to_nat</span></span> <span class="inlinecode"><a class="idref" href="VQCS.test_PropulsionSystem.Basic.html#p"><span class="id" title="definition">p</span></a>)</span> cannot be Uone 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ugenByBUNat_PosToNat_eq_Unone_contro" class="idref" href="#ugenByBUNat_PosToNat_eq_Unone_contro"><span class="id" title="lemma">ugenByBUNat_PosToNat_eq_Unone_contro</span></a> : <span class="id" title="keyword">forall</span> <a id="b:89" class="idref" href="#b:89"><span class="id" title="binder">b</span></a> <a id="p:90" class="idref" href="#p:90"><span class="id" title="binder">p</span></a> <a id="n:91" class="idref" href="#n:91"><span class="id" title="binder">n</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:89"><span class="id" title="variable">b</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.PArith.BinPos.html#Pos.to_nat"><span class="id" title="definition">Pos.to_nat</span></a> <a class="idref" href="VQCS.Unit.html#p:90"><span class="id" title="variable">p</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> <a class="idref" href="VQCS.Unit.html#n:91"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.PArith.BinPos.html#Pos.to_nat"><span class="id" title="definition">Pos.to_nat</span></a> <span class="id" title="var">p</span>) <span class="id" title="var">eqn</span>:<span class="id" title="var">Ep</span>; <span class="id" title="tactic">auto</span>; <span class="id" title="tactic">auto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">zarith</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n0</span>; <span class="id" title="var">easy</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode">(<span class="id" title="var">Pos.to_nat</span></span> <span class="inlinecode"><a class="idref" href="VQCS.test_PropulsionSystem.Basic.html#p"><span class="id" title="definition">p</span></a>)</span> cannot be Uinv 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ugenByBUNat_PosToNat_eq_Uinv_contro" class="idref" href="#ugenByBUNat_PosToNat_eq_Uinv_contro"><span class="id" title="lemma">ugenByBUNat_PosToNat_eq_Uinv_contro</span></a> : <span class="id" title="keyword">forall</span> <a id="b:92" class="idref" href="#b:92"><span class="id" title="binder">b</span></a> <a id="p:93" class="idref" href="#p:93"><span class="id" title="binder">p</span></a> <a id="u:94" class="idref" href="#u:94"><span class="id" title="binder">u</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:92"><span class="id" title="variable">b</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.PArith.BinPos.html#Pos.to_nat"><span class="id" title="definition">Pos.to_nat</span></a> <a class="idref" href="VQCS.Unit.html#p:93"><span class="id" title="variable">p</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#42bdf6b817ec1166171d3c6858283aa3"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#u:94"><span class="id" title="variable">u</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.PArith.BinPos.html#Pos.to_nat"><span class="id" title="definition">Pos.to_nat</span></a> <span class="id" title="var">p</span>) <span class="id" title="var">eqn</span>:<span class="id" title="var">Ep</span>; <span class="id" title="tactic">auto</span>; <span class="id" title="tactic">auto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">zarith</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>; <span class="id" title="var">easy</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a></span> equal to 1. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucoef_ugenByBUNat" class="idref" href="#ucoef_ugenByBUNat"><span class="id" title="lemma">ucoef_ugenByBUNat</span></a> : <span class="id" title="keyword">forall</span> (<a id="b:95" class="idref" href="#b:95"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) (<a id="n:96" class="idref" href="#n:96"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:95"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#n:96"><span class="id" title="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#ucoef_Umul"><span class="id" title="lemma">ucoef_Umul</span></a>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHn</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#ucoef_Ubu"><span class="id" title="lemma">ucoef_Ubu</span></a>. <span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> equal to n 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_ugenByBUNat_same" class="idref" href="#udim_ugenByBUNat_same"><span class="id" title="lemma">udim_ugenByBUNat_same</span></a> : <span class="id" title="keyword">forall</span> (<a id="b:97" class="idref" href="#b:97"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) (<a id="n:98" class="idref" href="#n:98"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:97"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#n:98"><span class="id" title="variable">n</span></a>) <a class="idref" href="VQCS.Unit.html#b:97"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#Z.of_nat"><span class="id" title="definition">Z.of_nat</span></a> <a class="idref" href="VQCS.Unit.html#n:98"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Ubu_same"><span class="id" title="lemma">udim_Ubu_same</span></a>. <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Umul"><span class="id" title="lemma">udim_Umul</span></a>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHn</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Ubu_same"><span class="id" title="lemma">udim_Ubu_same</span></a>. <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> <span class="inlinecode"><span class="id" title="var">b'</span></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> equal to 0 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_ugenByBUNat_diff" class="idref" href="#udim_ugenByBUNat_diff"><span class="id" title="lemma">udim_ugenByBUNat_diff</span></a> : <span class="id" title="keyword">forall</span> (<a id="b1:99" class="idref" href="#b1:99"><span class="id" title="binder">b1</span></a> <a id="b2:100" class="idref" href="#b2:100"><span class="id" title="binder">b2</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) (<a id="n:101" class="idref" href="#n:101"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#b1:99"><span class="id" title="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b2:100"><span class="id" title="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b1:99"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#n:101"><span class="id" title="variable">n</span></a>) <a class="idref" href="VQCS.Unit.html#b2:100"><span class="id" title="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0%<span class="id" title="var">Z</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#udim_Ubu_diff"><span class="id" title="lemma">udim_Ubu_diff</span></a>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Umul"><span class="id" title="lemma">udim_Umul</span></a>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHn</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Ubu_diff"><span class="id" title="lemma">udim_Ubu_diff</span></a>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Generate a unit by integer number power of a base unit 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="ugenByBU" class="idref" href="#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> (<a id="b:102" class="idref" href="#b:102"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) (<a id="z:103" class="idref" href="#z:103"><span class="id" title="binder">z</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Unit.html#z:103"><span class="id" title="variable">z</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z0"><span class="id" title="constructor">Z0</span></a> =&gt; 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Zpos"><span class="id" title="constructor">Zpos</span></a> <span class="id" title="var">p</span> =&gt; <a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:102"><span class="id" title="variable">b</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.PArith.BinPos.html#Pos.to_nat"><span class="id" title="definition">Pos.to_nat</span></a> <span class="id" title="var">p</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Zneg"><span class="id" title="constructor">Zneg</span></a> <span class="id" title="var">p</span> =&gt; <a class="idref" href="VQCS.Unit.html#42bdf6b817ec1166171d3c6858283aa3"><span class="id" title="notation">/</span></a> <a class="idref" href="VQCS.Unit.html#42bdf6b817ec1166171d3c6858283aa3"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#ugenByBUNat"><span class="id" title="definition">ugenByBUNat</span></a> <a class="idref" href="VQCS.Unit.html#b:102"><span class="id" title="variable">b</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.PArith.BinPos.html#Pos.to_nat"><span class="id" title="definition">Pos.to_nat</span></a> <span class="id" title="var">p</span>)<a class="idref" href="VQCS.Unit.html#42bdf6b817ec1166171d3c6858283aa3"><span class="id" title="notation">)</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="test" class="idref" href="#test"><span class="id" title="section">test</span></a>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Unit.html#test"><span class="id" title="section">test</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a></span> is injective for exponent 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ugenByBU_inj_exp" class="idref" href="#ugenByBU_inj_exp"><span class="id" title="lemma">ugenByBU_inj_exp</span></a> : <span class="id" title="keyword">forall</span> <a id="b:105" class="idref" href="#b:105"><span class="id" title="binder">b</span></a> <a id="z1:106" class="idref" href="#z1:106"><span class="id" title="binder">z1</span></a> <a id="z2:107" class="idref" href="#z2:107"><span class="id" title="binder">z2</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <a class="idref" href="VQCS.Unit.html#b:105"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z1:106"><span class="id" title="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <a class="idref" href="VQCS.Unit.html#b:105"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z2:107"><span class="id" title="variable">z2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#z1:106"><span class="id" title="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#z2:107"><span class="id" title="variable">z2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">z1</span>,<span class="id" title="var">z2</span>; <span class="id" title="tactic">try</span> <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">symmetry</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBUNat_PosToNat_eq_Unone_contro"><span class="id" title="lemma">ugenByBUNat_PosToNat_eq_Unone_contro</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBUNat_PosToNat_eq_Unone_contro"><span class="id" title="lemma">ugenByBUNat_PosToNat_eq_Unone_contro</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBUNat_inj_exp"><span class="id" title="lemma">ugenByBUNat_inj_exp</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBUNat_PosToNat_eq_Uinv_contro"><span class="id" title="lemma">ugenByBUNat_PosToNat_eq_Uinv_contro</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">symmetry</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBUNat_PosToNat_eq_Uinv_contro"><span class="id" title="lemma">ugenByBUNat_PosToNat_eq_Uinv_contro</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBUNat_inj_exp"><span class="id" title="lemma">ugenByBUNat_inj_exp</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H1</span>. <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a></span> is injective for <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ugenByBU_inj_BU" class="idref" href="#ugenByBU_inj_BU"><span class="id" title="lemma">ugenByBU_inj_BU</span></a> : <span class="id" title="keyword">forall</span> <a id="b1:108" class="idref" href="#b1:108"><span class="id" title="binder">b1</span></a> <a id="b2:109" class="idref" href="#b2:109"><span class="id" title="binder">b2</span></a> <a id="z:110" class="idref" href="#z:110"><span class="id" title="binder">z</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="VQCS.Unit.html#z:110"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> 0)%<span class="id" title="var">Z</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <a class="idref" href="VQCS.Unit.html#b1:108"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#z:110"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <a class="idref" href="VQCS.Unit.html#b2:109"><span class="id" title="variable">b2</span></a> <a class="idref" href="VQCS.Unit.html#z:110"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b1:108"><span class="id" title="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#b2:109"><span class="id" title="variable">b2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">z</span>; <span class="id" title="tactic">try</span> <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBUNat_inj_BU"><span class="id" title="lemma">ugenByBUNat_inj_BU</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBUNat_inj_BU"><span class="id" title="lemma">ugenByBUNat_inj_BU</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> equal to `1`. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucoef_ugenByBU" class="idref" href="#ucoef_ugenByBU"><span class="id" title="lemma">ucoef_ugenByBU</span></a> : <span class="id" title="keyword">forall</span> <a id="b:111" class="idref" href="#b:111"><span class="id" title="binder">b</span></a> <a id="z:112" class="idref" href="#z:112"><span class="id" title="binder">z</span></a>, <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <a class="idref" href="VQCS.Unit.html#b:111"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:112"><span class="id" title="variable">z</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">z</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#ucoef_ugenByBUNat"><span class="id" title="lemma">ucoef_ugenByBUNat</span></a>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#ucoef_ugenByBUNat"><span class="id" title="lemma">ucoef_ugenByBUNat</span></a>. <span class="id" title="tactic">field</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> equal to `z`. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_ugenByBU_same" class="idref" href="#udim_ugenByBU_same"><span class="id" title="lemma">udim_ugenByBU_same</span></a> : <span class="id" title="keyword">forall</span> <a id="b:113" class="idref" href="#b:113"><span class="id" title="binder">b</span></a> <a id="z:114" class="idref" href="#z:114"><span class="id" title="binder">z</span></a>, <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <a class="idref" href="VQCS.Unit.html#b:113"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:114"><span class="id" title="variable">z</span></a>) <a class="idref" href="VQCS.Unit.html#b:113"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#z:114"><span class="id" title="variable">z</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">z</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ugenByBUNat_same"><span class="id" title="lemma">udim_ugenByBUNat_same</span></a>. <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ugenByBUNat_same"><span class="id" title="lemma">udim_ugenByBUNat_same</span></a>. <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> <span class="inlinecode"><span class="id" title="var">b'</span></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> equal to `0`. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_ugenByBU_diff" class="idref" href="#udim_ugenByBU_diff"><span class="id" title="lemma">udim_ugenByBU_diff</span></a> : <span class="id" title="keyword">forall</span> <a id="b:115" class="idref" href="#b:115"><span class="id" title="binder">b</span></a> <a id="b':116" class="idref" href="#b':116"><span class="id" title="binder">b'</span></a> <a id="z:117" class="idref" href="#z:117"><span class="id" title="binder">z</span></a>, <a class="idref" href="VQCS.Unit.html#b:115"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b':116"><span class="id" title="variable">b'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <a class="idref" href="VQCS.Unit.html#b:115"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:117"><span class="id" title="variable">z</span></a>) <a class="idref" href="VQCS.Unit.html#b':116"><span class="id" title="variable">b'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0%<span class="id" title="var">Z</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">z</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ugenByBUNat_diff"><span class="id" title="lemma">udim_ugenByBUNat_diff</span></a>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ugenByBUNat_diff"><span class="id" title="lemma">udim_ugenByBUNat_diff</span></a>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab17"></a><h2 class="section">Generate a unit with a given unit and <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a></span></h2>
+
+<div class="paragraph"> </div>
+
+ Generate a unit by multiply <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> and a given unit `u` 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="ucons" class="idref" href="#ucons"><span class="id" title="definition">ucons</span></a> (<a id="u:118" class="idref" href="#u:118"><span class="id" title="binder">u</span></a> : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a>) (<a id="b:119" class="idref" href="#b:119"><span class="id" title="binder">b</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) (<a id="z:120" class="idref" href="#z:120"><span class="id" title="binder">z</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">if</span> (<a class="idref" href="VQCS.Unit.html#z:120"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#f10153ef1a81fe79ed16d848b456c79b"><span class="id" title="notation">=?</span></a> 0)%<span class="id" title="var">Z</span> <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">then</span> <a class="idref" href="VQCS.Unit.html#u:118"><span class="id" title="variable">u</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#ugenByBU"><span class="id" title="definition">ugenByBU</span></a> <a class="idref" href="VQCS.Unit.html#b:119"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:120"><span class="id" title="variable">z</span></a><a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">)</span></a> <a class="idref" href="VQCS.Unit.html#b1d43900a1845c22db7542c07bb56c94"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Unit.html#u:118"><span class="id" title="variable">u</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a></span> is injective for exponent 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucons_inj_exp" class="idref" href="#ucons_inj_exp"><span class="id" title="lemma">ucons_inj_exp</span></a> : <span class="id" title="keyword">forall</span> <a id="u:121" class="idref" href="#u:121"><span class="id" title="binder">u</span></a> <a id="b:122" class="idref" href="#b:122"><span class="id" title="binder">b</span></a> <a id="z1:123" class="idref" href="#z1:123"><span class="id" title="binder">z1</span></a> <a id="z2:124" class="idref" href="#z2:124"><span class="id" title="binder">z2</span></a>, <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u:121"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b:122"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z1:123"><span class="id" title="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u:121"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b:122"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z2:124"><span class="id" title="variable">z2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#z1:123"><span class="id" title="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#z2:124"><span class="id" title="variable">z2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">bdestruct</span> (<span class="id" title="var">z1</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#f10153ef1a81fe79ed16d848b456c79b"><span class="id" title="notation">=?</span></a> 0)%<span class="id" title="var">Z</span>; <span class="id" title="var">bdestruct</span> (<span class="id" title="var">z2</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#f10153ef1a81fe79ed16d848b456c79b"><span class="id" title="notation">=?</span></a> 0)%<span class="id" title="var">Z</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#umul_eq_contro_r"><span class="id" title="lemma">umul_eq_contro_r</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">symmetry</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#umul_eq_contro_r"><span class="id" title="lemma">umul_eq_contro_r</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#umul_cancel_r"><span class="id" title="lemma">umul_cancel_r</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBU_inj_exp"><span class="id" title="lemma">ugenByBU_inj_exp</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a></span> is injective for exponent (extend version) 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucons_inj_exp_ext" class="idref" href="#ucons_inj_exp_ext"><span class="id" title="lemma">ucons_inj_exp_ext</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:125" class="idref" href="#u1:125"><span class="id" title="binder">u1</span></a> <a id="u2:126" class="idref" href="#u2:126"><span class="id" title="binder">u2</span></a> <a id="b:127" class="idref" href="#b:127"><span class="id" title="binder">b</span></a> <a id="z1:128" class="idref" href="#z1:128"><span class="id" title="binder">z1</span></a> <a id="z2:129" class="idref" href="#z2:129"><span class="id" title="binder">z2</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#u1:125"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u2:126"><span class="id" title="variable">u2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u1:125"><span class="id" title="variable">u1</span></a> <a class="idref" href="VQCS.Unit.html#b:127"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z1:128"><span class="id" title="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u2:126"><span class="id" title="variable">u2</span></a> <a class="idref" href="VQCS.Unit.html#b:127"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z2:129"><span class="id" title="variable">z2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#z1:128"><span class="id" title="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#z2:129"><span class="id" title="variable">z2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ucons_inj_exp"><span class="id" title="lemma">ucons_inj_exp</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a></span> is injective for <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucons_inj_BU" class="idref" href="#ucons_inj_BU"><span class="id" title="lemma">ucons_inj_BU</span></a> : <span class="id" title="keyword">forall</span> <a id="u:130" class="idref" href="#u:130"><span class="id" title="binder">u</span></a> <a id="b1:131" class="idref" href="#b1:131"><span class="id" title="binder">b1</span></a> <a id="b2:132" class="idref" href="#b2:132"><span class="id" title="binder">b2</span></a> <a id="z:133" class="idref" href="#z:133"><span class="id" title="binder">z</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="VQCS.Unit.html#z:133"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> 0)%<span class="id" title="var">Z</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u:130"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b1:131"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#z:133"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u:130"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b2:132"><span class="id" title="variable">b2</span></a> <a class="idref" href="VQCS.Unit.html#z:133"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b1:131"><span class="id" title="variable">b1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#b2:132"><span class="id" title="variable">b2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">bdestruct</span> (<span class="id" title="var">z</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#f10153ef1a81fe79ed16d848b456c79b"><span class="id" title="notation">=?</span></a> 0)%<span class="id" title="var">Z</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#umul_cancel_r"><span class="id" title="lemma">umul_cancel_r</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#ugenByBU_inj_BU"><span class="id" title="lemma">ugenByBU_inj_BU</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a></span> is injective for initial <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucons_inj_Unit" class="idref" href="#ucons_inj_Unit"><span class="id" title="lemma">ucons_inj_Unit</span></a> : <span class="id" title="keyword">forall</span> <a id="u1:134" class="idref" href="#u1:134"><span class="id" title="binder">u1</span></a> <a id="u2:135" class="idref" href="#u2:135"><span class="id" title="binder">u2</span></a> <a id="b:136" class="idref" href="#b:136"><span class="id" title="binder">b</span></a> <a id="z:137" class="idref" href="#z:137"><span class="id" title="binder">z</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u1:134"><span class="id" title="variable">u1</span></a> <a class="idref" href="VQCS.Unit.html#b:136"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:137"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u2:135"><span class="id" title="variable">u2</span></a> <a class="idref" href="VQCS.Unit.html#b:136"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:137"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#u1:134"><span class="id" title="variable">u1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#u2:135"><span class="id" title="variable">u2</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">bdestruct</span> (<span class="id" title="var">z</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#f10153ef1a81fe79ed16d848b456c79b"><span class="id" title="notation">=?</span></a> 0)%<span class="id" title="var">Z</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#umul_cancel_l"><span class="id" title="lemma">umul_cancel_l</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a></span> <span class="inlinecode"><span class="id" title="var">u</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> equal to <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> <span class="inlinecode"><span class="id" title="var">u</span></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="ucoef_ucons" class="idref" href="#ucoef_ucons"><span class="id" title="lemma">ucoef_ucons</span></a> : <span class="id" title="keyword">forall</span> <a id="u:138" class="idref" href="#u:138"><span class="id" title="binder">u</span></a> <a id="b:139" class="idref" href="#b:139"><span class="id" title="binder">b</span></a> <a id="z:140" class="idref" href="#z:140"><span class="id" title="binder">z</span></a>, <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u:138"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b:139"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:140"><span class="id" title="variable">z</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> <a class="idref" href="VQCS.Unit.html#u:138"><span class="id" title="variable">u</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a>. <span class="id" title="tactic">destruct</span> (<span class="id" title="var">z</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#f10153ef1a81fe79ed16d848b456c79b"><span class="id" title="notation">=?</span></a> 0)%<span class="id" title="var">Z</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#ucoef_ugenByBU"><span class="id" title="lemma">ucoef_ugenByBU</span></a>. <span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> <span class="inlinecode"><span class="id" title="var">b</span></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a></span> <span class="inlinecode"><span class="id" title="var">u</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> equal to <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> <span class="inlinecode"><span class="id" title="var">u</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> + z 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_ucons_same" class="idref" href="#udim_ucons_same"><span class="id" title="lemma">udim_ucons_same</span></a> : <span class="id" title="keyword">forall</span> <a id="u:141" class="idref" href="#u:141"><span class="id" title="binder">u</span></a> <a id="b:142" class="idref" href="#b:142"><span class="id" title="binder">b</span></a> <a id="z:143" class="idref" href="#z:143"><span class="id" title="binder">z</span></a>, <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u:141"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b:142"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:143"><span class="id" title="variable">z</span></a>) <a class="idref" href="VQCS.Unit.html#b:142"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#u:141"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b:142"><span class="id" title="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Unit.html#z:143"><span class="id" title="variable">z</span></a>)%<span class="id" title="var">Z</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a>. <span class="id" title="tactic">destruct</span> (<span class="id" title="var">z</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#f10153ef1a81fe79ed16d848b456c79b"><span class="id" title="notation">=?</span></a> 0)%<span class="id" title="var">Z</span> <span class="id" title="var">eqn</span>:<span class="id" title="var">En</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#Z.eqb_eq"><span class="id" title="lemma">Z.eqb_eq</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">En</span>. <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Umul"><span class="id" title="lemma">udim_Umul</span></a>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ugenByBU_same"><span class="id" title="lemma">udim_ugenByBU_same</span></a>. <span class="id" title="var">lia</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> <span class="inlinecode"><span class="id" title="var">b'</span></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a></span> <span class="inlinecode"><span class="id" title="var">u</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span> equal to <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> <span class="inlinecode"><span class="id" title="var">u</span></span> <span class="inlinecode"><span class="id" title="var">b'</span></span> 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_ucons_diff" class="idref" href="#udim_ucons_diff"><span class="id" title="lemma">udim_ucons_diff</span></a> : <span class="id" title="keyword">forall</span> <a id="u:144" class="idref" href="#u:144"><span class="id" title="binder">u</span></a> <a id="b:145" class="idref" href="#b:145"><span class="id" title="binder">b</span></a> <a id="b':146" class="idref" href="#b':146"><span class="id" title="binder">b'</span></a> <a id="z:147" class="idref" href="#z:147"><span class="id" title="binder">z</span></a>, <a class="idref" href="VQCS.Unit.html#b:145"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Unit.html#b':146"><span class="id" title="variable">b'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u:144"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b:145"><span class="id" title="variable">b</span></a> <a class="idref" href="VQCS.Unit.html#z:147"><span class="id" title="variable">z</span></a>) <a class="idref" href="VQCS.Unit.html#b':146"><span class="id" title="variable">b'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#u:144"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b':146"><span class="id" title="variable">b'</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a>. <span class="id" title="tactic">destruct</span> (<span class="id" title="var">z</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#f10153ef1a81fe79ed16d848b456c79b"><span class="id" title="notation">=?</span></a> 0)%<span class="id" title="var">Z</span> <span class="id" title="var">eqn</span>:<span class="id" title="var">En</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Umul"><span class="id" title="lemma">udim_Umul</span></a>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ugenByBU_diff"><span class="id" title="lemma">udim_ugenByBU_diff</span></a>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A rewriting for <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> of <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="udim_ucons" class="idref" href="#udim_ucons"><span class="id" title="lemma">udim_ucons</span></a> : <span class="id" title="keyword">forall</span> (<a id="u:148" class="idref" href="#u:148"><span class="id" title="binder">u</span></a> : <a class="idref" href="VQCS.Unit.html#Unit"><span class="id" title="inductive">Unit</span></a>) (<a id="b1:149" class="idref" href="#b1:149"><span class="id" title="binder">b1</span></a> <a id="b2:150" class="idref" href="#b2:150"><span class="id" title="binder">b2</span></a> : <a class="idref" href="VQCS.Unit.html#BaseUnit"><span class="id" title="inductive">BaseUnit</span></a>) (<a id="z:151" class="idref" href="#z:151"><span class="id" title="binder">z</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> <a class="idref" href="VQCS.Unit.html#u:148"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b1:149"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#z:151"><span class="id" title="variable">z</span></a>) <a class="idref" href="VQCS.Unit.html#b2:150"><span class="id" title="variable">b2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> <a class="idref" href="VQCS.Unit.html#u:148"><span class="id" title="variable">u</span></a> <a class="idref" href="VQCS.Unit.html#b2:150"><span class="id" title="variable">b2</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">(</span></a><span class="id" title="keyword">if</span> (<a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <a class="idref" href="VQCS.Unit.html#b1:149"><span class="id" title="variable">b1</span></a> <a class="idref" href="VQCS.Unit.html#b2:150"><span class="id" title="variable">b2</span></a>) <span class="id" title="keyword">then</span> <a class="idref" href="VQCS.Unit.html#z:151"><span class="id" title="variable">z</span></a> <span class="id" title="keyword">else</span> 0<a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">Z</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">bdestruct</span> (<a class="idref" href="VQCS.Unit.html#bueqb"><span class="id" title="definition">bueqb</span></a> <span class="id" title="var">b1</span> <span class="id" title="var">b2</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Unit.html#udim_ucons_same"><span class="id" title="lemma">udim_ucons_same</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ucons_diff"><span class="id" title="lemma">udim_ucons_diff</span></a>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">ring</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+simplify the <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a></span> expression 
+</div>
+<div class="code">
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">simp_ucoef</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> [<a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> ?<span class="id" title="var">u</span> ?<span class="id" title="var">b</span> ?<span class="id" title="var">z</span>)] =&gt; <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#ucoef_ucons"><span class="id" title="lemma">ucoef_ucons</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> [<a class="idref" href="VQCS.Unit.html#ucoef"><span class="id" title="definition">ucoef</span></a> (<a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> ?<span class="id" title="var">r</span>)] =&gt; <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#ucoef_Unone"><span class="id" title="lemma">ucoef_Unone</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+simplify the <span class="inlinecode"><a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a></span> expression 
+</div>
+<div class="code">
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">simp_udim</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> [<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> ?<span class="id" title="var">u</span> ?<span class="id" title="var">b</span> ?<span class="id" title="var">z</span>) ?<span class="id" title="var">b</span>] =&gt; <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ucons_same"><span class="id" title="lemma">udim_ucons_same</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> [<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#ucons"><span class="id" title="definition">ucons</span></a> ?<span class="id" title="var">u</span> ?<span class="id" title="var">b</span> ?<span class="id" title="var">z</span>) ?<span class="id" title="var">b'</span>] =&gt; <span class="id" title="tactic">try</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_ucons_diff"><span class="id" title="lemma">udim_ucons_diff</span></a>;[|<span class="id" title="var">easy</span>]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> [<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#Unone"><span class="id" title="constructor">Unone</span></a> <span class="id" title="var">_</span>) ?<span class="id" title="var">b</span>] =&gt; <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Unone"><span class="id" title="lemma">udim_Unone</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> [<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#Ubu"><span class="id" title="constructor">Ubu</span></a> ?<span class="id" title="var">b</span>) ?<span class="id" title="var">b</span>] =&gt; <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Ubu_same"><span class="id" title="lemma">udim_Ubu_same</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" title="keyword">context</span> [<a class="idref" href="VQCS.Unit.html#udim"><span class="id" title="definition">udim</span></a> (<a class="idref" href="VQCS.Unit.html#Ubu"><span class="id" title="constructor">Ubu</span></a> ?<span class="id" title="var">b</span>) ?<span class="id" title="var">b'</span>] =&gt; <span class="id" title="tactic">try</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Unit.html#udim_Ubu_diff"><span class="id" title="lemma">udim_Ubu_diff</span></a>;[|<span class="id" title="var">easy</span>]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

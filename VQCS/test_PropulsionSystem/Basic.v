@@ -327,7 +327,7 @@ Module T_b_ex.
   (* 错误的使用 mA，看能否被成功识别 *)
   Example val_T_b_2 := qval (get_T_b_by_I_b (u2qR 15 'mA)).
 
-  Extraction "test_T_b.ml" val_T_b_1 val_T_b_2.
+  (* Extraction "test_T_b.ml" val_T_b_1 val_T_b_2. *)
 (* 
 utop[1]> T_b_ex.val_T_b_1;;
 - : float option = Some 0.768

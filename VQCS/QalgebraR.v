@@ -234,9 +234,13 @@ Section test.
   Goal (u2qR 2 'A) * u2qR 3 'Ω = q2quR (u2qR 6000 _m 'V) 'V.
   Proof. qeqR. Qed.
 
-    (* (4 m) ^ 3 = 64 m³  *)
-  Goal (u2qR 4 'm) ^ 3 = u2qR 64 ('m³)%U.
-  Proof. cbv. f_equal; try lra. f_equal. lra. Qed.
+  (* q2q (6000 'mV) 'V = 6 'V *)
+  Goal q2quR (u2qR 6000 _m 'V) 'V = (u2qR 6 'V).
+  Proof. qeqR. Qed.
+  
+  (* (4 m) ^ 3 = 64 m³  *)
+  Goal (u2qR 4 'm)³ = u2qR 64 ('m³)%U.
+  Proof. qeqR. Qed.
 
   (* ---------------------------------------------------- *)
   (* inversion *)
@@ -254,9 +258,9 @@ Section test.
 
   (* ---------------------------------------------------- *)
   (* boolean comparison *)
-  Goal u2qR 3 'N <? u2qR 5 'N = true. qeqR. Qed.
-  Goal u2qR 3 'A <? u2qR 5 'N = false. qeqR. Qed.
-  Goal u2qR 3 ('N*'m)%U <? u2qR 5 ('m²*'N*/'m)%U = true. qeqR. Qed.
+  Goal u2qR 3 'N <? u2qR 5 'N = true. Proof. qeqR. Qed.
+  Goal u2qR 3 'A <? u2qR 5 'N = false. Proof. qeqR. Qed.
+  Goal u2qR 3 ('N*'m)%U <? u2qR 5 ('m²*'N*/'m)%U = true. Proof. qeqR. Qed.
 
   (* ---------------------------------------------------- *)
   (* 三角函数 *)
@@ -320,6 +324,9 @@ Module ex_QuR.
     
     Example v1_m_per_s := qval v1.
     Example s1_s := qval s1.
+    
+    Goal qval v1 = Some 294. Proof. qeqR. Qed.
+    Goal qval s1 = Some 4410. Proof. qeqR. Qed.
   End ex1.
 
   (* ---------------------------------------------------- *)
@@ -353,7 +360,7 @@ Module ex_QuR.
   End ex2.
 End ex_QuR.
 
-Extraction "ocaml_qalgebraR_ex.ml" ex_QuR.
+(* Extraction "ocaml_qalgebraR_ex.ml" ex_QuR. *)
 
 (* 
 utop[2]> ex_QuR.v1_m_per_s;;

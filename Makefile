@@ -43,4 +43,4 @@ cleanall: $(COQMAKEFILE)
 	$(MAKE) -f $^ cleanall
 	$(RM) $^ $^.conf
 
-.PHONY: all clean cleanall
+.PHONY: all clean cleanall html

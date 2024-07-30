@@ -482,7 +482,7 @@ Module SI_Accepted.
   Definition litre := 1e-3 * 'm³.
   Notation "'L" := (litre) (at level 5) : SI_scope.
 
-  (** mass(tonne), 质量（顿） *)
+  (** mass(tonne), 质量（吨） *)
   Definition tonne := 1e3 * 'kg.
   Notation "'t" := (tonne) (at level 5) : SI_scope.
 

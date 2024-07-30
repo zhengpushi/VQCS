@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="resources/coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="resources/coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resources/config.js"></script>
+<script type="text/javascript" src="resources/coqdocjs.js"></script>
+<title>FinMatrix Library</title>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../index.html">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">VQCS.Qalgebra</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="VQCS.Quantity.html#"><span class="id" title="library">Quantity</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Generalizable Variable</span> <span class="id" title="var">tA</span> <span class="id" title="var">Aadd</span> <span class="id" title="var">Azero</span> <span class="id" title="var">Aopp</span> <span class="id" title="var">Amul</span> <span class="id" title="var">Aone</span> <span class="id" title="var">Ainv</span>.<br/>
+<span class="id" title="keyword">Generalizable Variable</span> <span class="id" title="var">tB</span> <span class="id" title="var">Badd</span> <span class="id" title="var">Bzero</span> <span class="id" title="var">Bopp</span> <span class="id" title="var">Bmul</span> <span class="id" title="var">Bone</span> <span class="id" title="var">Binv</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab67"></a><h1 class="section">Basic algebraic operations of quantity</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab68"></a><h2 class="section">General algebraic operations of quantity</h2>
+
+<div class="paragraph"> </div>
+
+ General unary quantity operation 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="qop1" class="idref" href="#qop1"><span class="id" title="definition">qop1</span></a> {<a id="tA:1" class="idref" href="#tA:1"><span class="id" title="binder">tA</span></a>} (<a id="f:2" class="idref" href="#f:2"><span class="id" title="binder">f</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:1"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:1"><span class="id" title="variable">tA</span></a>) (<a id="q:3" class="idref" href="#q:3"><span class="id" title="binder">q</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:1"><span class="id" title="variable">tA</span></a>) : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:1"><span class="id" title="variable">tA</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Qalgebra.html#q:3"><span class="id" title="variable">q</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v</span> <span class="id" title="var">n</span> =&gt; <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> (<a class="idref" href="VQCS.Qalgebra.html#f:2"><span class="id" title="variable">f</span></a> <span class="id" title="var">v</span>) <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+General binary quantity operation on same unit 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="qop2" class="idref" href="#qop2"><span class="id" title="definition">qop2</span></a> {<a id="tA:5" class="idref" href="#tA:5"><span class="id" title="binder">tA</span></a>} (<a id="f:6" class="idref" href="#f:6"><span class="id" title="binder">f</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:5"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:5"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:5"><span class="id" title="variable">tA</span></a>) (<a id="q1:7" class="idref" href="#q1:7"><span class="id" title="binder">q1</span></a> <a id="q2:8" class="idref" href="#q2:8"><span class="id" title="binder">q2</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:5"><span class="id" title="variable">tA</span></a>) : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:5"><span class="id" title="variable">tA</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Qalgebra.html#q1:7"><span class="id" title="variable">q1</span></a>, <a class="idref" href="VQCS.Qalgebra.html#q2:8"><span class="id" title="variable">q2</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v1</span> <span class="id" title="var">n1</span>, <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v2</span> <span class="id" title="var">n2</span> =&gt; <span class="id" title="keyword">if</span> <a class="idref" href="VQCS.Nunit.html#neqb"><span class="id" title="definition">neqb</span></a> <span class="id" title="var">n1</span> <span class="id" title="var">n2</span> <span class="id" title="keyword">then</span> <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> (<a class="idref" href="VQCS.Qalgebra.html#f:6"><span class="id" title="variable">f</span></a> <span class="id" title="var">v1</span> <span class="id" title="var">v2</span>)%<span class="id" title="var">A</span> <span class="id" title="var">n1</span> <span class="id" title="keyword">else</span> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span> =&gt; <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+General binary quantity operation on convertible untis, adopting the unit of 
+    the left operand q1 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="qop2l" class="idref" href="#qop2l"><span class="id" title="definition">qop2l</span></a> {<a id="tA:11" class="idref" href="#tA:11"><span class="id" title="binder">tA</span></a>} (<a id="ARmul:12" class="idref" href="#ARmul:12"><span class="id" title="binder">ARmul</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R"><span class="id" title="axiom">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:11"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:11"><span class="id" title="variable">tA</span></a>) (<a id="f:13" class="idref" href="#f:13"><span class="id" title="binder">f</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:11"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:11"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:11"><span class="id" title="variable">tA</span></a>)<br/>
+&nbsp;&nbsp;(<a id="q1:14" class="idref" href="#q1:14"><span class="id" title="binder">q1</span></a> <a id="q2:15" class="idref" href="#q2:15"><span class="id" title="binder">q2</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:11"><span class="id" title="variable">tA</span></a>) : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:11"><span class="id" title="variable">tA</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="VQCS.Quantity.html#qcvtbleb"><span class="id" title="definition">qcvtbleb</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:14"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:15"><span class="id" title="variable">q2</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="VQCS.Qalgebra.html#qop2"><span class="id" title="definition">qop2</span></a> <a class="idref" href="VQCS.Qalgebra.html#f:13"><span class="id" title="variable">f</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:14"><span class="id" title="variable">q1</span></a> (<a class="idref" href="VQCS.Quantity.html#q2q"><span class="id" title="definition">q2q</span></a> <a class="idref" href="VQCS.Qalgebra.html#ARmul:12"><span class="id" title="variable">ARmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:15"><span class="id" title="variable">q2</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:14"><span class="id" title="variable">q1</span></a>) <span class="id" title="keyword">else</span> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+General binary quantity operation on convertible untis, adopting the unit of 
+    the right operand q2 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="qop2r" class="idref" href="#qop2r"><span class="id" title="definition">qop2r</span></a> {<a id="tA:16" class="idref" href="#tA:16"><span class="id" title="binder">tA</span></a>} (<a id="ARmul:17" class="idref" href="#ARmul:17"><span class="id" title="binder">ARmul</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R"><span class="id" title="axiom">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:16"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:16"><span class="id" title="variable">tA</span></a>) (<a id="f:18" class="idref" href="#f:18"><span class="id" title="binder">f</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:16"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:16"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:16"><span class="id" title="variable">tA</span></a>)<br/>
+&nbsp;&nbsp;(<a id="q1:19" class="idref" href="#q1:19"><span class="id" title="binder">q1</span></a> <a id="q2:20" class="idref" href="#q2:20"><span class="id" title="binder">q2</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:16"><span class="id" title="variable">tA</span></a>) : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:16"><span class="id" title="variable">tA</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="VQCS.Quantity.html#qcvtbleb"><span class="id" title="definition">qcvtbleb</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:19"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:20"><span class="id" title="variable">q2</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="VQCS.Qalgebra.html#qop2"><span class="id" title="definition">qop2</span></a> <a class="idref" href="VQCS.Qalgebra.html#f:18"><span class="id" title="variable">f</span></a> (<a class="idref" href="VQCS.Quantity.html#q2q"><span class="id" title="definition">q2q</span></a> <a class="idref" href="VQCS.Qalgebra.html#ARmul:17"><span class="id" title="variable">ARmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:19"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:20"><span class="id" title="variable">q2</span></a>) <a class="idref" href="VQCS.Qalgebra.html#q2:20"><span class="id" title="variable">q2</span></a> <span class="id" title="keyword">else</span> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+General unary quantity operation, on which the quantity is dimensionless 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="qdim0op1" class="idref" href="#qdim0op1"><span class="id" title="definition">qdim0op1</span></a> {<a id="tA:21" class="idref" href="#tA:21"><span class="id" title="binder">tA</span></a>} (<a id="f:22" class="idref" href="#f:22"><span class="id" title="binder">f</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:21"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:21"><span class="id" title="variable">tA</span></a>) (<a id="q:23" class="idref" href="#q:23"><span class="id" title="binder">q</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:21"><span class="id" title="variable">tA</span></a>) : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:21"><span class="id" title="variable">tA</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Qalgebra.html#q:23"><span class="id" title="variable">q</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v</span> <span class="id" title="var">n</span> =&gt; <span class="id" title="keyword">if</span> <a class="idref" href="VQCS.Nunit.html#ndim1b"><span class="id" title="definition">ndim1b</span></a> <span class="id" title="var">n</span> <span class="id" title="keyword">then</span> <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> (<a class="idref" href="VQCS.Qalgebra.html#f:22"><span class="id" title="variable">f</span></a> <span class="id" title="var">v</span>) <span class="id" title="var">n</span> <span class="id" title="keyword">else</span> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+General binary quantity operation, on which the quantity is dimensionless 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="qdim0op2" class="idref" href="#qdim0op2"><span class="id" title="definition">qdim0op2</span></a> {<a id="tA:25" class="idref" href="#tA:25"><span class="id" title="binder">tA</span></a>} (<a id="f:26" class="idref" href="#f:26"><span class="id" title="binder">f</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:25"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:25"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:25"><span class="id" title="variable">tA</span></a>) (<a id="q1:27" class="idref" href="#q1:27"><span class="id" title="binder">q1</span></a> <a id="q2:28" class="idref" href="#q2:28"><span class="id" title="binder">q2</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:25"><span class="id" title="variable">tA</span></a>)<br/>
+&nbsp;&nbsp;: @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:25"><span class="id" title="variable">tA</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Qalgebra.html#q1:27"><span class="id" title="variable">q1</span></a>, <a class="idref" href="VQCS.Qalgebra.html#q2:28"><span class="id" title="variable">q2</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v1</span> <span class="id" title="var">n1</span>, <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v2</span> <span class="id" title="var">n2</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="VQCS.Nunit.html#ndim1b"><span class="id" title="definition">ndim1b</span></a> <span class="id" title="var">n1</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="VQCS.Nunit.html#ndim1b"><span class="id" title="definition">ndim1b</span></a> <span class="id" title="var">n2</span> <span class="id" title="keyword">then</span> <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> (<a class="idref" href="VQCS.Qalgebra.html#f:26"><span class="id" title="variable">f</span></a> <span class="id" title="var">v1</span> <span class="id" title="var">v2</span>) <span class="id" title="var">n1</span> <span class="id" title="keyword">else</span> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span> =&gt; <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab69"></a><h2 class="section">Specific algebraic operations of quantity</h2>
+
+<div class="paragraph"> </div>
+
+ Quantity addition/opposition/subtraction 
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a id="qadd_qopp_qsub" class="idref" href="#qadd_qopp_qsub"><span class="id" title="section">qadd_qopp_qsub</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="tA:31" class="idref" href="#tA:31"><span class="id" title="binder">tA</span></a>} (<a id="ARmul:32" class="idref" href="#ARmul:32"><span class="id" title="binder">ARmul</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R"><span class="id" title="axiom">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:31"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:31"><span class="id" title="variable">tA</span></a>) (<a id="Aadd:33" class="idref" href="#Aadd:33"><span class="id" title="binder">Aadd</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:31"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:31"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:31"><span class="id" title="variable">tA</span></a>) (<a id="Aopp:34" class="idref" href="#Aopp:34"><span class="id" title="binder">Aopp</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:31"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tA:31"><span class="id" title="variable">tA</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity addition using same unit 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qadd" class="idref" href="#qadd"><span class="id" title="definition">qadd</span></a> (<a id="q1:35" class="idref" href="#q1:35"><span class="id" title="binder">q1</span></a> <a id="q2:36" class="idref" href="#q2:36"><span class="id" title="binder">q2</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> := <a class="idref" href="VQCS.Qalgebra.html#qop2"><span class="id" title="definition">qop2</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.Aadd"><span class="id" title="variable">Aadd</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:35"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:36"><span class="id" title="variable">q2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="1ddd491ef22186f40de4485b410bdf1b" class="idref" href="#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">&quot;</span></a>+" := <a class="idref" href="VQCS.Qalgebra.html#qadd"><span class="id" title="definition">qadd</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity addition using the unit of the left operand q1 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qaddl" class="idref" href="#qaddl"><span class="id" title="definition">qaddl</span></a> (<a id="q1:37" class="idref" href="#q1:37"><span class="id" title="binder">q1</span></a> <a id="q2:38" class="idref" href="#q2:38"><span class="id" title="binder">q2</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> := <a class="idref" href="VQCS.Qalgebra.html#qop2l"><span class="id" title="definition">qop2l</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.ARmul"><span class="id" title="variable">ARmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.Aadd"><span class="id" title="variable">Aadd</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:37"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:38"><span class="id" title="variable">q2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="1b1dacf0f12c3648a6713782fb6577bb" class="idref" href="#1b1dacf0f12c3648a6713782fb6577bb"><span class="id" title="notation">&quot;</span></a>'+" := <a class="idref" href="VQCS.Qalgebra.html#qaddl"><span class="id" title="definition">qaddl</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity addition using the unit of the right operand q1 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qaddr" class="idref" href="#qaddr"><span class="id" title="definition">qaddr</span></a> (<a id="q1:39" class="idref" href="#q1:39"><span class="id" title="binder">q1</span></a> <a id="q2:40" class="idref" href="#q2:40"><span class="id" title="binder">q2</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> := <a class="idref" href="VQCS.Qalgebra.html#qop2r"><span class="id" title="definition">qop2r</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.ARmul"><span class="id" title="variable">ARmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.Aadd"><span class="id" title="variable">Aadd</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:39"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:40"><span class="id" title="variable">q2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="e9fe299e2033d3f79ba842b406e324bb" class="idref" href="#e9fe299e2033d3f79ba842b406e324bb"><span class="id" title="notation">&quot;</span></a>+'" := <a class="idref" href="VQCS.Qalgebra.html#qaddr"><span class="id" title="definition">qaddr</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity opposition 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qopp" class="idref" href="#qopp"><span class="id" title="definition">qopp</span></a> (<a id="q:41" class="idref" href="#q:41"><span class="id" title="binder">q</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> := <a class="idref" href="VQCS.Qalgebra.html#qop1"><span class="id" title="definition">qop1</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.Aopp"><span class="id" title="variable">Aopp</span></a> <a class="idref" href="VQCS.Qalgebra.html#q:41"><span class="id" title="variable">q</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="qadd_qopp_qsub.::Quantity_scope:'-'_x" class="idref" href="#qadd_qopp_qsub.::Quantity_scope:'-'_x"><span class="id" title="notation">&quot;</span></a>- q" := (<a class="idref" href="VQCS.Qalgebra.html#qopp"><span class="id" title="definition">qopp</span></a> <span class="id" title="var">q</span>) : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity subtraction using same unit  
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qsub" class="idref" href="#qsub"><span class="id" title="definition">qsub</span></a> (<a id="q1:42" class="idref" href="#q1:42"><span class="id" title="binder">q1</span></a> <a id="q2:43" class="idref" href="#q2:43"><span class="id" title="binder">q2</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> := <a class="idref" href="VQCS.Qalgebra.html#q1:42"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.::Quantity_scope:'-'_x"><span class="id" title="notation">-</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:43"><span class="id" title="variable">q2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="qadd_qopp_qsub.::Quantity_scope:x_'-'_x" class="idref" href="#qadd_qopp_qsub.::Quantity_scope:x_'-'_x"><span class="id" title="notation">&quot;</span></a>-" := <a class="idref" href="VQCS.Qalgebra.html#qsub"><span class="id" title="definition">qsub</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity subtraction using the unit of the left operand q1 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qsubl" class="idref" href="#qsubl"><span class="id" title="definition">qsubl</span></a> (<a id="q1:44" class="idref" href="#q1:44"><span class="id" title="binder">q1</span></a> <a id="q2:45" class="idref" href="#q2:45"><span class="id" title="binder">q2</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> := <a class="idref" href="VQCS.Qalgebra.html#q1:44"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#1b1dacf0f12c3648a6713782fb6577bb"><span class="id" title="notation">'+</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.::Quantity_scope:'-'_x"><span class="id" title="notation">-</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:45"><span class="id" title="variable">q2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="qadd_qopp_qsub.::Quantity_scope:x_'''-'_x" class="idref" href="#qadd_qopp_qsub.::Quantity_scope:x_'''-'_x"><span class="id" title="notation">&quot;</span></a>'-" := <a class="idref" href="VQCS.Qalgebra.html#qsubl"><span class="id" title="definition">qsubl</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity subtraction using the unit of the right operand q1 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qsubr" class="idref" href="#qsubr"><span class="id" title="definition">qsubr</span></a> (<a id="q1:46" class="idref" href="#q1:46"><span class="id" title="binder">q1</span></a> <a id="q2:47" class="idref" href="#q2:47"><span class="id" title="binder">q2</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> := <a class="idref" href="VQCS.Qalgebra.html#q1:46"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#e9fe299e2033d3f79ba842b406e324bb"><span class="id" title="notation">+'</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.::Quantity_scope:'-'_x"><span class="id" title="notation">-</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:47"><span class="id" title="variable">q2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="qadd_qopp_qsub.::Quantity_scope:x_'-'''_x" class="idref" href="#qadd_qopp_qsub.::Quantity_scope:x_'-'''_x"><span class="id" title="notation">&quot;</span></a>-'" := <a class="idref" href="VQCS.Qalgebra.html#qsubr"><span class="id" title="definition">qsubr</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> `{<a id="HASGroup:48" class="idref" href="#HASGroup:48"><span class="id" title="binder">HASGroup</span></a> : <span class="id" title="class">ASGroup</span> <span class="id" title="var">_</span> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.Aadd"><span class="id" title="variable">Aadd</span></a>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qadd"><span class="id" title="definition">qadd</span></a></span> is associative. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qadd_assoc" class="idref" href="#qadd_assoc"><span class="id" title="lemma">qadd_assoc</span></a> (<a id="q1:49" class="idref" href="#q1:49"><span class="id" title="binder">q1</span></a> <a id="q2:50" class="idref" href="#q2:50"><span class="id" title="binder">q2</span></a> <a id="q3:51" class="idref" href="#q3:51"><span class="id" title="binder">q3</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Qalgebra.html#q1:49"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:50"><span class="id" title="variable">q2</span></a><a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">)</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Qalgebra.html#q3:51"><span class="id" title="variable">q3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:49"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Qalgebra.html#q2:50"><span class="id" title="variable">q2</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Qalgebra.html#q3:51"><span class="id" title="variable">q3</span></a><a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">)</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Qalgebra.html#qadd"><span class="id" title="definition">qadd</span></a>, <a class="idref" href="VQCS.Qalgebra.html#qop2"><span class="id" title="definition">qop2</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">q1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v1</span> <span class="id" title="var">n1</span>|], <span class="id" title="var">q2</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v2</span> <span class="id" title="var">n2</span>|], <span class="id" title="var">q3</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v3</span> <span class="id" title="var">n3</span>|]; <span class="id" title="tactic">try</span> <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">bdestruct</span> (<a class="idref" href="VQCS.Nunit.html#neqb"><span class="id" title="definition">neqb</span></a> <span class="id" title="var">n1</span> <span class="id" title="var">n2</span>); <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">bdestruct</span> (<a class="idref" href="VQCS.Nunit.html#neqb"><span class="id" title="definition">neqb</span></a> <span class="id" title="var">n2</span> <span class="id" title="var">n3</span>); <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Nunit.html#neqb_refl"><span class="id" title="lemma">neqb_refl</span></a>. <span class="id" title="tactic">f_equal</span>. <span class="id" title="var">asgroup</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">bdestruct</span> (<a class="idref" href="VQCS.Nunit.html#neqb"><span class="id" title="definition">neqb</span></a> <span class="id" title="var">n2</span> <span class="id" title="var">n3</span>); <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Nunit.html#neqb_false_iff"><span class="id" title="lemma">neqb_false_iff</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">bdestruct</span> (<a class="idref" href="VQCS.Nunit.html#neqb"><span class="id" title="definition">neqb</span></a> <span class="id" title="var">n1</span> <span class="id" title="var">n2</span>); <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qadd"><span class="id" title="definition">qadd</span></a></span> is commutative. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qadd_comm" class="idref" href="#qadd_comm"><span class="id" title="lemma">qadd_comm</span></a> (<a id="q1:52" class="idref" href="#q1:52"><span class="id" title="binder">q1</span></a> <a id="q2:53" class="idref" href="#q2:53"><span class="id" title="binder">q2</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Qalgebra.html#q1:52"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:53"><span class="id" title="variable">q2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:53"><span class="id" title="variable">q2</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:52"><span class="id" title="variable">q1</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Qalgebra.html#qadd"><span class="id" title="definition">qadd</span></a>, <a class="idref" href="VQCS.Qalgebra.html#qop2"><span class="id" title="definition">qop2</span></a>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">q1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v1</span> <span class="id" title="var">n1</span>|], <span class="id" title="var">q2</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v2</span> <span class="id" title="var">n2</span>|]; <span class="id" title="tactic">try</span> <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Nunit.html#neqb_comm"><span class="id" title="lemma">neqb_comm</span></a>. <span class="id" title="var">bdestruct</span> (<a class="idref" href="VQCS.Nunit.html#neqb"><span class="id" title="definition">neqb</span></a> <span class="id" title="var">n2</span> <span class="id" title="var">n1</span>); <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">f_equal</span>. <span class="id" title="var">asgroup</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qadd"><span class="id" title="definition">qadd</span></a></span> left with !! equal to !!. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qadd_qinvalid_l" class="idref" href="#qadd_qinvalid_l"><span class="id" title="lemma">qadd_qinvalid_l</span></a> (<a id="q:54" class="idref" href="#q:54"><span class="id" title="binder">q</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Qalgebra.html#q:54"><span class="id" title="variable">q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qadd"><span class="id" title="definition">qadd</span></a></span> right with !! equal to !!. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qadd_qinvalid_r" class="idref" href="#qadd_qinvalid_r"><span class="id" title="lemma">qadd_qinvalid_r</span></a> (<a id="q:55" class="idref" href="#q:55"><span class="id" title="binder">q</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Qalgebra.html#q:55"><span class="id" title="variable">q</span></a> <a class="idref" href="VQCS.Qalgebra.html#1ddd491ef22186f40de4485b410bdf1b"><span class="id" title="notation">+</span></a> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Qalgebra.html#qadd_comm"><span class="id" title="lemma">qadd_comm</span></a>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> `{<a id="HGroup:57" class="idref" href="#HGroup:57"><span class="id" title="binder">HGroup</span></a> : <span class="id" title="class">Group</span> <span class="id" title="var">_</span> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.Aadd"><span class="id" title="variable">Aadd</span></a> <a id="Azero:56" class="idref" href="#Azero:56"><span class="id" title="binder">Azero</span></a> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub.Aopp"><span class="id" title="variable">Aopp</span></a>}.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Qalgebra.html#qadd_qopp_qsub"><span class="id" title="section">qadd_qopp_qsub</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity inversion 
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a id="qinv" class="idref" href="#qinv"><span class="id" title="section">qinv</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="A:58" class="idref" href="#A:58"><span class="id" title="binder">A</span></a>} (<a id="Ainv:59" class="idref" href="#Ainv:59"><span class="id" title="binder">Ainv</span></a> : <a class="idref" href="VQCS.Qalgebra.html#A:58"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#A:58"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity inversion 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qinv" class="idref" href="#qinv"><span class="id" title="definition">qinv</span></a> (<a id="q:60" class="idref" href="#q:60"><span class="id" title="binder">q</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Qalgebra.html#q:60"><span class="id" title="variable">q</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v</span> <span class="id" title="var">n</span> =&gt; <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> (<a class="idref" href="VQCS.Qalgebra.html#qinv.Ainv"><span class="id" title="variable">Ainv</span></a> <span class="id" title="var">v</span>) (<a class="idref" href="VQCS.Nunit.html#ninv"><span class="id" title="definition">ninv</span></a> <span class="id" title="var">n</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="8b1effc36cfbfbca9a96ceacdd880598" class="idref" href="#8b1effc36cfbfbca9a96ceacdd880598"><span class="id" title="notation">&quot;</span></a>/ q" := (<a class="idref" href="VQCS.Qalgebra.html#qinv"><span class="id" title="definition">qinv</span></a> <span class="id" title="var">q</span>) : <span class="id" title="var">Quantity_scope</span>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Qalgebra.html#qinv"><span class="id" title="section">qinv</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+multiplication or division of two quantities that may have different units.
+    For example, scalar multiplication of vectors or matrices 
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a id="qmul_qdiv" class="idref" href="#qmul_qdiv"><span class="id" title="section">qmul_qdiv</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="tA:62" class="idref" href="#tA:62"><span class="id" title="binder">tA</span></a> <a id="tB:63" class="idref" href="#tB:63"><span class="id" title="binder">tB</span></a>} (<a id="AmulB:64" class="idref" href="#AmulB:64"><span class="id" title="binder">AmulB</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tA:62"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tB:63"><span class="id" title="variable">tB</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tB:63"><span class="id" title="variable">tB</span></a>) (<a id="Binv:65" class="idref" href="#Binv:65"><span class="id" title="binder">Binv</span></a> : <a class="idref" href="VQCS.Qalgebra.html#tB:63"><span class="id" title="variable">tB</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#tB:63"><span class="id" title="variable">tB</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="0e10358e4db5c80baf7010014d2764ba" class="idref" href="#0e10358e4db5c80baf7010014d2764ba"><span class="id" title="notation">&quot;</span></a>*" := <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.AmulB"><span class="id" title="variable">AmulB</span></a> : <span class="id" title="var">A_scope</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="qinv" class="idref" href="#qinv"><span class="id" title="abbreviation">qinv</span></a> := (<a class="idref" href="VQCS.Qalgebra.html#qinv"><span class="id" title="definition">qinv</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.Binv"><span class="id" title="variable">Binv</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity multiplication 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qmul" class="idref" href="#qmul"><span class="id" title="definition">qmul</span></a> (<a id="q1:66" class="idref" href="#q1:66"><span class="id" title="binder">q1</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tA"><span class="id" title="variable">tA</span></a>) (<a id="q2:67" class="idref" href="#q2:67"><span class="id" title="binder">q2</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tB"><span class="id" title="variable">tB</span></a>) : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tB"><span class="id" title="variable">tB</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Qalgebra.html#q1:66"><span class="id" title="variable">q1</span></a>,<a class="idref" href="VQCS.Qalgebra.html#q2:67"><span class="id" title="variable">q2</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v1</span> <span class="id" title="var">n1</span>, <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v2</span> <span class="id" title="var">n2</span> =&gt; <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> (<span class="id" title="var">v1</span> <a class="idref" href="VQCS.Qalgebra.html#0e10358e4db5c80baf7010014d2764ba"><span class="id" title="notation">*</span></a> <span class="id" title="var">v2</span>)%<span class="id" title="var">A</span> (<a class="idref" href="VQCS.Nunit.html#nmul"><span class="id" title="definition">nmul</span></a> <span class="id" title="var">n1</span> <span class="id" title="var">n2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span> =&gt; <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="4d5cae54b2c31fcb291d61b36d283124" class="idref" href="#4d5cae54b2c31fcb291d61b36d283124"><span class="id" title="notation">&quot;</span></a>*" := <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="definition">qmul</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Power of quantity with an integer numbers 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Section</span> <a id="qmul_qdiv.qpow" class="idref" href="#qmul_qdiv.qpow"><span class="id" title="section">qpow</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Context</span> (<a id="ApowerZ:70" class="idref" href="#ApowerZ:70"><span class="id" title="binder">ApowerZ</span></a> : <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tA"><span class="id" title="variable">tA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tA"><span class="id" title="variable">tA</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qpow" class="idref" href="#qpow"><span class="id" title="definition">qpow</span></a> (<a id="q:71" class="idref" href="#q:71"><span class="id" title="binder">q</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tA"><span class="id" title="variable">tA</span></a>) (<a id="z:72" class="idref" href="#z:72"><span class="id" title="binder">z</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tA"><span class="id" title="variable">tA</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VQCS.Qalgebra.html#q:71"><span class="id" title="variable">q</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> <span class="id" title="var">v</span> <span class="id" title="var">n</span> =&gt; <a class="idref" href="VQCS.Quantity.html#Qmake"><span class="id" title="constructor">Qmake</span></a> (<a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.qpow.ApowerZ"><span class="id" title="variable">ApowerZ</span></a> <span class="id" title="var">v</span> <a class="idref" href="VQCS.Qalgebra.html#z:72"><span class="id" title="variable">z</span></a>) (<a class="idref" href="VQCS.Nunit.html#npow"><span class="id" title="definition">npow</span></a> <span class="id" title="var">n</span> <a class="idref" href="VQCS.Qalgebra.html#z:72"><span class="id" title="variable">z</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a> =&gt; <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="13246029ecf169ae06102c4f32be3b5f" class="idref" href="#13246029ecf169ae06102c4f32be3b5f"><span class="id" title="notation">&quot;</span></a>q ^ n" := (<a class="idref" href="VQCS.Qalgebra.html#qpow"><span class="id" title="definition">qpow</span></a> <span class="id" title="var">q</span> <span class="id" title="var">n</span>) : <span class="id" title="var">Quantity_scope</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="2abfa2aba278e30955274b29fe41bb61" class="idref" href="#2abfa2aba278e30955274b29fe41bb61"><span class="id" title="notation">&quot;</span></a> q ² " := (<span class="id" title="var">q</span> <a class="idref" href="VQCS.Qalgebra.html#13246029ecf169ae06102c4f32be3b5f"><span class="id" title="notation">^</span></a> 2) : <span class="id" title="var">Quantity_scope</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="870ecb069a0a2bc0fdff8a09fbaf96f2" class="idref" href="#870ecb069a0a2bc0fdff8a09fbaf96f2"><span class="id" title="notation">&quot;</span></a> q ³ " := (<span class="id" title="var">q</span> <a class="idref" href="VQCS.Qalgebra.html#13246029ecf169ae06102c4f32be3b5f"><span class="id" title="notation">^</span></a> 3) : <span class="id" title="var">Quantity_scope</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="e534c0163d8894f6938fbd6e032da1ae" class="idref" href="#e534c0163d8894f6938fbd6e032da1ae"><span class="id" title="notation">&quot;</span></a> q ⁴ " := (<span class="id" title="var">q</span> <a class="idref" href="VQCS.Qalgebra.html#13246029ecf169ae06102c4f32be3b5f"><span class="id" title="notation">^</span></a> 4) : <span class="id" title="var">Quantity_scope</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="42d7b577a16f4e8158275e07c19838cc" class="idref" href="#42d7b577a16f4e8158275e07c19838cc"><span class="id" title="notation">&quot;</span></a> q ⁵ " := (<span class="id" title="var">q</span> <a class="idref" href="VQCS.Qalgebra.html#13246029ecf169ae06102c4f32be3b5f"><span class="id" title="notation">^</span></a> 5) : <span class="id" title="var">Quantity_scope</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.qpow"><span class="id" title="section">qpow</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quantity division 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="qdiv" class="idref" href="#qdiv"><span class="id" title="definition">qdiv</span></a> (<a id="q1:74" class="idref" href="#q1:74"><span class="id" title="binder">q1</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tA"><span class="id" title="variable">tA</span></a>) (<a id="q2:75" class="idref" href="#q2:75"><span class="id" title="binder">q2</span></a> : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tB"><span class="id" title="variable">tB</span></a>) : @<a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv.tB"><span class="id" title="variable">tB</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="definition">qmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:74"><span class="id" title="variable">q1</span></a> (<a class="idref" href="VQCS.Qalgebra.html#qinv"><span class="id" title="abbreviation">qinv</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:75"><span class="id" title="variable">q2</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="d0c2a1cd2bb38447cae20db54ee7be0c" class="idref" href="#d0c2a1cd2bb38447cae20db54ee7be0c"><span class="id" title="notation">&quot;</span></a>/" := <a class="idref" href="VQCS.Qalgebra.html#qdiv"><span class="id" title="definition">qdiv</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="abbreviation">qmul</span></a></span> left cancellation law 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qmul_cancel_l" class="idref" href="#qmul_cancel_l"><span class="id" title="lemma">qmul_cancel_l</span></a> <a id="q1:76" class="idref" href="#q1:76"><span class="id" title="binder">q1</span></a> <a id="q2:77" class="idref" href="#q2:77"><span class="id" title="binder">q2</span></a> <a id="q3:78" class="idref" href="#q3:78"><span class="id" title="binder">q3</span></a> : <a class="idref" href="VQCS.Qalgebra.html#q1:76"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#4d5cae54b2c31fcb291d61b36d283124"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:77"><span class="id" title="variable">q2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:76"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#4d5cae54b2c31fcb291d61b36d283124"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q3:78"><span class="id" title="variable">q3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:77"><span class="id" title="variable">q2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q3:78"><span class="id" title="variable">q3</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="definition">qmul</span></a> <span class="id" title="tactic">in</span> *. <span class="id" title="tactic">destruct</span> <span class="id" title="var">q1</span>,<span class="id" title="var">q2</span>,<span class="id" title="var">q3</span>. <span class="id" title="var">inv</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="abbreviation">qmul</span></a></span> right cancellation law 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qmul_cancel_r" class="idref" href="#qmul_cancel_r"><span class="id" title="lemma">qmul_cancel_r</span></a> <a id="q1:79" class="idref" href="#q1:79"><span class="id" title="binder">q1</span></a> <a id="q2:80" class="idref" href="#q2:80"><span class="id" title="binder">q2</span></a> <a id="q3:81" class="idref" href="#q3:81"><span class="id" title="binder">q3</span></a> : <a class="idref" href="VQCS.Qalgebra.html#q1:79"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#4d5cae54b2c31fcb291d61b36d283124"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q3:81"><span class="id" title="variable">q3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:80"><span class="id" title="variable">q2</span></a> <a class="idref" href="VQCS.Qalgebra.html#4d5cae54b2c31fcb291d61b36d283124"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q3:81"><span class="id" title="variable">q3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:79"><span class="id" title="variable">q1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:80"><span class="id" title="variable">q2</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_qdiv"><span class="id" title="section">qmul_qdiv</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Properties for qmul with specific element types 
+</div>
+<div class="code">
+<span class="id" title="keyword">Section</span> <a id="qmul_specific" class="idref" href="#qmul_specific"><span class="id" title="section">qmul_specific</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> `{<a id="HASGroup:84" class="idref" href="#HASGroup:84"><span class="id" title="binder">HASGroup</span></a> : <span class="id" title="class">ASGroup</span> <a id="tA:82" class="idref" href="#tA:82"><span class="id" title="binder">tA</span></a> <a id="Amul:83" class="idref" href="#Amul:83"><span class="id" title="binder">Amul</span></a>}.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="qmul" class="idref" href="#qmul"><span class="id" title="abbreviation">qmul</span></a> := (<a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="definition">qmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.Amul"><span class="id" title="variable">Amul</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="4a6dea39c1b4e6720ddcf3c5c19c08e5" class="idref" href="#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">&quot;</span></a>*" := <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="abbreviation">qmul</span></a> : <span class="id" title="var">Quantity_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="abbreviation">qmul</span></a></span> is associative 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qmul_assoc" class="idref" href="#qmul_assoc"><span class="id" title="lemma">qmul_assoc</span></a> (<a id="q1:85" class="idref" href="#q1:85"><span class="id" title="binder">q1</span></a> <a id="q2:86" class="idref" href="#q2:86"><span class="id" title="binder">q2</span></a> <a id="q3:87" class="idref" href="#q3:87"><span class="id" title="binder">q3</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Qalgebra.html#q1:85"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:86"><span class="id" title="variable">q2</span></a><a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">)</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q3:87"><span class="id" title="variable">q3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:85"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">(</span></a><a class="idref" href="VQCS.Qalgebra.html#q2:86"><span class="id" title="variable">q2</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q3:87"><span class="id" title="variable">q3</span></a><a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">)</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="definition">qmul</span></a>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">q1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v1</span> <span class="id" title="var">n1</span>|], <span class="id" title="var">q2</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v2</span> <span class="id" title="var">n2</span>|], <span class="id" title="var">q3</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v3</span> <span class="id" title="var">n3</span>|]; <span class="id" title="tactic">try</span> <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">f_equal</span>. <span class="id" title="var">asgroup</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Nunit.html#nmul_assoc"><span class="id" title="lemma">nmul_assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="abbreviation">qmul</span></a></span> is commutative 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qmul_comm" class="idref" href="#qmul_comm"><span class="id" title="lemma">qmul_comm</span></a> (<a id="q1:88" class="idref" href="#q1:88"><span class="id" title="binder">q1</span></a> <a id="q2:89" class="idref" href="#q2:89"><span class="id" title="binder">q2</span></a> : <a class="idref" href="VQCS.Quantity.html#Quantity"><span class="id" title="inductive">Quantity</span></a>) : <a class="idref" href="VQCS.Qalgebra.html#q1:88"><span class="id" title="variable">q1</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:89"><span class="id" title="variable">q2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q2:89"><span class="id" title="variable">q2</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q1:88"><span class="id" title="variable">q1</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="definition">qmul</span></a>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">q1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v1</span> <span class="id" title="var">n1</span>|], <span class="id" title="var">q2</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v2</span> <span class="id" title="var">n2</span>|]; <span class="id" title="tactic">try</span> <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">f_equal</span>. <span class="id" title="var">asgroup</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Nunit.html#nmul_comm"><span class="id" title="lemma">nmul_comm</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> `{<a id="HAMonoid:91" class="idref" href="#HAMonoid:91"><span class="id" title="binder">HAMonoid</span></a> : <span class="id" title="class">AMonoid</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.tA"><span class="id" title="variable">tA</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.Amul"><span class="id" title="variable">Amul</span></a> <a id="Aone:90" class="idref" href="#Aone:90"><span class="id" title="binder">Aone</span></a>}.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="qone" class="idref" href="#qone"><span class="id" title="abbreviation">qone</span></a> := (<a class="idref" href="VQCS.Quantity.html#qone"><span class="id" title="definition">qone</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.Aone"><span class="id" title="variable">Aone</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="VQCS.Qalgebra.html#qone"><span class="id" title="abbreviation">qone</span></a></span> is the left identity for multiplication 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qmul_1_l" class="idref" href="#qmul_1_l"><span class="id" title="lemma">qmul_1_l</span></a> <a id="q:92" class="idref" href="#q:92"><span class="id" title="binder">q</span></a> : <a class="idref" href="VQCS.Qalgebra.html#qone"><span class="id" title="abbreviation">qone</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q:92"><span class="id" title="variable">q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q:92"><span class="id" title="variable">q</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="definition">qmul</span></a>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Quantity.html#qone"><span class="id" title="definition">qone</span></a>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">q</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v</span> <span class="id" title="var">n</span>|]; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">f_equal</span>. <span class="id" title="var">amonoid</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Nunit.html#nmul_1_l"><span class="id" title="lemma">nmul_1_l</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qmul_1_r" class="idref" href="#qmul_1_r"><span class="id" title="lemma">qmul_1_r</span></a> <a id="q:93" class="idref" href="#q:93"><span class="id" title="binder">q</span></a> : <a class="idref" href="VQCS.Qalgebra.html#q:93"><span class="id" title="variable">q</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#qone"><span class="id" title="abbreviation">qone</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#q:93"><span class="id" title="variable">q</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_comm"><span class="id" title="lemma">qmul_comm</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_1_l"><span class="id" title="lemma">qmul_1_l</span></a>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Instance</span> <a id="qmul_Monoid" class="idref" href="#qmul_Monoid"><span class="id" title="instance">qmul_Monoid</span></a> : <span class="id" title="class">Monoid</span> <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="abbreviation">qmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#qone"><span class="id" title="abbreviation">qone</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_assoc"><span class="id" title="lemma">qmul_assoc</span></a>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_1_l"><span class="id" title="lemma">qmul_1_l</span></a>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_1_r"><span class="id" title="lemma">qmul_1_r</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_comm"><span class="id" title="lemma">qmul_comm</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Instance</span> <a id="qmul_AMonoid" class="idref" href="#qmul_AMonoid"><span class="id" title="instance">qmul_AMonoid</span></a> : <span class="id" title="class">AMonoid</span> <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="abbreviation">qmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#qone"><span class="id" title="abbreviation">qone</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_assoc"><span class="id" title="lemma">qmul_assoc</span></a>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_1_l"><span class="id" title="lemma">qmul_1_l</span></a>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_1_r"><span class="id" title="lemma">qmul_1_r</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_comm"><span class="id" title="lemma">qmul_comm</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> `{<a id="HAGroup:95" class="idref" href="#HAGroup:95"><span class="id" title="binder">HAGroup</span></a> : <span class="id" title="class">AGroup</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.tA"><span class="id" title="variable">tA</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.Amul"><span class="id" title="variable">Amul</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.Aone"><span class="id" title="variable">Aone</span></a> <a id="Ainv:94" class="idref" href="#Ainv:94"><span class="id" title="binder">Ainv</span></a>}.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="qinv" class="idref" href="#qinv"><span class="id" title="abbreviation">qinv</span></a> := (<a class="idref" href="VQCS.Qalgebra.html#qinv"><span class="id" title="definition">qinv</span></a> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.Ainv"><span class="id" title="variable">Ainv</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="qmul_qinv_l" class="idref" href="#qmul_qinv_l"><span class="id" title="lemma">qmul_qinv_l</span></a> : <span class="id" title="keyword">forall</span> <a id="q:96" class="idref" href="#q:96"><span class="id" title="binder">q</span></a>, <a class="idref" href="VQCS.Qalgebra.html#q:96"><span class="id" title="variable">q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="VQCS.Quantity.html#ded4eccfbeb4aabf78379a8ec66838af"><span class="id" title="notation">!!</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Quantity.html#qcoef"><span class="id" title="definition">qcoef</span></a> <a class="idref" href="VQCS.Qalgebra.html#q:96"><span class="id" title="variable">q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="VQCS.Qalgebra.html#qinv"><span class="id" title="abbreviation">qinv</span></a> <a class="idref" href="VQCS.Qalgebra.html#q:96"><span class="id" title="variable">q</span></a> <a class="idref" href="VQCS.Qalgebra.html#4a6dea39c1b4e6720ddcf3c5c19c08e5"><span class="id" title="notation">*</span></a> <a class="idref" href="VQCS.Qalgebra.html#q:96"><span class="id" title="variable">q</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.18.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="VQCS.Qalgebra.html#qone"><span class="id" title="abbreviation">qone</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="definition">qmul</span></a>, <a class="idref" href="VQCS.Qalgebra.html#qinv"><span class="id" title="definition">qinv</span></a>, <a class="idref" href="VQCS.Quantity.html#qone"><span class="id" title="definition">qone</span></a>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">q</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v</span> <span class="id" title="var">n</span>|]; <span class="id" title="tactic">auto</span>; <span class="id" title="tactic">try</span> <span class="id" title="var">easy</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">f_equal</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific.HAGroup"><span class="id" title="variable">HAGroup</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Nunit.html#nmul_ninv_l"><span class="id" title="lemma">nmul_ninv_l</span></a>. <span class="id" title="tactic">cbv</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">intro</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H1</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Instance</span> <a id="qmul_Group" class="idref" href="#qmul_Group"><span class="id" title="instance">qmul_Group</span></a> : <span class="id" title="class">Group</span> <a class="idref" href="VQCS.Qalgebra.html#qmul"><span class="id" title="abbreviation">qmul</span></a> <a class="idref" href="VQCS.Qalgebra.html#qone"><span class="id" title="abbreviation">qone</span></a> <a class="idref" href="VQCS.Qalgebra.html#qinv"><span class="id" title="abbreviation">qinv</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_assoc"><span class="id" title="lemma">qmul_assoc</span></a>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_1_l"><span class="id" title="lemma">qmul_1_l</span></a>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_1_r"><span class="id" title="lemma">qmul_1_r</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_comm"><span class="id" title="lemma">qmul_comm</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VQCS.Qalgebra.html#qmul_specific"><span class="id" title="section">qmul_specific</span></a>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

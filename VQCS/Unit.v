@@ -49,13 +49,13 @@ Inductive BaseUnit : Set :=
 (* | BURadian *)
 .
 
-Notation "&T" := (BUTime) (at level 0).
-Notation "&L" := (BULength) (at level 0).
-Notation "&M" := (BUMass) (at level 0).
-Notation "&I" := (BUElectricCurrent) (at level 0).
-Notation "&Q" := (BUThermodynamicTemperature) (at level 0).
-Notation "&N" := (BUAmountOfSubstance) (at level 0).
-Notation "&J" := (BULuminousIntensity) (at level 0).  
+Notation "&T" := (BUTime) (at level 0) : Unit_scope.
+Notation "&L" := (BULength) (at level 0) : Unit_scope.
+Notation "&M" := (BUMass) (at level 0) : Unit_scope.
+Notation "&I" := (BUElectricCurrent) (at level 0) : Unit_scope.
+Notation "&Q" := (BUThermodynamicTemperature) (at level 0) : Unit_scope.
+Notation "&N" := (BUAmountOfSubstance) (at level 0) : Unit_scope.
+Notation "&J" := (BULuminousIntensity) (at level 0) : Unit_scope.
 (* Notation "&R" := (BURadian) (at level 0). *)
 
 
@@ -70,10 +70,10 @@ Definition bu2nat (b : BaseUnit) : nat :=
 
 (** Conversion from [nat] to [BaseUnit] *)
 Definition nat2bu (n : nat) : option BaseUnit :=
-  match n with
+  (match n with
   | 0 => Some &T | 1 => Some &L | 2 => Some &M | 3 => Some &I | 4 => Some &Q
   | 5 => Some &N | 6 => Some &J | _ => None
-  end.
+  end)%nat.
 
 (** The valid condition of [nat2bu] *)
 Definition nat2bu_validCond (n : nat) : Prop := (n < 7)%nat.
