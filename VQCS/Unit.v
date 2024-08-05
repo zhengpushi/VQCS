@@ -13,9 +13,9 @@
   
   remark    :
   1. Basic Unit and derived Unit
-    There are 7 basic unit. eg., Time, Length, Mass, etc.
+    There are 7 basic unit. e.g., Time, Length, Mass, etc.
     basic unit can be composed to construct derived unit, and the coefficient 
-    could be added. eg., 1min=60's, 1N=1kg*m/s².
+    could be added. e.g., 1min=60's, 1N=1kg*m/s².
   2. Comparing Q and R: Which is suitable for data type of Unit coefficient?
     * Q is constructed while R is axiomized, making Q more user-friendly than R.
     * Both Q and R differ from float and double types.
@@ -167,10 +167,10 @@ Proof. apply bueqb_true_iff. auto. Qed.
 
 (** Unit is an AST that can represent any unit. *)
 Inductive Unit : Set :=
-| Unone (coef : R) :> Unit        (* a unit with no dimension. eg: a number *)
-| Ubu (bu : BaseUnit) :> Unit     (* a unit with single dimension. eg: m *)
-| Uinv (u : Unit)         (* inversion of a unit. eg: Hz = /s *)
-| Umul (u1 u2 : Unit).    (* multiplication of two units. eg: m*s *)
+| Unone (coef : R) :> Unit        (* a unit with no dimension. e.g.: a number *)
+| Ubu (bu : BaseUnit) :> Unit     (* a unit with single dimension. e.g.: m *)
+| Uinv (u : Unit)         (* inversion of a unit. e.g.: Hz = /s *)
+| Umul (u1 u2 : Unit).    (* multiplication of two units. e.g.: m*s *)
 
 (** Notation for constructor of unit *)
 Notation "u1 * u2" := (Umul u1 u2) : Unit_scope.

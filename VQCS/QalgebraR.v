@@ -358,6 +358,28 @@ Module ex_QuR.
     Goal qcoef (f1 +' f2) = Some (1e-3/60)%R. qeqR. Qed.
     Goal qval fill_time_min = qval (fill_time_s / 60). qeqR. Qed.
   End ex2.
+
+  (* ---------------------------------------------------- *)
+  (* K_T与K_E的问题 *)
+  Section ex3.
+    Let coef_955 : R := 60 / (2 * PI).  (* 60 / (2π) ≈ 9.55 *)
+    Let u1 : Unit := ('V / 'rpm)%U.
+    Let u2 : Unit := ('N * 'm / 'A)%U.
+    
+    Variable val_K_E : R.
+    Let K_E := u2qR val_K_E u1. (* K_E 的单位是 V/rpm *)
+    Let K_T1 := q2quR K_E u1. (* K_T与K_E相等，且 K_T 的单位是 V/rpm *)
+    Let K_T2 := q2quR K_E u2. (* K_T与K_E相等，且 K_T 的单位是 N*m/A *)
+
+    (* 当 K_T 单位是 N*m/A 时才符合教材中的公式，即 K_T = 9.55 * K_E *)
+    Goal qval K_T2 = Some (coef_955 * val_K_E)%R.
+    Proof. qeqR; ra. Qed.
+
+    (* 当 K_T 单位是 V/rpm 时，不符合教材中的公式 *)
+    Goal qval K_T1 = Some val_K_E.
+    Proof. qeqR; ra. Qed.
+  End ex3.
+  
 End ex_QuR.
 
 (* Extraction "ocaml_qalgebraR_ex.ml" ex_QuR. *)
