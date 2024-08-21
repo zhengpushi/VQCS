@@ -847,7 +847,7 @@ Open Scope Unit_scope.
 (** ** Boolean Equality of [Unit] *)
 Definition ueqb (u1 u2 : Unit) : bool := neqb (u2n u1) (u2n u2).
 
-Notation "u1 =? u2" := (ueqb u1 u2) : Unit_scope.
+Infix "=?" := ueqb : Unit_scope.
 
 (** [ueqb] of [ucons u1] and [ucons u2], equal to [ueqb u1 u2]. *)
 Lemma ueqb_ucons : forall u1 u2 b dim,
