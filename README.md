@@ -1,4 +1,4 @@
 # VQCS
 Formally Verified Quantity Calculus System (in Coq)
 
-Homepage: https://zhengpushi.github.io/projects/VQCS
+Homepage: [VQCS project](https://zhengpushi.github.io/projects/VQCS)
