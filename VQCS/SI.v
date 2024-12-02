@@ -439,6 +439,9 @@ Module SI_Accepted.
   Definition killometre := 1e3 * 'm.
   Notation "'km" := (killometre) (at level 5) : SI_scope.
   
+  Definition centmetre := 1e-2 * 'm.
+  Notation "'cm" := (centmetre) (at level 5) : SI_scope.
+  
   Definition millimetre := 1e-3 * 'm.
   Notation "'mm" := (millimetre) (at level 5) : SI_scope.
   
