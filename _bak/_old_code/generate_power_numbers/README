@@ -1,8 +1,0 @@
-Apr 24, 2022
-Zhengpu SHI
-
-
-1. Usage of dune:
-dune build
-dune exec ./main.exe
-dune clean
