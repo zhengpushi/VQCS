@@ -1,10 +1,10 @@
 (*
-  Copyright 2024 Zhengpu Shi
+  Copyright 2024 ***
   This file is part of VQCS. It is distributed under the MIT
   "expat license". You should have recieved a LICENSE file with it.
 
   purpose   : Formal verification of Basic module - propulsion subsystem
-  author    : Zhengpu Shi
+  author    : ***
   date      : 2020.11
 *)
 
