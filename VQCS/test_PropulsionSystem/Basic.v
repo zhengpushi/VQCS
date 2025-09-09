@@ -7,8 +7,8 @@
   author:       ***
   date:         2020.11.17
 
-  copyright:    Formalized Engineering Mathematics team of NUAA.
-  website:      http://fem-nuaa.cn
+  copyright:    ***
+  website:      http://***
 *)
 
 Require Export SI QalgebraR.
